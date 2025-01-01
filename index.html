@@ -6,10 +6,17 @@
     <title>Impresionarte</title>
     <link rel="stylesheet" href="estilo.css">
     <link rel="icon" href="img/IMPRESIONATE.png" type="image/png">
+    
+    <!-- Bibliotecas de Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="firebase.js" type="module"></script>
 </head>
 <body>
     <header class="menu-fixed">
         <img src="img/IMPRESIONATE.png" alt="Logo Impresion-ate" class="logo">
+        
         <nav>
             <ul>
                 <li><a href="#inicio">Inicio</a></li>
@@ -88,7 +95,7 @@
         <div class="modal-content">
             <span class="close" onclick="cerrarFormularioProducto()">&times;</span>
             <h2>Agregar Producto</h2>
-            <form onsubmit="return agregarProducto()">
+            <form onsubmit="return agregarProducto(event)">
                 <label for="producto-nombre">Nombre del Producto:</label>
                 <input type="text" id="producto-nombre" required>
                 
@@ -103,6 +110,8 @@
         </div>
     </div>
 
-    <script src="productos.js"></script>
+    <script src="productos.js" type="module"></script>
+    <script src="firebase.js" type="module"></script>
+
 </body>
 </html>
