@@ -11,7 +11,7 @@
     <header class="menu-fixed">
         <img src="img/IMPRESIONATE.png" alt="Logo Impresion-ate" class="logo">
         
-        <nav>
+        <nav id="nav-menu">
             <ul>
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#portafolio">Portafolio</a></li>
@@ -20,6 +20,7 @@
                 <li><a href="#" id="login-link" onclick="mostrarLogin()">Iniciar Sesión</a></li>
             </ul>
         </nav>
+        <button id="menu-toggle" class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
     </header>
 
     <div id="login-modal" class="modal" style="display:none;">
@@ -69,5 +70,6 @@
     <script src="agregar.js"></script>
     <script src="eliminar.js"></script>
     <script src="firebase.js"></script>
+
 </body>
 </html>

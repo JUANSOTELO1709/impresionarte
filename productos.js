@@ -31,11 +31,19 @@ function autenticarAdmin(event) {
     } else {
         alert('Credenciales incorrectas');
         return false;
-    }}
+    }
+}
 
-    window.onclick = function(event) {
+function toggleMenu() {
+    const navMenu = document.getElementById('nav-menu').querySelector('ul');
+    if (navMenu) {
+        navMenu.classList.toggle('show');
+    }
+}
 
-const modalLogin = document.getElementById('login-modal');
-if (event.target === modalLogin) {        modalLogin.style.display = 'none';
+window.onclick = function(event) {
+    const modalLogin = document.getElementById('login-modal');
+    if (event.target === modalLogin) {
+        modalLogin.style.display = 'none';
     }
 }

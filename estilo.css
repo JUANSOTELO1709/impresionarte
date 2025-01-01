@@ -248,3 +248,99 @@ footer p {
 .btn-eliminar:hover {
     background-color: #cc0000;
 }
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+    header.menu-fixed {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header .logo {
+        width: 150px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    #banner {
+        padding: 100px 20px 70px;
+    }
+
+    .contenedor {
+        padding: 1rem;
+    }
+
+    .galeria-productos {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .producto {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 20px;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    header .logo {
+        width: 120px;
+    }
+
+    nav ul li {
+        margin: 5px 0;
+    }
+
+    .producto {
+        width: 100%;
+    }
+}
+/* Estilos para el menú hamburguesa */
+.menu-toggle {
+    display: none;
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    nav ul li a {
+        font-size: 1.2rem;
+    }
+
+    header.menu-fixed {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
