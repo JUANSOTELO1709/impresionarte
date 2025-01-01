@@ -1,11 +1,12 @@
 // eliminar.js
 
-function eliminarProducto(index) {
+import { db } from './firebase.js';
+import { deleteDoc, doc } from "firebase/firestore";
+
+async function eliminarProducto(id) {
     if (!esAdmin) return;
 
-    const productos = JSON.parse(localStorage.getItem('productos')) || [];
-    productos.splice(index, 1);
-    localStorage.setItem('productos', JSON.stringify(productos));
+    await deleteDoc(doc(db, "productos", id));
     document.getElementById('galeria-productos').innerHTML = '';
     cargarProductos();
 }
