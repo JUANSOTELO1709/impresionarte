@@ -65,7 +65,9 @@ function animate() {
 function showCard() {
     document.getElementById('message1').style.display = 'none';
     document.getElementById('message2').style.display = 'block';
-    alert('Aquí está tu carta especial: Querida Anna, venus, mi cielo, vida, bueno, tantas cosas y formas en las que te puedo mencionar   este año ha sido increíble gracias a ti...');
+    alert('Querida Anna, mi Venus, mi cielo, mi vida, Hay tantas formas en las que puedo llamarte, y aun así siento que ninguna hace justicia a lo que realmente representas para mí. Cada palabra que te dedico lleva un pedacito de mi corazón, porque eso eres: mi todo... Este año ha sido simplemente maravilloso, y no tengo dudas de que la razón principal eres tú. Desde que entraste en mi vida, cada día tiene un brillo especial, como si el sol saliera solo para iluminarnos. Tu sonrisa, tus palabras, tu voz, todo en ti me llena de una felicidad que nunca creí posible. Eres una fuerza en los días difíciles, mi calma cuando todo parece agitado, y mi alegría constante... Quiero que inicies el año pensando asi, teniendo claro esto, ¿sabias?, Contigo, cada tiempo es unico, desde las pequeñas charlas cotidianas hasta los instantes en los que el silencio dice más que mil palabras. Quiero que sepas cuánto valoro todo lo que haces, lo que conoces, y eres capaz de brindar conmigo, eres increible, Este año ha sido una aventura increíble, mi vida ha  tenido multiples cosas, pero lo que mas valoro es tu estadia en mi vida, enserio te quiero, y no puedo esperar a descubrir todo lo que el futuro nos tiene preparado. Porque contigo, Anna, sé que lo mejor está siempre por venir. Gracias por existir, ser mi amiga y pues... mi musa. Eres uno de los regalos mas hermosos que la vida me ha dado, y espero hacerte tan feliz como tú me haces a mi. Con todo mi corazón: juan <3');
+
+
 }
 
 function showFlowers() {
