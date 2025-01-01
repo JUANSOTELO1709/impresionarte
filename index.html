@@ -3,57 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animación de Flores</title>
-    <style>
-        body {
-            background-color: #f8f9fa;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        canvas {
-            display: none;
-            background-color: #fff;
-            border: 1px solid #ccc;
-        }
-        .message {
-            display: block;
-            margin: 20px auto;
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            max-width: 90%;
-        }
-        button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
+    <title>Flores</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Animación de Flores</h1>
+    <h1>Carta para Anna</h1>
+    <div id="countdown"></div>
     <div id="messageContainer">
         <div class="message" id="message1">
             <p>Presiona el botón para ver la carta:</p>
-            <button onclick="showCard()">Ver Carta</button>
+            <button id="showCardButton" onclick="showCard()" disabled>Ver Carta</button>
         </div>
         <div class="message" id="message2" style="display: none;">
             <p>Presiona el botón para ver las flores:</p>
-            <button onclick="showFlowers()">Ver Flores</button>
+            <button id="showFlowersButton" onclick="showFlowers()">Ver Flores</button>
         </div>
     </div>
     <canvas id="flowerCanvas" width="300" height="400"></canvas>
     <script src="flower.js"></script>
+    <script src="timer.js"></script>
 </body>
 </html>

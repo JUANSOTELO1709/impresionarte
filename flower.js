@@ -32,7 +32,7 @@ class Flower {
         for (let i = 0; i < 5; i++) {
             ctx.beginPath();
             ctx.ellipse(0, this.size / 2, this.size / 3, this.size, 0, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+            ctx.fillStyle = 'rgba(104, 13, 157, 0.5)';
             ctx.fill();
             ctx.rotate(Math.PI * 2 / 5);
         }
