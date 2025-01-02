@@ -3,16 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prueba de Subida de Archivo</title>
-    <script src="prueba.js" type="module"></script>
+    <title>Impresionarte</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="icon" href="img/IMPRESIONATE.png" type="image/png">
 </head>
 <body>
-    <h1>Prueba de Subida de Archivo</h1>
-    <form id="upload-form">
-        <label for="file-upload">Seleccione una imagen:</label>
-        <input type="file" id="file-upload" accept="image/*" required>
-        <button type="submit">Subir</button>
-    </form>
-    <div id="result"></div>
+    <header class="menu-fixed">
+        <img src="img/IMPRESIONATE.png" alt="Logo Impresion-ate" class="logo">
+        
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#portafolio">Portafolio</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#" id="login-link" onclick="mostrarLogin()">Iniciar Sesión</a></li>
+            </ul>
+        </nav>
+        <button id="menu-toggle" class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+    </header>
+
+    <div id="login-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarLogin()">&times;</span>
+            <h2>Iniciar Sesión</h2>
+            <form id="login-form" onsubmit="return autenticarAdmin(event)">
+                <label for="usuario">Usuario:</label>
+                <input type="text" id="usuario" required>
+                
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" required>
+                
+                <button type="submit" class="btn-cta">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="producto-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarFormularioProducto()">&times;</span>
+            <h2>Agregar Producto</h2>
+            <form id="producto-form" onsubmit="return agregarProducto(event)">
+                <label for="producto-nombre">Nombre del Producto:</label>
+                <input type="text" id="producto-nombre" required>
+                
+                <label for="producto-precio">Precio del Producto:</label>
+                <input type="number" id="producto-precio" required>
+                
+                <label for="producto-imagen">Imagen del Producto:</label>
+                <input type="file" id="producto-imagen" accept="image/*" required>
+                
+                <button type="submit" class="btn-cta">Agregar Producto</button>
+            </form>
+        </div>
+    </div>
+
+    <section id="productos" class="contenedor">
+        <h2>Productos</h2>
+        <div class="galeria-productos" id="galeria-productos">
+            <!-- Productos dinámicos se añadirán aquí -->
+        </div>
+        <button id="btn-agregar" onclick="mostrarFormularioProducto()" style="display:none;">Agregar Producto</button>
+    </section>
+
+    <script src="productos.js"></script>
+    <script src="agregar.js"></script>
+    <script src="eliminar.js"></script>
+    <script>
+        function toggleMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            if (navMenu.style.display === 'block') {
+                navMenu.style.display = 'none';
+            } else {
+                navMenu.style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>
