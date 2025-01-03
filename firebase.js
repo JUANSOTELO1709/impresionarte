@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { GoogleAuthProvider } from "firebase/auth/web-extension";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -13,6 +14,26 @@ const firebaseConfig = {
 
 // Inicializar Firebase
 const app = initializeApp(firebaseConfig);
+
+const provider = new GoogleAuthProvider();
+
+export function auth() {
+    const auth = getAuth();
+try {
+    const result = signInWithPopup(auth, provider);
+
+    const   credential = GoogleAuthProvider.credentialFromResult(result);
+    const user = result.user;
+    const token = credential.accessToken;
+
+    }catch (error) {
+
+    }
+
+}
+
+
+
 const db = getFirestore(app);
 
 export { db };
