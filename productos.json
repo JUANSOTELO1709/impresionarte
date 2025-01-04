@@ -1,0 +1,20 @@
+[
+    {
+        "nombre": "Florero",
+        "precio": 60000,
+        "imagen": "FOTOSIMPRESOS/floreros.jpg"
+    },
+    {
+        "nombre": "Bolas Navideñas",
+        "precio": 8000,
+        "imagenes": [
+            "FOTOSIMPRESOS/bolas.jpg",
+            "FOTOSIMPRESOS/bolas1.jpg"
+        ]
+    },
+    {
+        "nombre": "Llaveros Personalizados",
+        "precio": 8000,
+        "imagen": "FOTOSIMPRESOS/llavero_pulpo.jpg"
+    }
+]

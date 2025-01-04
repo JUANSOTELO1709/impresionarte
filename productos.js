@@ -1,5 +1,47 @@
 // productos.js
 
+
+// productos.js
+document.addEventListener('DOMContentLoaded', function() {
+    const productos = [
+
+
+    ];
+
+    const galeria = document.getElementById('galeria-productos');
+
+    productos.forEach(producto => {
+        const divProducto = document.createElement('div');
+        divProducto.className = 'producto';
+        
+        const imgProducto = document.createElement('img');
+        imgProducto.src = producto.imagen;
+        imgProducto.alt = producto.nombre;
+        
+        const nombreProducto = document.createElement('h3');
+        nombreProducto.textContent = producto.nombre;
+        
+        const precioProducto = document.createElement('p');
+        precioProducto.textContent = `Precio: $${producto.precio}`;
+
+        divProducto.appendChild(imgProducto);
+        divProducto.appendChild(nombreProducto);
+        divProducto.appendChild(precioProducto);
+
+        galeria.appendChild(divProducto);
+    });
+});
+
+
+// aparte
+
+
+
+
+
+
+
+
 let esAdmin = false;
 
 function mostrarLogin() {
