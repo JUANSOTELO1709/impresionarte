@@ -1,91 +1,67 @@
-// productos.js
-
-
-// productos.js
-document.addEventListener('DOMContentLoaded', function() {
-    const productos = [
-
-
-    ];
+// Función para cargar productos dinámicamente desde el archivo JSON
+async function cargarProductos() {
+    const response = await fetch('productos.json');
+    const productos = await response.json();
 
     const galeria = document.getElementById('galeria-productos');
-
     productos.forEach(producto => {
         const divProducto = document.createElement('div');
-        divProducto.className = 'producto';
-        
-        const imgProducto = document.createElement('img');
-        imgProducto.src = producto.imagen;
-        imgProducto.alt = producto.nombre;
-        
-        const nombreProducto = document.createElement('h3');
-        nombreProducto.textContent = producto.nombre;
-        
-        const precioProducto = document.createElement('p');
-        precioProducto.textContent = `Precio: $${producto.precio}`;
+        divProducto.classList.add('producto');
 
-        divProducto.appendChild(imgProducto);
-        divProducto.appendChild(nombreProducto);
-        divProducto.appendChild(precioProducto);
+        if (producto.imagenes) {
+            // Crear un carrusel de imágenes
+            const divCarrusel = document.createElement('div');
+            divCarrusel.classList.add('carrusel');
 
+            producto.imagenes.forEach((imagen, index) => {
+                const imgProducto = document.createElement('img');
+                imgProducto.src = imagen;
+                imgProducto.alt = `Producto ${producto.nombre} ${index + 1}`;
+                imgProducto.classList.add(index === 0 ? 'active' : 'inactive');
+                divCarrusel.appendChild(imgProducto);
+            });
+
+            divProducto.appendChild(divCarrusel);
+        } else {
+            const imgProducto = document.createElement('img');
+            imgProducto.src = producto.imagen;
+            imgProducto.alt = `Producto ${producto.nombre}`;
+            divProducto.appendChild(imgProducto);
+        }
+
+        const h3Producto = document.createElement('h3');
+        h3Producto.textContent = producto.nombre;
+        
+        const pPrecio = document.createElement('p');
+        pPrecio.textContent = `Precio: $${producto.precio}`;
+
+        divProducto.appendChild(h3Producto);
+        divProducto.appendChild(pPrecio);
+        
         galeria.appendChild(divProducto);
     });
-});
 
-
-// aparte
-
-
-
-
-
-
-
-
-let esAdmin = false;
-
-function mostrarLogin() {
-    const modal = document.getElementById('login-modal');
-    if (modal) {
-        modal.style.display = 'block';
-    }
+    // Añadir funcionalidad al carrusel
+    iniciarCarrusel();
 }
 
-function cerrarLogin() {
-    const modal = document.getElementById('login-modal');
-    if (modal) {
-        modal.style.display = 'none';
-    }
+// Función para iniciar carruseles
+function iniciarCarrusel() {
+    const carruseles = document.querySelectorAll('.carrusel');
+    
+    carruseles.forEach(carrusel => {
+        let currentIndex = 0;
+        const images = carrusel.querySelectorAll('img');
+
+        setInterval(() => {
+            images[currentIndex].classList.remove('active');
+            images[currentIndex].classList.add('inactive');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.remove('inactive');
+            images[currentIndex].classList.add('active');
+        }, 3000);
+    });
 }
 
-function autenticarAdmin(event) {
-    event.preventDefault();
-    const usuario = document.getElementById('usuario').value;
-    const password = document.getElementById('password').value;
-
-    if (usuario === 'admin' && password === 'admin123') {
-        esAdmin = true;
-        alert('Bienvenido, administrador');
-        cerrarLogin();
-        document.getElementById('btn-agregar').style.display = 'block';
-        cargarProductos();
-        return false;
-    } else {
-        alert('Credenciales incorrectas');
-        return false;
-    }
-}
-
-function toggleMenu() {
-    const navMenu = document.getElementById('nav-menu').querySelector('ul');
-    if (navMenu) {
-        navMenu.classList.toggle('show');
-    }
-}
-
-window.onclick = function(event) {
-    const modalLogin = document.getElementById('login-modal');
-    if (event.target === modalLogin) {
-        modalLogin.style.display = 'none';
-    }
-}
+// Cargar productos al cargar la página
+window.onload = cargarProductos;
