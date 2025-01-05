@@ -9,12 +9,15 @@
         "precio": 8000,
         "imagenes": [
             "FOTOSIMPRESOS/bolas.jpg",
-            "FOTOSIMPRESOS/bolas1.jpg"
+            "FOTOSIMPRESOS/bolas1.jpg",
+            "FOTOSIMPRESOS/bolas2.jpg"
         ]
     },
     {
         "nombre": "Llaveros Personalizados",
         "precio": 8000,
-        "imagen": "FOTOSIMPRESOS/llavero_pulpo.jpg"
-    }
+        "imagenes": [
+            "FOTOSIMPRESOS/llavero_pulpo.jpg",
+            "FOTOSIMPRESOS/chimuelo.png"
+        ]    }
 ]
