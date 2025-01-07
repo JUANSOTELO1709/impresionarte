@@ -295,12 +295,14 @@ footer p {
 
 .contenedor-imagenes {
     display: flex;
-    animation: scroll-horizontal 15s linear infinite;
+    width: calc(100% * 7); /* Multiplica por la cantidad de imágenes */
+    animation: scroll-horizontal 30s linear infinite;
+    transform: translateX(100%); /* Comienza fuera de la vista desde la derecha */
 }
 
 .contenedor-imagenes img {
-    max-width: 40%; /* Asegura que la imagen no exceda el ancho del contenedor */
-    max-height: 40%; /* Asegura que la imagen no exceda la altura del contenedor */
+    width: calc(100% / 6); /* Ajusta el ancho del contenedor para cada imagen */
+    max-height: 50%; /* Limita la altura máxima de las imágenes */
     object-fit: cover; /* Ajusta la imagen para que cubra el contenedor */
 }
 
@@ -316,18 +318,19 @@ footer p {
 /* Media query para dispositivos móviles */
 @media (max-width: 768px) {
     .banner-animado {
-        height: 800px; /* Mantener la misma altura en dispositivos móviles */
-        align-items: center; /* Asegura que las imágenes estén centradas verticalmente */
-    }
-
-    .contenedor-imagenes img {
-        max-width: 100%; /* Asegura que la imagen no exceda el ancho del contenedor */
-        max-height: 100%; /* Asegura que la imagen no exceda la altura del contenedor */
-        object-fit: cover; /* Ajusta la imagen para que cubra el contenedor */
+        height: 600px; /* Reduce la altura en dispositivos móviles si es necesario */
+        align-items: center; /* Centra verticalmente */
     }
 
     .contenedor-imagenes {
-        animation: scroll-horizontal-mobile 10s linear infinite;
+        width: calc(100% * 7); /* Mantiene el ancho proporcional */
+        animation: scroll-horizontal-mobile 20s linear infinite;
+    }
+
+    .contenedor-imagenes img {
+        width: calc(100% / 3); /* Aumenta el tamaño de las imágenes en móviles */
+        max-height: 100%; /* Permite que las imágenes ocupen el 100% del espacio vertical */
+        object-fit: cover; /* Ajusta las imágenes para que cubran el contenedor */
     }
 
     @keyframes scroll-horizontal-mobile {
@@ -339,6 +342,9 @@ footer p {
         }
     }
 }
+
+
+
 
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
@@ -360,9 +366,6 @@ footer p {
         margin: 10px 0;
     }
 
-    #banner {
-        padding: 100px 20px 70px;
-    }
 
     .contenedor {
         padding: 1rem;
