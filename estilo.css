@@ -419,15 +419,23 @@ footer p {
     cursor: pointer;
 }
 
+/* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        left: 10px; /* Ajusta la posición según tus necesidades */
+    }
+
+    header.menu-fixed {
+        flex-direction: row-reverse; /* Cambia la dirección del flex para que el logotipo esté a la derecha */
+    }
+
     nav ul {
         display: none;
         flex-direction: column;
-        align-items: center;
-    }
-
-    .menu-toggle {
-        display: block;
+        align-items: flex-start;
+        width: 100%;
     }
 
     nav ul.show {
@@ -440,10 +448,5 @@ footer p {
 
     nav ul li a {
         font-size: 1.2rem;
-    }
-
-    header.menu-fixed {
-        flex-direction: column;
-        align-items: flex-start;
     }
 }
