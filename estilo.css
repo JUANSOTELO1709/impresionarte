@@ -408,7 +408,6 @@ footer p {
         width: 100%;
     }
 }
-
 /* Estilos para el menú hamburguesa */
 .menu-toggle {
     display: none;
@@ -417,18 +416,20 @@ footer p {
     font-size: 2rem;
     color: var(--text-color);
     cursor: pointer;
+    position: absolute;
+    left: 10px; /* Ajusta la posición según tus necesidades */
+    top: 15px; /* Ajusta la posición según tus necesidades */
 }
 
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
     .menu-toggle {
         display: block;
-        position: absolute;
-        left: 10px; /* Ajusta la posición según tus necesidades */
     }
 
     header.menu-fixed {
         flex-direction: row-reverse; /* Cambia la dirección del flex para que el logotipo esté a la derecha */
+        justify-content: space-between; /* Asegura que el espacio se distribuya correctamente */
     }
 
     nav ul {
@@ -436,6 +437,12 @@ footer p {
         flex-direction: column;
         align-items: flex-start;
         width: 100%;
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        top: 60px; /* Ajusta la posición del menú desplegable */
+        left: 0;
+        background-color: var(--primary-color);
     }
 
     nav ul.show {
@@ -443,10 +450,14 @@ footer p {
     }
 
     nav ul li {
-        margin: 10px 0;
+        margin: 10px 20px; /* Ajusta el margen según tus necesidades */
+        width: 100%; /* Asegura que los elementos del menú ocupen todo el ancho */
     }
 
     nav ul li a {
         font-size: 1.2rem;
+        width: 100%;
+        display: block;
+        padding: 10px 0;
     }
 }

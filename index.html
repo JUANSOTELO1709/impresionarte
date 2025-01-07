@@ -11,16 +11,23 @@
     <header class="menu-fixed">
         <img src="img/IMPRESIONATE.png" alt="Logo Impresion-ate" class="logo">
         
-        <nav id="nav-menu">
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav>
             <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#portafolio">Portafolio</a></li>
-                <li><a href="#productos">Productos</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-                <li><a href="#" id="login-link" onclick="mostrarLogin()">Iniciar Sesión</a></li>
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#about">Acerca de</a></li>
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#contact">Contacto</a></li>
             </ul>
         </nav>
-        <button id="menu-toggle" class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+        
+        <script>
+            function toggleMenu() {
+                var menu = document.querySelector('nav ul');
+                menu.classList.toggle('show');
+            }
+        </script>
+        
     </header>
 
     <div class="banner-animado">
