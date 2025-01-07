@@ -318,7 +318,7 @@ footer p {
 /* Media query para dispositivos móviles */
 @media (max-width: 768px) {
     .banner-animado {
-        height: 600px; /* Reduce la altura en dispositivos móviles si es necesario */
+        height: 400px; /* Reduce la altura en dispositivos móviles si es necesario */
         align-items: center; /* Centra verticalmente */
     }
 
