@@ -434,7 +434,7 @@ footer p {
         justify-content: space-between; 
         height: auto;
         min-height: 50px;
-        width: 370px;
+        width: auto;
     }
 
     nav ul {
