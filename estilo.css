@@ -354,7 +354,7 @@ footer p {
     }
 
     header .logo {
-        width: 150px;
+        width: 180px;
     }
 
     nav ul {
@@ -397,7 +397,7 @@ footer p {
 
 @media (max-width: 480px) {
     header .logo {
-        width: 120px;
+        width: 180px;
     }
 
     nav ul li {
@@ -409,6 +409,8 @@ footer p {
     }
 }
 /* Estilos para el menú hamburguesa */
+
+
 .menu-toggle {
     display: none;
     background-color: transparent;
@@ -417,8 +419,8 @@ footer p {
     color: var(--text-color);
     cursor: pointer;
     position: absolute;
-    left: 10px; /* Ajusta la posición según tus necesidades */
-    top: 15px; /* Ajusta la posición según tus necesidades */
+    left: 15px; /* Ajusta la posición según tus necesidades */
+    top: 10px; /* Ajusta la posición según tus necesidades */
 }
 
 /* Estilos para dispositivos móviles */
@@ -428,8 +430,11 @@ footer p {
     }
 
     header.menu-fixed {
-        flex-direction: row-reverse; /* Cambia la dirección del flex para que el logotipo esté a la derecha */
-        justify-content: space-between; /* Asegura que el espacio se distribuya correctamente */
+        flex-direction: row-reverse; 
+        justify-content: space-between; 
+        height: auto;
+        min-height: 50px;
+        width: 370px;
     }
 
     nav ul {
@@ -440,7 +445,7 @@ footer p {
         padding: 0;
         margin: 0;
         position: absolute;
-        top: 60px; /* Ajusta la posición del menú desplegable */
+        top: 60px; 
         left: 0;
         background-color: var(--primary-color);
     }
@@ -450,8 +455,8 @@ footer p {
     }
 
     nav ul li {
-        margin: 10px 20px; /* Ajusta el margen según tus necesidades */
-        width: 100%; /* Asegura que los elementos del menú ocupen todo el ancho */
+        margin: 10px 20px; 
+        width: 100%; 
     }
 
     nav ul li a {
