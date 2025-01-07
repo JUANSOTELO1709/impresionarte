@@ -422,7 +422,7 @@ footer p {
 }
 
 /* Estilos para dispositivos móviles */
-@media (max-width: 768px) {
+@media (max-width: 1170px) {
     .menu-toggle {
         display: block;
     }
