@@ -325,7 +325,7 @@ footer p {
 
     .contenedor-imagenes {
         width: calc(100% * 7); /* Mantiene el ancho proporcional */
-        animation: scroll-horizontal-mobile 20s linear infinite;
+        animation: scroll-horizontal-mobile 10s linear infinite;
     }
 
     .contenedor-imagenes img {
@@ -476,7 +476,7 @@ footer p {
     font-size: 16px;
     font-weight: bold;
     color: #fff;
-    background-color: #4CAF50;
+    background-color: #cc32c7;
     border: none;
     border-radius: 5px;
     text-align: center;
@@ -485,6 +485,6 @@ footer p {
 }
 
 .boton-comprar:hover {
-    background-color: #45a049;
+    background-color: #4c0958;
     transform: scale(1.05);
 }
