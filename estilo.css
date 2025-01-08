@@ -466,3 +466,25 @@ footer p {
         padding: 10px 0;
     }
 }
+
+
+.boton-comprar {
+    display: block; /* Cambia de inline-block a block */
+    width: fit-content; /* Ajusta el ancho al contenido del botón */
+    margin: 10px auto; /* Centra el botón horizontalmente */
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #9c4cb6;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.boton-comprar:hover {
+    background-color: #481c5c;
+    transform: scale(1.05);
+}

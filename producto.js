@@ -1,4 +1,3 @@
-// Función para cargar productos dinámicamente desde el archivo JSON
 async function cargarProductos() {
     const response = await fetch('productos.json');
     const productos = await response.json();
@@ -31,13 +30,20 @@ async function cargarProductos() {
 
         const h3Producto = document.createElement('h3');
         h3Producto.textContent = producto.nombre;
-        
+
         const pPrecio = document.createElement('p');
         pPrecio.textContent = `Precio: $${producto.precio}`;
 
+        // Crear el botón de comprar y agregarlo al producto
+        const botonComprar = document.createElement('a');
+        botonComprar.href = `https://wa.me/573026622715?text=Hola,%20me%20interesa%20el%20producto%20${producto.nombre}`;
+        botonComprar.textContent = 'Comprar';
+        botonComprar.classList.add('boton-comprar');
+
         divProducto.appendChild(h3Producto);
         divProducto.appendChild(pPrecio);
-        
+        divProducto.appendChild(botonComprar);
+
         galeria.appendChild(divProducto);
     });
 
@@ -48,7 +54,7 @@ async function cargarProductos() {
 // Función para iniciar carruseles
 function iniciarCarrusel() {
     const carruseles = document.querySelectorAll('.carrusel');
-    
+
     carruseles.forEach(carrusel => {
         let currentIndex = 0;
         const images = carrusel.querySelectorAll('img');
