@@ -315,8 +315,6 @@ footer p {
         transform: translateX(-100%);
     }
 }
-
-/* Media query para dispositivos móviles */
 @media (max-width: 768px) {
     .banner-animado {
         height: 400px; /* Reduce la altura en dispositivos móviles si es necesario */
@@ -325,7 +323,7 @@ footer p {
 
     .contenedor-imagenes {
         width: calc(100% * 6); /* Mantiene el ancho proporcional */
-        animation: scroll-horizontal-mobile 7s linear infinite;
+        animation: scroll-horizontal-mobile 3s linear infinite; /* Reduce la duración a 3 segundos para un movimiento más rápido */
     }
 
     .contenedor-imagenes img {
@@ -343,8 +341,6 @@ footer p {
         }
     }
 }
-
-
 
 
 /* Estilos para dispositivos móviles */
