@@ -323,7 +323,7 @@ footer p {
 
     .contenedor-imagenes {
         width: calc(100% * 6); /* Mantiene el ancho proporcional */
-        animation: scroll-horizontal-mobile 5s linear infinite; /* Reduce la duración de la animación */
+        animation: scroll-horizontal-mobile 10s linear infinite; /* Ajusta la duración a 10 segundos */
     }
 
     .contenedor-imagenes img {
@@ -335,9 +335,6 @@ footer p {
     @keyframes scroll-horizontal-mobile {
         0% {
             transform: translateX(100%);
-        }
-        50% {
-            transform: translateX(0%);
         }
         100% {
             transform: translateX(-100%);
