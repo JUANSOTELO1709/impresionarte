@@ -323,7 +323,7 @@ footer p {
 
     .contenedor-imagenes {
         width: 600px;
-        animation: scroll-horizontal-mobile 3s linear infinite; /* Ajusta la duración a 10 segundos */
+        animation: scroll-horizontal-mobile 6s linear infinite; /* Ajusta la duración a 10 segundos */
         height: 80px;
     }
 
