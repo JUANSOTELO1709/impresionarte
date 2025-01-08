@@ -324,10 +324,11 @@ footer p {
     .contenedor-imagenes {
         width: calc(100% * 6); /* Mantiene el ancho proporcional */
         animation: scroll-horizontal-mobile 10s linear infinite; /* Ajusta la duración a 10 segundos */
+        height: 100px;
     }
 
     .contenedor-imagenes img {
-        width: calc(100% / 6); /* Aumenta el tamaño de las imágenes en móviles */
+        width: 100%; /* Ajusta el tamaño de las imágenes a 100% del contenedor */
         max-height: 100%; /* Permite que las imágenes ocupen el 100% del espacio vertical */
         object-fit: cover; /* Ajusta las imágenes para que cubran el contenedor */
     }
