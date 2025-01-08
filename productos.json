@@ -1,11 +1,11 @@
 [
     {
-        "nombre": "Florero",
+        "nombre": "Matera curva Version 1",
         "precio": 60000,
         "imagen": "FOTOSIMPRESOS/floreros.jpg"
     },
     {
-        "nombre": "Bolas Navideñas",
+        "nombre": "Bolas Navideñas personalizadas",
         "precio": 8000,
         "imagenes": [
             "FOTOSIMPRESOS/bolas.jpg",

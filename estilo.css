@@ -159,7 +159,7 @@ footer p {
     text-align: left;
     background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -171,8 +171,9 @@ footer p {
 
 .producto img {
     width: 100%;
+    height: 67%;
     border-bottom: 1px solid #ddd;
-    border-top-left-radius: 5px;
+    border-top-left-radius: 10px;
     border-top-right-radius: 5px;
 }
 
@@ -467,16 +468,15 @@ footer p {
     }
 }
 
-
 .boton-comprar {
-    display: block; /* Cambia de inline-block a block */
-    width: fit-content; /* Ajusta el ancho al contenido del botón */
-    margin: 10px auto; /* Centra el botón horizontalmente */
+    display: block;
+    width: fit-content;
+    margin: 10px auto 20px; /* Incrementa el margen inferior a 30 píxeles */
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
     color: #fff;
-    background-color: #9c4cb6;
+    background-color: #4CAF50;
     border: none;
     border-radius: 5px;
     text-align: center;
@@ -485,6 +485,6 @@ footer p {
 }
 
 .boton-comprar:hover {
-    background-color: #481c5c;
+    background-color: #45a049;
     transform: scale(1.05);
 }
