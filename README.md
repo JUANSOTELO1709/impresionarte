@@ -1,6 +1,5 @@
 # Impresionarte
 (actualizacion)
-a
 ¡Bienvenido a Impresionarte! Este proyecto está diseñado para llevar el arte a tus manos a través de impresionantes impresiones de obras de arte.
 
 https://juansotelo1709.github.io/impresionarte/
