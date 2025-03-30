@@ -5,7 +5,7 @@
 https://juansotelo1709.github.io/impresionarte/
 
 ## Descripción
-
+s
 Impresionarte es una plataforma que permite a los usuarios descubrir, personalizar y ordenar impresiones de alta calidad de sus obras de arte favoritas. Ya sea que desees decorar tu hogar, oficina o regalar una pieza única, Impresionarte tiene algo para todos los gustos.
 
 ## Características
