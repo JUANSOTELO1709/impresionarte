@@ -1,5 +1,5 @@
 # Impresionarte
-¡Bienvenido a Impresionarte! Este proyecto está diseñado para llevar el arte a tus manos a través de impresionantes impresiones de obras de arte.
+¡Bienvenido a Impresionarte! Este proyecto está diseñado para llevar el arte a tus manos a través de impresionantes impresiones de obras de arte y tejidos en croshet.
 
 https://juansotelo1709.github.io/impresionarte/
 
