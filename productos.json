@@ -19,5 +19,16 @@
         "imagenes": [
             "FOTOSIMPRESOS/llavero_pulpo.jpg",
             "FOTOSIMPRESOS/chimuelo.png"
-        ]    }
+        ]    },
+
+
+        {
+            "nombre": "Llavero otro",
+            "precio": 8000,
+            "imagenes": [
+                "FOTOSIMPRESOS/llavero_pulpo.jpg",
+                "FOTOSIMPRESOS/chimuelo.png"
+            ]    }
+    
+
 ]
