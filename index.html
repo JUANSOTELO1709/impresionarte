@@ -4,564 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impresionarte - Impresión 3D y Electrónica</title>
+    <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="img/IMPRESIONATE.png" type="image/png">
-    <style>
-        :root {
-            --primary: #2a4b8d;
-            --secondary: #ff5722;
-            --accent: #00bcd4;
-            --dark: #212121;
-            --light: #f5f5f7;
-            --gray: #757575;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--dark);
-            background-color: var(--light);
-            line-height: 1.6;
-        }
-        
-        h1, h2, h3, h4 {
-            font-family: 'Roboto Condensed', sans-serif;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        /* Header y Navegación */
-        header {
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-        }
-        
-        .logo img {
-            height: 40px;
-            margin-right: 10px;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 25px;
-        }
-        
-        nav ul li a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
-        
-        nav ul li a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--secondary);
-            transition: width 0.3s;
-        }
-        
-        nav ul li a:hover {
-            color: var(--primary);
-        }
-        
-        nav ul li a:hover:after {
-            width: 100%;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            font-size: 1.5rem;
-            background: none;
-            border: none;
-            color: var(--primary);
-            cursor: pointer;
-        }
-        
-        /* Hero Section */
-        .main-banner {
-            background: linear-gradient(to right, rgba(42, 75, 141, 0.8), rgba(0, 188, 212, 0.7)), url('https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding: 0 20px;
-        }
-        
-        .main-banner h1 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .main-banner p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin-bottom: 2rem;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--secondary);
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            background-color: #e64a19;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Sección Acerca de */
-        #about {
-            padding: 5rem 0;
-            background-color: white;
-        }
-        
-        .about-content {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 3rem;
-        }
-        
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .about-image {
-            flex: 1;
-            min-width: 300px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s;
-        }
-        
-        .about-image:hover img {
-            transform: scale(1.05);
-        }
-        
-        /* Sección Productos */
-        #productos {
-            padding: 5rem 0;
-            background-color: #f8f9fa;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-        
-        .section-title:after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--secondary);
-            margin: 15px auto;
-        }
-        
-        .productos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        
-        .producto-card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
-        }
-        
-        .producto-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .producto-img {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .producto-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .producto-card:hover .producto-img img {
-            transform: scale(1.1);
-        }
-        
-        .producto-info {
-            padding: 1.5rem;
-        }
-        
-        .producto-info h3 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .producto-precio {
-            color: var(--secondary);
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin: 0.5rem 0;
-        }
-        
-        .producto-desc {
-            color: var(--gray);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-        
-        .btn-producto {
-            background-color: var(--primary);
-            color: white;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-block;
-            transition: background-color 0.3s;
-        }
-        
-        .btn-producto:hover {
-            background-color: #1a3372;
-        }
-        
-        /* Testimonios */
-        #testimonios {
-            padding: 5rem 0;
-            background-color: white;
-        }
-        
-        .testimonios-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .testimonio-card {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            position: relative;
-        }
-        
-        .testimonio-card:before {
-            content: '"';
-            font-size: 4rem;
-            color: var(--secondary);
-            opacity: 0.2;
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            line-height: 1;
-        }
-        
-        .testimonio-text {
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .testimonio-author {
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        /* Contacto */
-        #contacto {
-            padding: 5rem 0;
-            background-color: #f8f9fa;
-        }
-        
-        .contacto-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 3rem;
-        }
-        
-        .contacto-info {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .contacto-form {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: 1rem;
-        }
-        
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .info-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-        
-        .info-icon {
-            width: 40px;
-            height: 40px;
-            background-color: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-        }
-        
-        .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-        }
-        
-        .footer-section h3 {
-            color: white;
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-        
-        .footer-section h3:after {
-            content: '';
-            display: block;
-            width: 40px;
-            height: 3px;
-            background: var(--secondary);
-            margin-top: 10px;
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--secondary);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 1rem;
-        }
-        
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-        
-        .social-links a:hover {
-            background-color: var(--secondary);
-            transform: translateY(-3px);
-        }
-        
-        .copyright {
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: #ccc;
-        }
-        
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-content {
-            background-color: white;
-            border-radius: 8px;
-            padding: 2rem;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background-color: white;
-                flex-direction: column;
-                padding: 1rem 0;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.show {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                text-align: center;
-            }
-            
-            nav ul li a {
-                display: block;
-                padding: 1rem;
-            }
-            
-            .main-banner h1 {
-                font-size: 2.2rem;
-            }
-            
-            .main-banner p {
-                font-size: 1rem;
-            }
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -651,7 +96,7 @@
                     <input type="file" id="producto-imagen" accept="image/*" required>
                 </div>
                 
-                <button type="submit" class="btn">Agregar Producto</button>
+                <button type="submit" class="btn">Agregar Productos</button>
             </form>
         </div>
     </div>
@@ -660,44 +105,9 @@
         <div class="container">
             <h2 class="section-title">Nuestros Productos</h2>
             <div class="productos-grid" id="galeria-productos">
-                <!-- Productos dinámicos -->
-                <div class="producto-card">
-                    <div class="producto-img">
-                        <img src="https://images.unsplash.com/photo-1581784368651-8916092072cf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Producto 1">
-                    </div>
-                    <div class="producto-info">
-                        <h3>Figura personalizada</h3>
-                        <p class="producto-precio">$25.000</p>
-                        <p class="producto-desc">Figura impresa en 3D con detalles precisos y pintura personalizada.</p>
-                        <a href="#contacto" class="btn-producto">Solicitar</a>
-                    </div>
-                </div>
-                
-                <div class="producto-card">
-                    <div class="producto-img">
-                        <img src="https://images.unsplash.com/photo-1598301257982-0cf01499abb2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Producto 2">
-                    </div>
-                    <div class="producto-info">
-                        <h3>Soporte para dispositivos</h3>
-                        <p class="producto-precio">$18.000</p>
-                        <p class="producto-desc">Soporte ergonómico para teléfonos y tablets con diseño moderno.</p>
-                        <a href="#contacto" class="btn-producto">Solicitar</a>
-                    </div>
-                </div>
-                
-                <div class="producto-card">
-                    <div class="producto-img">
-                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Producto 3">
-                    </div>
-                    <div class="producto-info">
-                        <h3>Kit de electrónica</h3>
-                        <p class="producto-precio">$45.000</p>
-                        <p class="producto-desc">Kit personalizado con componentes electrónicos y carcasa impresa en 3D.</p>
-                        <a href="#contacto" class="btn-producto">Solicitar</a>
-                    </div>
-                </div>
+                <!-- Los productos se cargarán dinámicamente desde productos.json -->
             </div>
-            <div style="text-align: center; margin-top: 2rem;">
+            <div class="text-center">
                 <button id="btn-agregar" onclick="mostrarFormularioProducto()" style="display:none;" class="btn">Agregar Producto</button>
             </div>
         </div>
@@ -749,7 +159,7 @@
                         </div>
                         <div>
                             <h4>Email</h4>
-                            <p>info@impresionarte.com</p>
+                            <p>juan.david.jds84@gmail.com</p>
                         </div>
                     </div>
                     
@@ -759,7 +169,7 @@
                         </div>
                         <div>
                             <h4>Teléfono</h4>
-                            <p>+57 1 234 5678</p>
+                            <p>+57 3026622715</p>
                         </div>
                     </div>
                     
@@ -818,8 +228,8 @@
                 
                 <div class="footer-section">
                     <h3>Contacto</h3>
-                    <p>info@impresionarte.com</p>
-                    <p>+57 1 234 5678</p>
+                    <p>juan.david.jds84@gmail.com</p>
+                    <p>+57 3026622715</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -835,6 +245,52 @@
     </footer>
 
     <script>
+        // Cargar productos desde el archivo JSON
+        async function cargarProductos() {
+            try {
+                const response = await fetch('productos.json');
+                const productos = await response.json();
+                mostrarProductos(productos);
+            } catch (error) {
+                console.error('Error al cargar los productos:', error);
+                // Mostrar mensaje de error o productos por defecto
+                document.getElementById('galeria-productos').innerHTML = 
+                    '<p class="error-message">No se pudieron cargar los productos. Por favor, intente más tarde.</p>';
+            }
+        }
+
+        // Mostrar productos en la galería
+        function mostrarProductos(productos) {
+            const galeria = document.getElementById('galeria-productos');
+            galeria.innerHTML = ''; // Limpiar galería
+            
+            productos.forEach(producto => {
+                // Determinar la imagen a mostrar (primera imagen del array si existe)
+                const imagenPrincipal = producto.imagenes && producto.imagenes.length > 0 
+                    ? producto.imagenes[0] 
+                    : producto.imagen || 'img/placeholder-producto.jpg';
+                
+                const productoHTML = `
+                    <div class="producto-card">
+                        <div class="producto-img">
+                            <img src="${imagenPrincipal}" alt="${producto.nombre}">
+                            ${producto.imagenes && producto.imagenes.length > 1 ? 
+                                `<div class="producto-badges">
+                                    <span class="multiples-imagenes"><i class="fas fa-images"></i> +${producto.imagenes.length - 1}</span>
+                                </div>` : ''}
+                        </div>
+                        <div class="producto-info">
+                            <h3>${producto.nombre}</h3>
+                            <p class="producto-precio">$${producto.precio.toLocaleString()}</p>
+                            <a href="#contacto" class="btn-producto">Solicitar</a>
+                        </div>
+                    </div>
+                `;
+                
+                galeria.innerHTML += productoHTML;
+            });
+        }
+
         // Menú móvil
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             document.getElementById('menu').classList.toggle('show');
@@ -859,7 +315,7 @@
             }, 5000);
         };
         
-        // Funciones para modales (simplificadas para la demostración)
+        // Funciones para modales
         function mostrarFormularioProducto() {
             document.getElementById('producto-modal').style.display = 'flex';
         }
@@ -890,6 +346,9 @@
                 e.target.style.display = 'none';
             }
         });
+
+        // Cargar productos cuando el documento esté listo
+        document.addEventListener('DOMContentLoaded', cargarProductos);
     </script>
 </body>
 </html>
