@@ -1,8 +1,44 @@
 [
     {
-        "nombre": "Matera curva Version 1",
-        "precio": 60000,
-        "imagen": "FOTOSIMPRESOS/floreros.jpg"
+        "nombre": "Frase:El tiempo de dios es perfecto",
+        "precio": 40000,
+        "imagen": "FOTOSIMPRESOS/El tiempo.jpeg"
+    },
+{        "nombre": "Frase:Yo y mi casa ",
+        "precio": 40000,
+        "imagen": "FOTOSIMPRESOS/Yo y mi casa.jpeg"
+    },
+    {
+        "nombre": "Frase:Dios bendice este hogar",
+        "precio": 40000,
+        "imagen": "FOTOSIMPRESOS/Dios bendice.jpeg"
+    },
+    {
+        "nombre": "Frase:El amor es paciente...",
+        "precio": 40000,
+        "imagen": "FOTOSIMPRESOS/El amor es.jpeg"
+    },
+        {
+        "nombre": "Frase:Nunca fue suerte",
+        "precio": 40000,
+        "imagen": "FOTOSIMPRESOS/Nunca fue suerte.jpeg"
+    },
+            {
+        "nombre": "Frase:Somos una familia jehova",
+        "precio": 40000,
+        "imagen": "FOTOSIMPRESOS/Somos una familia jehova.jpeg"
+    },
+                {
+        "nombre": "Frase:Somos una familia bendecida",
+        "precio": 40000,
+        "imagen": "FOTOSIMPRESOS/Somos una familia.jpeg"
+    },
+            
+    
+        {
+        "nombre": "Frase:En esta casa",
+        "precio": 40000,
+        "imagen": "FOTOSIMPRESOS/En esta casa.jpeg"
     },
     {
         "nombre": "Bolas Navideñas personalizadas",
