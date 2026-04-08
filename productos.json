@@ -106,21 +106,19 @@
         ]
     },
     {
-        "nombre": "Llaveros Personalizados",
+        "nombre": "Llaveros Pa' tu negocio",
         "categoria": "llaveros",
         "precio": 5000 ,
         "imagenes": [
-            "FOTOSIMPRESOS/llavero negocio.jpeg",
-            "FOTOSIMPRESOS/chimuelo.png"
+            "FOTOSIMPRESOS/llavero negocio.jpeg"
         ]
     },
     {
-        "nombre": "Llavero otro",
+        "nombre": "Llaveros Copa del mundo",
         "categoria": "llaveros",
-        "precio": 8000,
+        "precio": 5000 ,
         "imagenes": [
-            "FOTOSIMPRESOS/llavero_pulpo.jpg",
-            "FOTOSIMPRESOS/chimuelo.png"
+            "FOTOSIMPRESOS/llavero worldcup.jpeg"
         ]
     }
 ]
