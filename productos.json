@@ -47,6 +47,54 @@
         "precio": 50000,
         "imagen": "FOTOSIMPRESOS/En esta casa.jpeg"
     },
+
+
+
+
+        {
+        "nombre": "Decoracion: Mascota personalizada",
+        "categoria": "decoracion",
+        "precio": 50000,
+        "imagenes": [
+            "FOTOSIMPRESOS/Keen.jpg"
+
+        ]
+    },
+
+
+    
+        {
+        "nombre": "Decoracion: Mascota personalizada",
+        "categoria": "decoracion",
+        "precio": 50000,
+        "imagenes": [
+            "FOTOSIMPRESOS/coco.jpg"
+
+        ]
+    },
+
+    
+        {
+        "nombre": "Decoracion: Mascota personalizada",
+        "categoria": "decoracion",
+        "precio": 50000,
+        "imagenes": [
+            "FOTOSIMPRESOS/Roco.jpg"
+
+        ]
+    },
+
+
+        {
+        "nombre": "Decoracion: Cuadro mascotas",
+        "categoria": "decoracion",
+        "precio": 150000,
+        "imagenes": [
+            "FOTOSIMPRESOS/perrito.jpg"
+
+        ]
+    },
+
     {
         "nombre": "Bolas Navideñas personalizadas",
         "categoria": "decoracion",
@@ -60,9 +108,9 @@
     {
         "nombre": "Llaveros Personalizados",
         "categoria": "llaveros",
-        "precio": 8000,
+        "precio": 5000 ,
         "imagenes": [
-            "FOTOSIMPRESOS/llavero_pulpo.jpg",
+            "FOTOSIMPRESOS/llavero negocio.jpeg",
             "FOTOSIMPRESOS/chimuelo.png"
         ]
     },

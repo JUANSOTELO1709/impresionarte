@@ -350,7 +350,13 @@
         .btn-producto:hover {
             background-color: #1a3372;
         }
-        
+
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
         /* Testimonios */
         #testimonios {
             padding: 5rem 0;
@@ -626,10 +632,16 @@
                 box-shadow: none;
                 background-color: rgba(255, 255, 255, 0.95);
                 margin-top: 0;
+                padding-left: 1rem;
             }
             
             .submenu li a {
                 padding: 0.8rem 2rem;
                 font-size: 0.9rem;
+            }
+            
+            .productos-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
         }
