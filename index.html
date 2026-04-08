@@ -177,28 +177,38 @@
 </section>
 
     <section id="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>¿Quiénes somos?</h2>
-                    <p>En <b>Impresionarte</b> combinamos creatividad, tecnología y pasión para ofrecerte productos de impresión 3D hechos a medida. Nuestro objetivo es ayudarte a materializar tus ideas, desde prototipos hasta piezas funcionales y decorativas.</p>
-                    <p>Trabajamos con materiales de alta calidad (PLA, PETG, TPU) y tiempos de entrega rápidos. ¡Apoyamos el emprendimiento local y la innovación desde Bogotá!</p>
-                    <a href="#contacto" class="btn">Contáctanos</a>
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>¿Quiénes somos?</h2>
+                <p>En <b>Impresionarte</b> combinamos creatividad, tecnología y pasión para ofrecerte productos de impresión 3D hechos a medida. Nuestro objetivo es ayudarte a materializar tus ideas, desde prototipos hasta piezas funcionales y decorativas.</p>
+                <p>Trabajamos con materiales de alta calidad (PLA, PETG, TPU) y tiempos de entrega rápidos. ¡Apoyamos el emprendimiento local y la innovación desde Bogotá!</p>
+                <a href="#contacto" class="btn">Contáctanos</a>
+            </div>
+
+            <!-- REEMPLAZA about-gallery por esto -->
+            <div class="about-slider">
+                <div class="slider-track">
+                    <div class="slider-slide">
+                        <img src="FOTOSIMPRESOS/llavero negocio.jpeg" alt="Trabajo 1">
+                    </div>
+                    <div class="slider-slide">
+                        <img src="FOTOSIMPRESOS/real2.jpeg" alt="Trabajo 2">
+                    </div>
+                    <div class="slider-slide">
+                        <img src="FOTOSIMPRESOS/real1.jpeg" alt="Trabajo 3">
+                    </div>
                 </div>
-                <div class="about-gallery">
-                    <div class="about-thumb">
-                        <img src="FOTOSIMPRESOS/llavero negocio.jpeg" alt="Trabajo real 1 de Impresionarte">
-                    </div>
-                    <div class="about-thumb">
-                        <img src="FOTOSIMPRESOS/real2.jpeg" alt="Trabajo real 2 de Impresionarte">
-                    </div>
-                    <div class="about-thumb">
-                        <img src="FOTOSIMPRESOS/real1.jpeg" alt="Trabajo real 3 de Impresionarte">
-                    </div>
+                <div class="slider-dots">
+                    <span class="dot active" onclick="irSlide(0)"></span>
+                    <span class="dot" onclick="irSlide(1)"></span>
+                    <span class="dot" onclick="irSlide(2)"></span>
                 </div>
             </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Modales de admin — ocultos para usuarios normales -->
     <div id="login-modal" class="modal">
@@ -398,6 +408,26 @@
     </footer>
 
     <script>
+
+
+let slideActual = 0;
+const totalSlides = 3;
+
+function irSlide(n) {
+    slideActual = n;
+    document.querySelector('.slider-track').style.transform = `translateX(-${n * 100}%)`;
+    document.querySelectorAll('.dot').forEach((d, i) => {
+        d.classList.toggle('active', i === n);
+    });
+}
+
+// Auto-avance cada 3 segundos
+setInterval(() => {
+    irSlide((slideActual + 1) % totalSlides);
+}, 3000);
+
+
+
         async function cargarProductos() {
             try {
                 const response = await fetch('productos.json');
