@@ -1,47 +1,55 @@
 [
     {
         "nombre": "Frase:El tiempo de dios es perfecto",
+        "categoria": "frases",
         "precio": 40000,
         "imagen": "FOTOSIMPRESOS/El tiempo.jpeg"
     },
-{        "nombre": "Frase:Yo y mi casa ",
+    {
+        "nombre": "Frase:Yo y mi casa ",
+        "categoria": "frases",
         "precio": 40000,
         "imagen": "FOTOSIMPRESOS/Yo y mi casa.jpeg"
     },
     {
         "nombre": "Frase:Dios bendice este hogar",
+        "categoria": "frases",
         "precio": 40000,
         "imagen": "FOTOSIMPRESOS/Dios bendice.jpeg"
     },
     {
         "nombre": "Frase:El amor es paciente...",
+        "categoria": "frases",
         "precio": 50000,
         "imagen": "FOTOSIMPRESOS/El amor es.jpeg"
     },
-        {
+    {
         "nombre": "Frase:Nunca fue suerte",
+        "categoria": "frases",
         "precio": 40000,
         "imagen": "FOTOSIMPRESOS/Nunca fue suerte.jpeg"
     },
-            {
+    {
         "nombre": "Frase:Somos una familia jehova",
+        "categoria": "frases",
         "precio": 40000,
         "imagen": "FOTOSIMPRESOS/Somos una familia jehova.jpeg"
     },
-                {
+    {
         "nombre": "Frase:Somos una familia bendecida",
+        "categoria": "frases",
         "precio": 40000,
         "imagen": "FOTOSIMPRESOS/somos una familia.jpeg"
     },
-            
-    
-        {
+    {
         "nombre": "Frase:En esta casa",
+        "categoria": "frases",
         "precio": 50000,
         "imagen": "FOTOSIMPRESOS/En esta casa.jpeg"
     },
     {
         "nombre": "Bolas Navideñas personalizadas",
+        "categoria": "decoracion",
         "precio": 8000,
         "imagenes": [
             "FOTOSIMPRESOS/bolas.jpg",
@@ -51,20 +59,20 @@
     },
     {
         "nombre": "Llaveros Personalizados",
+        "categoria": "llaveros",
         "precio": 8000,
         "imagenes": [
             "FOTOSIMPRESOS/llavero_pulpo.jpg",
             "FOTOSIMPRESOS/chimuelo.png"
-        ]    },
-
-
-        {
-            "nombre": "Llavero otro",
-            "precio": 8000,
-            "imagenes": [
-                "FOTOSIMPRESOS/llavero_pulpo.jpg",
-                "FOTOSIMPRESOS/chimuelo.png"
-            ]    }
-    
-
+        ]
+    },
+    {
+        "nombre": "Llavero otro",
+        "categoria": "llaveros",
+        "precio": 8000,
+        "imagenes": [
+            "FOTOSIMPRESOS/llavero_pulpo.jpg",
+            "FOTOSIMPRESOS/chimuelo.png"
+        ]
+    }
 ]

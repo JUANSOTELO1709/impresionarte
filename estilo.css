@@ -99,7 +99,58 @@
         nav ul li a:hover:after {
             width: 100%;
         }
-        
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .submenu li {
+            margin: 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .submenu li:last-child {
+            border-bottom: none;
+        }
+
+        .submenu li a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--dark);
+            font-weight: 400;
+        }
+
+        .submenu li a:hover {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        .submenu li a:after {
+            display: none;
+        }
+
         .mobile-menu-btn {
             display: none;
             font-size: 1.5rem;
@@ -153,7 +204,7 @@
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         /* Sección Acerca de */
         #about {
             padding: 5rem 0;
@@ -212,10 +263,25 @@
             margin: 15px auto;
         }
         
-        .productos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
+        .categoria-section {
+            margin-bottom: 3rem;
+        }
+        
+        .categoria-titulo {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .categoria-titulo:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary);
+            margin: 10px auto;
         }
         
         .producto-card {
@@ -549,5 +615,21 @@
             
             .main-banner p {
                 font-size: 1rem;
+            }
+            
+            /* Dropdown en móviles */
+            .dropdown .submenu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background-color: rgba(255, 255, 255, 0.95);
+                margin-top: 0;
+            }
+            
+            .submenu li a {
+                padding: 0.8rem 2rem;
+                font-size: 0.9rem;
             }
         }

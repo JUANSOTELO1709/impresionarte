@@ -144,7 +144,14 @@
                 <ul id="menu">
                     <li><a href="#home">Inicio</a></li>
                     <li><a href="#about">Acerca de</a></li>
-                    <li><a href="#productos">Productos</a></li>
+                    <li class="dropdown">
+                        <a href="#productos">Productos</a>
+                        <ul class="submenu">
+                            <li><a href="#categoria-frases">Frases</a></li>
+                            <li><a href="#categoria-llaveros">Llaveros</a></li>
+                            <li><a href="#categoria-decoracion">Decoración</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#testimonios">Testimonios</a></li>
                     <li><a href="#contacto">Contacto</a></li>
                 </ul>
@@ -401,28 +408,58 @@
                 galeria.innerHTML = '<p class="productos-vacio">Próximamente — escríbenos por WhatsApp para ver el catálogo.</p>';
                 return;
             }
-            galeria.innerHTML = '';
+
+            // Agrupar productos por categoría
+            const productosPorCategoria = {};
             productos.forEach(producto => {
-                const imagen = producto.imagenes && producto.imagenes.length > 0
-                    ? producto.imagenes[0]
-                    : producto.imagen || 'img/placeholder-producto.jpg';
+                const categoria = producto.categoria || 'otros';
+                if (!productosPorCategoria[categoria]) {
+                    productosPorCategoria[categoria] = [];
+                }
+                productosPorCategoria[categoria].push(producto);
+            });
 
-                const waMsg = encodeURIComponent(`Hola Impresionarte, me interesa "${producto.nombre}" 😊`);
+            galeria.innerHTML = '';
 
-                galeria.innerHTML += `
-                    <div class="producto-card">
-                        <div class="producto-img">
-                            <img src="${imagen}" alt="${producto.nombre}" loading="lazy">
-                        </div>
-                        <div class="producto-info">
-                            <h3>${producto.nombre}</h3>
-                            <p class="producto-precio">$${producto.precio.toLocaleString('es-CO')}</p>
-                            ${producto.descripcion ? `<p class="producto-desc">${producto.descripcion}</p>` : ''}
-                            <a href="https://wa.me/573026622715?text=${waMsg}" target="_blank" class="btn-producto">
-                                <i class="fab fa-whatsapp" style="margin-right:5px;"></i>Solicitar
-                            </a>
-                        </div>
-                    </div>`;
+            // Crear secciones por categoría
+            Object.keys(productosPorCategoria).forEach(categoria => {
+                const categoriaDiv = document.createElement('div');
+                categoriaDiv.classList.add('categoria-section');
+                categoriaDiv.id = `categoria-${categoria}`;
+
+                const tituloCategoria = document.createElement('h3');
+                tituloCategoria.classList.add('categoria-titulo');
+                tituloCategoria.textContent = categoria.charAt(0).toUpperCase() + categoria.slice(1);
+                categoriaDiv.appendChild(tituloCategoria);
+
+                const gridDiv = document.createElement('div');
+                gridDiv.classList.add('productos-grid');
+
+                productosPorCategoria[categoria].forEach(producto => {
+                    const imagen = producto.imagenes && producto.imagenes.length > 0
+                        ? producto.imagenes[0]
+                        : producto.imagen || 'img/placeholder-producto.jpg';
+
+                    const waMsg = encodeURIComponent(`Hola Impresionarte, me interesa "${producto.nombre}" 😊`);
+
+                    gridDiv.innerHTML += `
+                        <div class="producto-card">
+                            <div class="producto-img">
+                                <img src="${imagen}" alt="${producto.nombre}" loading="lazy">
+                            </div>
+                            <div class="producto-info">
+                                <h3>${producto.nombre}</h3>
+                                <p class="producto-precio">$${producto.precio.toLocaleString('es-CO')}</p>
+                                ${producto.descripcion ? `<p class="producto-desc">${producto.descripcion}</p>` : ''}
+                                <a href="https://wa.me/573026622715?text=${waMsg}" target="_blank" class="btn-producto">
+                                    <i class="fab fa-whatsapp" style="margin-right:5px;"></i>Solicitar
+                                </a>
+                            </div>
+                        </div>`;
+                });
+
+                categoriaDiv.appendChild(gridDiv);
+                galeria.appendChild(categoriaDiv);
             });
         }
 
