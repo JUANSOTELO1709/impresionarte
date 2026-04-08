@@ -223,25 +223,36 @@
             min-width: 300px;
         }
         
-        .about-image {
+        .about-gallery {
             flex: 1;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
             min-width: 300px;
-            border-radius: 10px;
+        }
+
+        .about-thumb {
+            flex: 1;
+            min-width: 180px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+            min-height: 220px;
+            background: white;
         }
-        
-        .about-image img {
+
+        .about-thumb img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
-            transition: transform 0.5s;
+            transition: transform 0.4s ease;
         }
-        
-        .about-image:hover img {
+
+        .about-thumb:hover img {
             transform: scale(1.05);
         }
-        
+
         /* Sección Productos */
         #productos {
             padding: 5rem 0;
