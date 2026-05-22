@@ -5,6 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impresionarte — Impresión 3D a tu Medida en Bogotá</title>
     <meta name="description" content="Impresionarte: impresión 3D personalizada en Bogotá. Prototipos, piezas funcionales, llaveros, decoración y regalos únicos. Cuéntanos tu idea y la hacemos realidad.">
+    <meta name="keywords" content="impresión 3D Bogotá, impresión 3D Colombia, prototipos 3D, llaveros personalizados, decoración 3D, regalos personalizados">
+    <meta name="author" content="Impresionarte">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://impresionarte.co/">
+    <meta property="og:title" content="Impresionarte — Impresión 3D a tu Medida en Bogotá">
+    <meta property="og:description" content="Prototipos, piezas funcionales, llaveros y regalos únicos hechos con impresión 3D en Bogotá. Cuéntanos tu idea y la hacemos realidad.">
+    <meta property="og:image" content="https://impresionarte.co/img/IMPRESIONATE.png">
+    <meta property="og:locale" content="es_CO">
+    <meta property="og:site_name" content="Impresionarte">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Impresionarte — Impresión 3D en Bogotá">
+    <meta name="twitter:description" content="Prototipos, piezas funcionales, llaveros y regalos únicos en 3D. Bogotá, Colombia.">
+    <meta name="twitter:image" content="https://impresionarte.co/img/IMPRESIONATE.png">
+
+    <!-- JSON-LD LocalBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Impresionarte",
+      "description": "Servicio de impresión 3D personalizada en Bogotá: prototipos, piezas funcionales, llaveros, decoración y regalos únicos.",
+      "url": "https://impresionarte.co",
+      "telephone": "+573026622715",
+      "email": "juan.david.jds84@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bogotá",
+        "addressCountry": "CO"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 4.7110,
+        "longitude": -74.0721
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+        "opens": "08:00",
+        "closes": "20:00"
+      },
+      "priceRange": "$$",
+      "image": "https://impresionarte.co/img/IMPRESIONATE.png",
+      "sameAs": [
+        "https://wa.me/573026622715"
+      ]
+    }
+    </script>
+
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="img/IMPRESIONATE.png" type="image/png">
@@ -16,14 +69,38 @@
 
     <!-- ===== WHATSAPP FLOTANTE ===== -->
     <a href="https://wa.me/573026622715?text=Hola%20Impresionarte%2C%20me%20interesa%20un%20producto"
-       target="_blank"
-       rel="noopener"
+       target="_blank" rel="noopener"
        class="whatsapp-float"
-       title="Escríbenos por WhatsApp"
        aria-label="Contactar por WhatsApp">
         <i class="fab fa-whatsapp" aria-hidden="true"></i>
         <span>Pedir cotización</span>
     </a>
+
+    <!-- ===== BACK TO TOP ===== -->
+    <button id="back-top" aria-label="Volver al inicio" title="Volver al inicio">
+        <i class="fas fa-chevron-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- ===== LIGHTBOX ===== -->
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="Vista de producto">
+        <div class="lightbox-inner">
+            <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar">&times;</button>
+            <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Anterior">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Siguiente">
+                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </button>
+            <img id="lightbox-img" src="" alt="">
+            <div style="text-align:center;">
+                <p class="lightbox-caption" id="lightbox-caption"></p>
+                <p class="lightbox-precio" id="lightbox-precio"></p>
+                <a href="#" id="lightbox-wa" class="lightbox-wa" target="_blank" rel="noopener">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar por WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- ===== OVERLAY MENÚ MÓVIL ===== -->
     <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
@@ -42,6 +119,7 @@
                 <ul id="menu" role="list">
                     <li><a href="#home">Inicio</a></li>
                     <li><a href="#about">Acerca de</a></li>
+                    <li><a href="#como-funciona">Cómo funciona</a></li>
                     <li class="dropdown">
                         <a href="#productos" aria-haspopup="true">Productos</a>
                         <ul class="submenu" role="list">
@@ -60,12 +138,12 @@
     <!-- ===== HERO ===== -->
     <section class="main-banner" id="home" aria-label="Sección principal">
         <video autoplay muted loop playsinline
-            style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0; opacity:0.5;"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.5;"
             aria-hidden="true">
             <source src="img/Vid1.mp4" type="video/mp4">
         </video>
 
-        <div class="container" style="position:relative; z-index:2; text-align:center;">
+        <div class="container" style="position:relative;z-index:2;text-align:center;">
             <div class="hero-badge">
                 <span aria-hidden="true"></span>
                 Disponible en Bogotá
@@ -135,7 +213,7 @@
                         </span>
                         <span class="material-tag">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                            TPU
+                            TPU Flexible
                         </span>
                     </div>
 
@@ -145,13 +223,13 @@
                 <div class="about-slider reveal from-right" aria-label="Galería de trabajos">
                     <div class="slider-track" id="slider-track">
                         <div class="slider-slide">
-                            <img src="FOTOSIMPRESOS/llavero negocio.jpeg" alt="Llavero personalizado para negocio">
+                            <img src="FOTOSIMPRESOS/llavero negocio.jpeg" alt="Llavero personalizado para negocio impreso en 3D">
                         </div>
                         <div class="slider-slide">
-                            <img src="FOTOSIMPRESOS/real2.jpeg" alt="Pieza impresa en 3D">
+                            <img src="FOTOSIMPRESOS/real2.jpeg" alt="Pieza impresa en 3D por Impresionarte">
                         </div>
                         <div class="slider-slide">
-                            <img src="FOTOSIMPRESOS/real1.jpeg" alt="Producto de impresión 3D">
+                            <img src="FOTOSIMPRESOS/real1.jpeg" alt="Producto de impresión 3D terminado">
                         </div>
                     </div>
                     <div class="slider-dots" role="tablist" aria-label="Navegar galería">
@@ -165,7 +243,40 @@
         </div>
     </section>
 
-    <!-- ===== MODALES ADMIN (ocultos) ===== -->
+    <!-- ===== CÓMO FUNCIONA ===== -->
+    <section id="como-funciona" aria-labelledby="como-title">
+        <div class="container">
+            <h2 class="section-title reveal" id="como-title">¿Cómo funciona?</h2>
+            <p class="section-subtitle reveal">Hacer realidad tu idea es más fácil de lo que crees. Solo tres pasos.</p>
+
+            <div class="pasos-grid">
+
+                <div class="paso-card reveal reveal-delay-1">
+                    <div class="paso-numero">1</div>
+                    <i class="fas fa-lightbulb paso-icon" aria-hidden="true"></i>
+                    <h3>Cuéntanos tu idea</h3>
+                    <p>Escríbenos por WhatsApp o el formulario de contacto con tu idea, referencia o archivo. Sin compromisos.</p>
+                </div>
+
+                <div class="paso-card reveal reveal-delay-2">
+                    <div class="paso-numero">2</div>
+                    <i class="fas fa-cogs paso-icon" aria-hidden="true"></i>
+                    <h3>Fabricamos tu pieza</h3>
+                    <p>Diseñamos e imprimimos con el material ideal para tu proyecto. Te enviamos fotos del avance.</p>
+                </div>
+
+                <div class="paso-card reveal reveal-delay-3">
+                    <div class="paso-numero">3</div>
+                    <i class="fas fa-box-open paso-icon" aria-hidden="true"></i>
+                    <h3>Recibe tu pedido</h3>
+                    <p>Entrega rápida en Bogotá o envío a todo Colombia. Tu pieza lista, empacada y perfecta.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MODALES ADMIN ===== -->
     <div id="login-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
         <div class="modal-content">
             <button class="close" onclick="cerrarLogin()" aria-label="Cerrar">&times;</button>
@@ -184,21 +295,21 @@
         </div>
     </div>
 
-    <div id="producto-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="producto-modal-title">
+    <div id="producto-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="prod-modal-title">
         <div class="modal-content">
             <button class="close" onclick="cerrarFormularioProducto()" aria-label="Cerrar">&times;</button>
-            <h2 id="producto-modal-title">Agregar Producto</h2>
+            <h2 id="prod-modal-title">Agregar Producto</h2>
             <form id="producto-form" onsubmit="return agregarProducto(event)">
                 <div class="form-group">
                     <label for="producto-nombre">Nombre del Producto:</label>
                     <input type="text" id="producto-nombre" required>
                 </div>
                 <div class="form-group">
-                    <label for="producto-precio">Precio del Producto:</label>
+                    <label for="producto-precio">Precio:</label>
                     <input type="number" id="producto-precio" required>
                 </div>
                 <div class="form-group">
-                    <label for="producto-imagen">Imagen del Producto:</label>
+                    <label for="producto-imagen">Imagen:</label>
                     <input type="file" id="producto-imagen" accept="image/*" required>
                 </div>
                 <button type="submit" class="btn">Agregar Producto</button>
@@ -211,13 +322,30 @@
         <div class="container">
             <h2 class="section-title reveal" id="productos-title">Nuestros Productos</h2>
             <p class="section-subtitle reveal">Cada pieza es única, diseñada y fabricada con dedicación para superar tus expectativas.</p>
+
+            <!-- Filtros -->
+            <div class="filtros-bar reveal" role="group" aria-label="Filtrar productos por categoría">
+                <button class="filtro-btn active" data-cat="todos" onclick="filtrarCategoria('todos', this)">
+                    Todos
+                </button>
+                <button class="filtro-btn" data-cat="frases" onclick="filtrarCategoria('frases', this)">
+                    <i class="fas fa-quote-right" aria-hidden="true" style="margin-right:6px;font-size:0.8rem;"></i>Frases
+                </button>
+                <button class="filtro-btn" data-cat="llaveros" onclick="filtrarCategoria('llaveros', this)">
+                    <i class="fas fa-key" aria-hidden="true" style="margin-right:6px;font-size:0.8rem;"></i>Llaveros
+                </button>
+                <button class="filtro-btn" data-cat="decoracion" onclick="filtrarCategoria('decoracion', this)">
+                    <i class="fas fa-star" aria-hidden="true" style="margin-right:6px;font-size:0.8rem;"></i>Decoración
+                </button>
+            </div>
+
             <div class="productos-grid" id="galeria-productos" aria-live="polite">
                 <p class="productos-vacio">Cargando productos...</p>
             </div>
-            <div style="margin-top:2rem; text-align:center;">
+
+            <div style="margin-top:2rem;text-align:center;">
                 <button id="btn-agregar" onclick="mostrarFormularioProducto()" style="display:none;" class="btn">
-                    <i class="fas fa-plus" aria-hidden="true"></i>
-                    Agregar Producto
+                    <i class="fas fa-plus" aria-hidden="true"></i> Agregar Producto
                 </button>
             </div>
         </div>
@@ -273,6 +401,22 @@
         </div>
     </section>
 
+    <!-- ===== CTA BAND ===== -->
+    <section class="cta-band" aria-label="Llamada a la acción">
+        <div class="container">
+            <h2 class="reveal">¿Tienes una idea en mente?</h2>
+            <p class="reveal">No importa si es un prototipo, una pieza de repuesto o un regalo especial. En Impresionarte lo hacemos realidad con la máxima calidad.</p>
+            <div class="reveal">
+                <a href="https://wa.me/573026622715?text=Hola%2C%20quiero%20cotizar%20una%20pieza" target="_blank" rel="noopener" class="btn">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i> Cotizar por WhatsApp
+                </a>
+                <a href="#contacto" class="btn btn-outline">
+                    <i class="fas fa-envelope" aria-hidden="true"></i> Enviar mensaje
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- ===== CONTACTO ===== -->
     <section id="contacto" aria-labelledby="contacto-title">
         <div class="container">
@@ -308,10 +452,10 @@
                         </div>
                     </div>
 
-                    <div class="social-links" style="justify-content:flex-start; margin-top:2rem;" aria-label="Redes sociales">
+                    <div class="social-links" style="justify-content:flex-start;margin-top:2rem;" aria-label="Redes sociales">
                         <a href="#" title="Instagram" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                         <a href="#" title="Facebook" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="https://wa.me/573026622715" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp" style="background:linear-gradient(135deg,#25d366,#1ebe5d); color:white;"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+                        <a href="https://wa.me/573026622715" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp" style="background:linear-gradient(135deg,#25d366,#1ebe5d);color:white;"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
                         <a href="#" title="TikTok" aria-label="TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
                     </div>
                 </div>
@@ -330,13 +474,13 @@
                             <label for="mensaje">¿En qué podemos ayudarte?</label>
                             <textarea id="mensaje" name="mensaje" placeholder="Describe tu idea o proyecto..." required></textarea>
                         </div>
-                        <button type="submit" class="btn" style="width:100%; justify-content:center;">
+                        <button type="submit" class="btn" style="width:100%;justify-content:center;">
                             <i class="fas fa-paper-plane" aria-hidden="true"></i>
                             Enviar mensaje
                         </button>
                     </form>
-                    <div id="contact-success" style="display:none; color:var(--primary); margin-top:1.2rem; text-align:center; font-weight:600; padding:1rem; background:var(--surface); border-radius:var(--radius-sm);" role="alert">
-                        <i class="fas fa-check-circle" style="color:#22c55e; margin-right:6px;"></i>
+                    <div id="contact-success" style="display:none;color:var(--primary);margin-top:1.2rem;text-align:center;font-weight:600;padding:1rem;background:var(--surface);border-radius:var(--radius-sm);" role="alert">
+                        <i class="fas fa-check-circle" style="color:#22c55e;margin-right:6px;"></i>
                         ¡Gracias! Te responderemos muy pronto.
                     </div>
                 </div>
@@ -352,7 +496,7 @@
                 <div class="footer-section">
                     <h3>Impresionarte</h3>
                     <p>Transformando ideas en realidad a través de la impresión 3D desde Bogotá, Colombia. Precisión, calidad y pasión en cada pieza.</p>
-                    <div class="social-links" style="justify-content:flex-start; margin-top:1.5rem;" aria-label="Redes sociales">
+                    <div class="social-links" style="justify-content:flex-start;margin-top:1.5rem;" aria-label="Redes sociales">
                         <a href="#" title="Instagram" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                         <a href="#" title="Facebook" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
                         <a href="https://wa.me/573026622715" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
@@ -364,6 +508,7 @@
                     <ul class="footer-links" role="list">
                         <li><a href="#home">Inicio</a></li>
                         <li><a href="#about">Acerca de</a></li>
+                        <li><a href="#como-funciona">Cómo funciona</a></li>
                         <li><a href="#productos">Productos</a></li>
                         <li><a href="#testimonios">Testimonios</a></li>
                         <li><a href="#contacto">Contacto</a></li>
@@ -371,13 +516,13 @@
                 </div>
                 <div class="footer-section">
                     <h3>Contacto</h3>
-                    <p><a href="mailto:juan.david.jds84@gmail.com" style="color:rgba(255,255,255,0.62); transition:color 0.25s;">juan.david.jds84@gmail.com</a></p>
-                    <p style="margin-top:0.5rem;"><a href="https://wa.me/573026622715" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.62); transition:color 0.25s;">+57 302 662 2715</a></p>
-                    <p style="margin-top:0.5rem; color:rgba(255,255,255,0.42);">Bogotá, Colombia</p>
+                    <p><a href="mailto:juan.david.jds84@gmail.com" style="color:rgba(255,255,255,0.62);transition:color 0.25s;">juan.david.jds84@gmail.com</a></p>
+                    <p style="margin-top:0.5rem;"><a href="https://wa.me/573026622715" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.62);transition:color 0.25s;">+57 302 662 2715</a></p>
+                    <p style="margin-top:0.5rem;color:rgba(255,255,255,0.42);">Bogotá, Colombia</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>© 2026 Impresionarte · Impresión 3D — Bogotá, Colombia · Hecho con pasión</p>
+                <p>© 2026 Impresionarte · Impresión 3D — Bogotá, Colombia</p>
             </div>
         </div>
     </footer>
@@ -401,24 +546,24 @@
     setInterval(() => irSlide((slideActual + 1) % totalSlides), 3500);
 
     /* =============================================
-       HEADER — shrink + active nav on scroll
+       HEADER — shrink + active nav
        ============================================= */
     const header = document.getElementById('header');
-    const navLinks = document.querySelectorAll('nav a');
     const sections = document.querySelectorAll('section[id]');
 
     window.addEventListener('scroll', () => {
-        // Shrink header
         header.classList.toggle('scrolled', window.scrollY > 60);
 
-        // Active nav link
         let current = '';
         sections.forEach(sec => {
-            if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+            if (window.scrollY >= sec.offsetTop - 130) current = sec.id;
         });
-        navLinks.forEach(link => {
+        document.querySelectorAll('nav a').forEach(link => {
             link.classList.toggle('active', link.getAttribute('href') === '#' + current);
         });
+
+        // Back to top
+        document.getElementById('back-top').classList.toggle('visible', window.scrollY > 400);
     }, { passive: true });
 
     /* =============================================
@@ -438,9 +583,13 @@
 
     mobileBtn.addEventListener('click', () => toggleMenu());
     overlay.addEventListener('click', () => toggleMenu(false));
+    document.querySelectorAll('nav a').forEach(link => link.addEventListener('click', () => toggleMenu(false)));
 
-    document.querySelectorAll('nav a').forEach(link => {
-        link.addEventListener('click', () => toggleMenu(false));
+    /* =============================================
+       BACK TO TOP
+       ============================================= */
+    document.getElementById('back-top').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     /* =============================================
@@ -453,7 +602,7 @@
                 revealObserver.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
 
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
@@ -487,12 +636,78 @@
     document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
 
     /* =============================================
+       LIGHTBOX
+       ============================================= */
+    let lbProductos = [];
+    let lbIndex = 0;
+
+    function abrirLightbox(index) {
+        lbIndex = index;
+        const p = lbProductos[index];
+        if (!p) return;
+
+        const img = document.getElementById('lightbox-img');
+        const caption = document.getElementById('lightbox-caption');
+        const precio = document.getElementById('lightbox-precio');
+        const wa = document.getElementById('lightbox-wa');
+
+        img.src = p.img;
+        img.alt = p.nombre;
+        caption.textContent = p.nombre;
+        precio.textContent = '$' + p.precio.toLocaleString('es-CO');
+        wa.href = `https://wa.me/573026622715?text=${encodeURIComponent('Hola Impresionarte, me interesa "' + p.nombre + '"')}`;
+
+        const lb = document.getElementById('lightbox');
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+
+        // Mostrar/ocultar navegación
+        document.getElementById('lightbox-prev').style.display = lbProductos.length > 1 ? 'flex' : 'none';
+        document.getElementById('lightbox-next').style.display = lbProductos.length > 1 ? 'flex' : 'none';
+    }
+
+    function cerrarLightbox() {
+        document.getElementById('lightbox').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    document.getElementById('lightbox-close').addEventListener('click', cerrarLightbox);
+    document.getElementById('lightbox').addEventListener('click', e => {
+        if (e.target === document.getElementById('lightbox')) cerrarLightbox();
+    });
+    document.getElementById('lightbox-prev').addEventListener('click', () => {
+        lbIndex = (lbIndex - 1 + lbProductos.length) % lbProductos.length;
+        abrirLightbox(lbIndex);
+    });
+    document.getElementById('lightbox-next').addEventListener('click', () => {
+        lbIndex = (lbIndex + 1) % lbProductos.length;
+        abrirLightbox(lbIndex);
+    });
+
+    /* =============================================
+       FILTROS DE CATEGORÍA
+       ============================================= */
+    function filtrarCategoria(cat, btn) {
+        document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const categorias = document.querySelectorAll('.categoria-section');
+        categorias.forEach(sec => {
+            if (cat === 'todos' || sec.id === `categoria-${cat}`) {
+                sec.style.display = '';
+            } else {
+                sec.style.display = 'none';
+            }
+        });
+    }
+
+    /* =============================================
        PRODUCTOS — carga y renderizado
        ============================================= */
     async function cargarProductos() {
         try {
             const response = await fetch('productos.json');
-            if (!response.ok) throw new Error('No se pudo cargar');
+            if (!response.ok) throw new Error('error');
             const productos = await response.json();
             mostrarProductos(productos);
         } catch {
@@ -504,9 +719,16 @@
     function mostrarProductos(productos) {
         const galeria = document.getElementById('galeria-productos');
         if (!productos || productos.length === 0) {
-            galeria.innerHTML = '<p class="productos-vacio">Próximamente — escríbenos por WhatsApp para ver el catálogo.</p>';
+            galeria.innerHTML = '<p class="productos-vacio">Próximamente — escríbenos por WhatsApp.</p>';
             return;
         }
+
+        // Guardar todos los productos para lightbox
+        lbProductos = productos.map(p => ({
+            nombre: p.nombre,
+            precio: p.precio,
+            img: p.imagenes?.[0] ?? p.imagen ?? 'img/placeholder-producto.jpg'
+        }));
 
         const porCategoria = {};
         productos.forEach(p => {
@@ -516,6 +738,7 @@
         });
 
         galeria.innerHTML = '';
+        let globalIndex = 0;
 
         Object.keys(porCategoria).forEach(categoria => {
             const catDiv = document.createElement('div');
@@ -534,15 +757,18 @@
                 const imagen = p.imagenes?.[0] ?? p.imagen ?? 'img/placeholder-producto.jpg';
                 const waMsg = encodeURIComponent(`Hola Impresionarte, me interesa "${p.nombre}"`);
                 const delay = i % 4;
+                const idx = globalIndex;
+                globalIndex++;
 
                 const card = document.createElement('div');
                 card.className = `producto-card reveal reveal-delay-${delay}`;
+                card.setAttribute('role', 'article');
                 card.innerHTML = `
-                    <div class="producto-img">
+                    <div class="producto-img" style="cursor:zoom-in;" onclick="abrirLightbox(${idx})" aria-label="Ver ${p.nombre} en grande">
                         <img src="${imagen}" alt="${p.nombre}" loading="lazy">
                         <div class="producto-img-overlay">
                             <span class="producto-overlay-text">
-                                <i class="fab fa-whatsapp"></i> Solicitar
+                                <i class="fas fa-search-plus"></i> Ver ampliado
                             </span>
                         </div>
                     </div>
@@ -559,17 +785,29 @@
 
             catDiv.appendChild(grid);
             galeria.appendChild(catDiv);
-
-            // Activar observer en nuevas tarjetas
             catDiv.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
         });
     }
 
     /* =============================================
-       FORMULARIO DE CONTACTO
+       FORMULARIO
        ============================================= */
     document.getElementById('contact-form').addEventListener('submit', function(e) {
         e.preventDefault();
+
+        // Validación visual
+        let valid = true;
+        this.querySelectorAll('[required]').forEach(field => {
+            if (!field.value.trim()) {
+                field.style.borderColor = '#ef4444';
+                valid = false;
+            } else {
+                field.style.borderColor = '';
+            }
+        });
+
+        if (!valid) return;
+
         const success = document.getElementById('contact-success');
         success.style.display = 'block';
         this.reset();
@@ -577,7 +815,7 @@
     });
 
     /* =============================================
-       ADMIN MODALES
+       ADMIN
        ============================================= */
     function mostrarFormularioProducto() {
         document.getElementById('producto-modal').style.display = 'flex';
@@ -585,28 +823,27 @@
     function cerrarFormularioProducto() {
         document.getElementById('producto-modal').style.display = 'none';
     }
-    function agregarProducto(e) {
-        e.preventDefault();
-        cerrarFormularioProducto();
-    }
-    function cerrarLogin() {
-        document.getElementById('login-modal').style.display = 'none';
-    }
+    function agregarProducto(e) { e.preventDefault(); cerrarFormularioProducto(); }
+    function cerrarLogin() { document.getElementById('login-modal').style.display = 'none'; }
     function autenticarAdmin(e) {
         e.preventDefault();
         document.getElementById('btn-agregar').style.display = 'inline-flex';
         cerrarLogin();
     }
 
-    window.addEventListener('click', function(e) {
+    window.addEventListener('click', e => {
         if (e.target.classList.contains('modal')) e.target.style.display = 'none';
     });
 
-    // Cerrar modales con Escape
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', e => {
         if (e.key === 'Escape') {
+            cerrarLightbox();
             document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
             toggleMenu(false);
+        }
+        if (document.getElementById('lightbox').classList.contains('open')) {
+            if (e.key === 'ArrowLeft') { lbIndex = (lbIndex - 1 + lbProductos.length) % lbProductos.length; abrirLightbox(lbIndex); }
+            if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % lbProductos.length; abrirLightbox(lbIndex); }
         }
     });
 
