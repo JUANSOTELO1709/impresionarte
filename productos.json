@@ -1,124 +1,145 @@
 [
     {
-        "nombre": "Frase:El tiempo de dios es perfecto",
+        "nombre": "El tiempo de Dios es perfecto",
         "categoria": "frases",
         "precio": 40000,
-        "imagen": "FOTOSIMPRESOS/El tiempo.jpeg"
+        "descripcion": "Cuadro impreso en 3D con frase motivacional. Ideal para sala o comedor.",
+        "imagenes": ["FOTOSIMPRESOS/El tiempo.jpeg"]
     },
     {
-        "nombre": "Frase:Yo y mi casa ",
+        "nombre": "Yo y mi casa serviremos a Jehová",
         "categoria": "frases",
         "precio": 40000,
-        "imagen": "FOTOSIMPRESOS/Yo y mi casa.jpeg"
+        "descripcion": "Frase bíblica en relieve, perfecta para decorar el hogar.",
+        "imagenes": ["FOTOSIMPRESOS/Yo y mi casa.jpeg"]
     },
     {
-        "nombre": "Frase:Dios bendice este hogar",
+        "nombre": "Dios bendice este hogar",
         "categoria": "frases",
         "precio": 40000,
-        "imagen": "FOTOSIMPRESOS/Dios bendice.jpeg"
+        "descripcion": "Cuadro decorativo con frase de bendición para el hogar.",
+        "imagenes": ["FOTOSIMPRESOS/Dios bendice.jpeg"]
     },
     {
-        "nombre": "Frase:El amor es paciente...",
+        "nombre": "El amor es paciente...",
         "categoria": "frases",
         "precio": 50000,
-        "imagen": "FOTOSIMPRESOS/El amor es.jpeg"
+        "descripcion": "Frase bíblica completa en relieve 3D. Diseño detallado y elegante.",
+        "imagenes": ["FOTOSIMPRESOS/El amor es.jpeg"]
     },
     {
-        "nombre": "Frase:Nunca fue suerte",
+        "nombre": "Nunca fue suerte",
         "categoria": "frases",
         "precio": 40000,
-        "imagen": "FOTOSIMPRESOS/Nunca fue suerte.jpeg"
+        "descripcion": "Frase motivacional impresa en 3D. Perfecta para oficina o estudio.",
+        "imagenes": ["FOTOSIMPRESOS/Nunca fue suerte.jpeg"]
     },
     {
-        "nombre": "Frase:Somos una familia jehova",
+        "nombre": "Somos una familia Jehová",
         "categoria": "frases",
         "precio": 40000,
-        "imagen": "FOTOSIMPRESOS/Somos una familia jehova.jpeg"
+        "descripcion": "Cuadro familiar con frase de fe. Gran detalle en cada letra.",
+        "imagenes": ["FOTOSIMPRESOS/Somos una familia jehova.jpeg"]
     },
     {
-        "nombre": "Frase:Somos una familia bendecida",
+        "nombre": "Somos una familia bendecida",
         "categoria": "frases",
         "precio": 40000,
-        "imagen": "FOTOSIMPRESOS/somos una familia.jpeg"
+        "descripcion": "Cuadro decorativo familiar. Ideal como regalo para bodas o aniversarios.",
+        "imagenes": ["FOTOSIMPRESOS/somos una familia.jpeg"]
     },
     {
-        "nombre": "Frase:En esta casa",
+        "nombre": "En esta casa...",
         "categoria": "frases",
         "precio": 50000,
-        "imagen": "FOTOSIMPRESOS/En esta casa.jpeg"
+        "descripcion": "Cuadro familiar en relieve 3D con frase especial. Diseño premium.",
+        "imagenes": ["FOTOSIMPRESOS/En esta casa.jpeg"]
     },
 
-
-
-
-        {
-        "nombre": "Decoracion: Mascota personalizada",
+    {
+        "nombre": "Mascota personalizada — Keen",
         "categoria": "decoracion",
         "precio": 50000,
-        "imagenes": [
-            "FOTOSIMPRESOS/Keen.jpg"
-
-        ]
+        "descripcion": "Figura 3D personalizada de tu mascota. Envíanos la foto y la hacemos realidad.",
+        "imagenes": ["FOTOSIMPRESOS/Keen.jpg"]
     },
-
-
-    
-        {
-        "nombre": "Decoracion: Mascota personalizada",
+    {
+        "nombre": "Mascota personalizada — Coco",
         "categoria": "decoracion",
         "precio": 50000,
-        "imagenes": [
-            "FOTOSIMPRESOS/coco.jpg"
-
-        ]
+        "descripcion": "Figura 3D personalizada de tu mascota. Envíanos la foto y la hacemos realidad.",
+        "imagenes": ["FOTOSIMPRESOS/coco.jpg"]
     },
-
-    
-        {
-        "nombre": "Decoracion: Mascota personalizada",
+    {
+        "nombre": "Mascota personalizada — Roco",
         "categoria": "decoracion",
         "precio": 50000,
-        "imagenes": [
-            "FOTOSIMPRESOS/Roco.jpg"
-
-        ]
+        "descripcion": "Figura 3D personalizada de tu mascota. Envíanos la foto y la hacemos realidad.",
+        "imagenes": ["FOTOSIMPRESOS/Roco.jpg"]
     },
-
-
-        {
-        "nombre": "Decoracion: Cuadro mascotas",
+    {
+        "nombre": "Cuadro mascota personalizado",
         "categoria": "decoracion",
         "precio": 150000,
+        "descripcion": "Cuadro 3D con el retrato de tu mascota. Alta fidelidad al detalle. El regalo perfecto.",
+        "imagenes": ["FOTOSIMPRESOS/Perrito.jpg"]
+    },
+    {
+        "nombre": "Chimuelo — Figura decorativa",
+        "categoria": "decoracion",
+        "precio": 35000,
+        "descripcion": "Figura de Chimuelo impresa en 3D con acabado premium. Coleccionable.",
         "imagenes": [
-            "FOTOSIMPRESOS/perrito.jpg"
-
+            "FOTOSIMPRESOS/chimuelo.png",
+            "FOTOSIMPRESOS/chimuelo1.jpg",
+            "FOTOSIMPRESOS/chimuelo2.jpg"
         ]
     },
-
     {
-        "nombre": "Bolas Navideñas personalizadas",
+        "nombre": "Floreros decorativos",
+        "categoria": "decoracion",
+        "precio": 30000,
+        "descripcion": "Floreros impresos en 3D con diseños únicos. Perfectos para sala o comedor.",
+        "imagenes": ["FOTOSIMPRESOS/floreros.jpg"]
+    },
+    {
+        "nombre": "Bolas navideñas personalizadas",
         "categoria": "decoracion",
         "precio": 8000,
+        "descripcion": "Bolas para árbol de Navidad con nombre o frase personalizada. Precio por unidad.",
         "imagenes": [
             "FOTOSIMPRESOS/bolas.jpg",
             "FOTOSIMPRESOS/bolas1.jpg",
             "FOTOSIMPRESOS/bolas2.jpg"
         ]
     },
+
     {
-        "nombre": "Llaveros Pa' tu negocio",
+        "nombre": "Llavero personalizado",
         "categoria": "llaveros",
-        "precio": 5000 ,
-        "imagenes": [
-            "FOTOSIMPRESOS/llavero negocio.jpeg"
-        ]
+        "precio": 5000,
+        "descripcion": "Llavero impreso en 3D con el diseño que quieras. Resistente y ligero.",
+        "imagenes": ["FOTOSIMPRESOS/llavero.jpg"]
     },
     {
-        "nombre": "Llaveros Copa del mundo",
+        "nombre": "Llavero pulpo",
         "categoria": "llaveros",
-        "precio": 5000 ,
-        "imagenes": [
-            "FOTOSIMPRESOS/llavero worldcup.jpeg"
-        ]
+        "precio": 6000,
+        "descripcion": "Llavero con diseño de pulpo articulado. Divertido y único.",
+        "imagenes": ["FOTOSIMPRESOS/llavero_pulpo.jpg"]
+    },
+    {
+        "nombre": "Llaveros para negocio",
+        "categoria": "llaveros",
+        "precio": 5000,
+        "descripcion": "Llaveros con el logo o nombre de tu negocio. Perfectos para merchandising. Precio por unidad.",
+        "imagenes": ["FOTOSIMPRESOS/llavero negocio.jpeg"]
+    },
+    {
+        "nombre": "Llaveros Copa del Mundo",
+        "categoria": "llaveros",
+        "precio": 5000,
+        "descripcion": "Llavero edición especial Copa del Mundo. Ideal como souvenir o regalo.",
+        "imagenes": ["FOTOSIMPRESOS/llavero worldcup.jpeg"]
     }
 ]

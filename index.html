@@ -3,150 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impresionarte - Impresión 3D y Electrónica</title>
+    <title>Impresionarte — Impresión 3D a tu Medida en Bogotá</title>
+    <meta name="description" content="Impresionarte: impresión 3D personalizada en Bogotá. Prototipos, piezas funcionales, llaveros, decoración y regalos únicos. Cuéntanos tu idea y la hacemos realidad.">
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="img/IMPRESIONATE.png" type="image/png">
-
-    <style>
-        /* ===== BOTÓN FLOTANTE WHATSAPP ===== */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 28px;
-            right: 28px;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background-color: #25d366;
-            color: white;
-            padding: 13px 20px 13px 16px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
-            transition: all 0.3s;
-            animation: pulse-wa 2.5s infinite;
-        }
-        .whatsapp-float:hover {
-            background-color: #1ebe5d;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 28px rgba(37, 211, 102, 0.55);
-            animation: none;
-        }
-        .whatsapp-float i {
-            font-size: 1.4rem;
-        }
-        @keyframes pulse-wa {
-            0%, 100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45); }
-            50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.75); }
-        }
-
-        /* ===== TESTIMONIOS MEJORADOS ===== */
-        .testimonio-card {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 1.8rem 1.5rem 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            position: relative;
-            border-top: 3px solid var(--secondary);
-        }
-        .testimonio-card:before {
-            content: '"';
-            font-size: 4rem;
-            color: var(--secondary);
-            opacity: 0.2;
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            line-height: 1;
-        }
-        .testimonio-author-block {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 1rem;
-        }
-        .testimonio-avatar {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background-color: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.95rem;
-            flex-shrink: 0;
-        }
-        .testimonio-author-name {
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 0.95rem;
-        }
-        .testimonio-author-detail {
-            font-size: 0.8rem;
-            color: #888;
-            margin-top: 2px;
-        }
-        .testimonio-stars {
-            color: #f5a623;
-            font-size: 0.85rem;
-            margin-bottom: 0.6rem;
-        }
-
-        /* ===== BANNER: instrucción para reemplazar foto ===== */
-        /* Quitar este bloque cuando subas tu propia foto */
-        .foto-placeholder-note {
-            display: none; /* solo visible en modo edición */
-        }
-
-        /* ===== PRODUCTOS: mensaje cuando está vacío ===== */
-        .productos-vacio {
-            text-align: center;
-            color: #888;
-            padding: 2rem;
-            font-style: italic;
-            grid-column: 1 / -1;
-        }
-
-        /* ===== DESCRIPCIÓN EN TARJETA DE PRODUCTO ===== */
-        .producto-desc {
-            color: #757575;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- ===== BOTÓN FLOTANTE WHATSAPP ===== -->
-    <a href="https://wa.me/573026622715?text=Hola%20Impresionarte%2C%20me%20interesa%20un%20producto%20%F0%9F%98%8A"
+    <!-- ===== WHATSAPP FLOTANTE ===== -->
+    <a href="https://wa.me/573026622715?text=Hola%20Impresionarte%2C%20me%20interesa%20un%20producto"
        target="_blank"
+       rel="noopener"
        class="whatsapp-float"
-       title="Escríbenos por WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-        Pedir cotización
+       title="Escríbenos por WhatsApp"
+       aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        <span>Pedir cotización</span>
     </a>
 
-    <header>
+    <!-- ===== OVERLAY MENÚ MÓVIL ===== -->
+    <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header id="header">
         <div class="container header-container">
-            <a href="#" class="logo">
+            <a href="#home" class="logo" aria-label="Impresionarte - Inicio">
                 <img src="img/IMPRESIONATE.png" alt="Logo Impresionarte">
                 Impresionarte
             </a>
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+                <i class="fas fa-bars" aria-hidden="true"></i>
             </button>
-            <nav>
-                <ul id="menu">
+            <nav aria-label="Navegación principal">
+                <ul id="menu" role="list">
                     <li><a href="#home">Inicio</a></li>
                     <li><a href="#about">Acerca de</a></li>
                     <li class="dropdown">
-                        <a href="#productos">Productos</a>
-                        <ul class="submenu">
+                        <a href="#productos" aria-haspopup="true">Productos</a>
+                        <ul class="submenu" role="list">
                             <li><a href="#categoria-frases">Frases</a></li>
                             <li><a href="#categoria-llaveros">Llaveros</a></li>
                             <li><a href="#categoria-decoracion">Decoración</a></li>
@@ -159,80 +57,137 @@
         </div>
     </header>
 
-<section class="main-banner" id="home">
-  <video autoplay muted loop playsinline
-    style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0; opacity:0.55;">
-    <source src="img/Vid1.mp4" type="video/mp4">
-  </video>
-  <div style="position:relative; z-index:1;" class="container">
-    <h1>Impresión 3D a tu medida — en Bogotá</h1>
-    <p>Prototipos, piezas funcionales, decoración y regalos únicos. Cuéntanos tu idea y la hacemos realidad.</p>
-    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-      <a href="#productos" class="btn">Ver productos</a>
-      <a href="https://wa.me/573026622715?text=Hola%2C%20quiero%20cotizar%20una%20pieza" target="_blank" class="btn" style="background:rgba(255,255,255,0.15); border:2px solid white;">
-        <i class="fab fa-whatsapp" style="margin-right:6px;"></i>Cotizar ahora
-      </a>
-    </div>
-  </div>
-</section>
+    <!-- ===== HERO ===== -->
+    <section class="main-banner" id="home" aria-label="Sección principal">
+        <video autoplay muted loop playsinline
+            style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0; opacity:0.5;"
+            aria-hidden="true">
+            <source src="img/Vid1.mp4" type="video/mp4">
+        </video>
 
-    <section id="about">
-    <div class="container">
-        <div class="about-content">
-            <div class="about-text">
-                <h2>¿Quiénes somos?</h2>
-                <p>En <b>Impresionarte</b> combinamos creatividad, tecnología y pasión para ofrecerte productos de impresión 3D hechos a medida. Nuestro objetivo es ayudarte a materializar tus ideas, desde prototipos hasta piezas funcionales y decorativas.</p>
-                <p>Trabajamos con materiales de alta calidad (PLA, PETG, TPU) y tiempos de entrega rápidos. ¡Apoyamos el emprendimiento local y la innovación desde Bogotá!</p>
-                <a href="#contacto" class="btn">Contáctanos</a>
+        <div class="container" style="position:relative; z-index:2; text-align:center;">
+            <div class="hero-badge">
+                <span aria-hidden="true"></span>
+                Disponible en Bogotá
             </div>
-
-            <!-- REEMPLAZA about-gallery por esto -->
-            <div class="about-slider">
-                <div class="slider-track">
-                    <div class="slider-slide">
-                        <img src="FOTOSIMPRESOS/llavero negocio.jpeg" alt="Trabajo 1">
-                    </div>
-                    <div class="slider-slide">
-                        <img src="FOTOSIMPRESOS/real2.jpeg" alt="Trabajo 2">
-                    </div>
-                    <div class="slider-slide">
-                        <img src="FOTOSIMPRESOS/real1.jpeg" alt="Trabajo 3">
-                    </div>
-                </div>
-                <div class="slider-dots">
-                    <span class="dot active" onclick="irSlide(0)"></span>
-                    <span class="dot" onclick="irSlide(1)"></span>
-                    <span class="dot" onclick="irSlide(2)"></span>
-                </div>
+            <h1>Impresión 3D<br>a tu medida</h1>
+            <p>Prototipos, piezas funcionales, decoración y regalos únicos hechos con precisión. Cuéntanos tu idea y la hacemos realidad.</p>
+            <div class="hero-ctas">
+                <a href="#productos" class="btn">
+                    <i class="fas fa-cube" aria-hidden="true"></i>
+                    Ver productos
+                </a>
+                <a href="https://wa.me/573026622715?text=Hola%2C%20quiero%20cotizar%20una%20pieza" target="_blank" rel="noopener" class="btn btn-outline">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                    Cotizar ahora
+                </a>
             </div>
-
         </div>
-    </div>
-</section>
 
-    <!-- Modales de admin — ocultos para usuarios normales -->
-    <div id="login-modal" class="modal">
+        <a href="#stats" class="scroll-indicator" aria-label="Desplazarse hacia abajo">
+            <div class="scroll-line" aria-hidden="true"></div>
+            <span>Scroll</span>
+        </a>
+    </section>
+
+    <!-- ===== STATS BAR ===== -->
+    <section class="stats-bar" id="stats" aria-label="Estadísticas">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item reveal">
+                    <span class="stat-number" data-count="150">0</span>
+                    <span class="stat-label">Proyectos entregados</span>
+                </div>
+                <div class="stat-item reveal reveal-delay-1">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Satisfacción garantizada</span>
+                </div>
+                <div class="stat-item reveal reveal-delay-2">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Materiales premium</span>
+                </div>
+                <div class="stat-item reveal reveal-delay-3">
+                    <span class="stat-number">&lt;24h</span>
+                    <span class="stat-label">Tiempo de respuesta</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ACERCA DE ===== -->
+    <section id="about" aria-labelledby="about-title">
+        <div class="container">
+            <div class="about-content">
+
+                <div class="about-text reveal from-left">
+                    <h2 id="about-title">¿Quiénes somos?</h2>
+                    <p>En <strong>Impresionarte</strong> combinamos creatividad, tecnología y pasión para ofrecerte productos de impresión 3D hechos a medida. Nuestro objetivo es ayudarte a materializar tus ideas, desde prototipos hasta piezas funcionales y decorativas.</p>
+                    <p>Trabajamos con materiales de alta calidad y tiempos de entrega rápidos. Apoyamos el emprendimiento local y la innovación desde Bogotá.</p>
+
+                    <div class="materials-tags" aria-label="Materiales disponibles">
+                        <span class="material-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            PLA
+                        </span>
+                        <span class="material-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            PETG
+                        </span>
+                        <span class="material-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            TPU
+                        </span>
+                    </div>
+
+                    <a href="#contacto" class="btn">Contáctanos</a>
+                </div>
+
+                <div class="about-slider reveal from-right" aria-label="Galería de trabajos">
+                    <div class="slider-track" id="slider-track">
+                        <div class="slider-slide">
+                            <img src="FOTOSIMPRESOS/llavero negocio.jpeg" alt="Llavero personalizado para negocio">
+                        </div>
+                        <div class="slider-slide">
+                            <img src="FOTOSIMPRESOS/real2.jpeg" alt="Pieza impresa en 3D">
+                        </div>
+                        <div class="slider-slide">
+                            <img src="FOTOSIMPRESOS/real1.jpeg" alt="Producto de impresión 3D">
+                        </div>
+                    </div>
+                    <div class="slider-dots" role="tablist" aria-label="Navegar galería">
+                        <button class="dot active" onclick="irSlide(0)" role="tab" aria-label="Imagen 1" aria-selected="true"></button>
+                        <button class="dot" onclick="irSlide(1)" role="tab" aria-label="Imagen 2" aria-selected="false"></button>
+                        <button class="dot" onclick="irSlide(2)" role="tab" aria-label="Imagen 3" aria-selected="false"></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MODALES ADMIN (ocultos) ===== -->
+    <div id="login-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
         <div class="modal-content">
-            <span class="close" onclick="cerrarLogin()">&times;</span>
-            <h2>Iniciar Sesión</h2>
+            <button class="close" onclick="cerrarLogin()" aria-label="Cerrar">&times;</button>
+            <h2 id="login-title">Iniciar Sesión</h2>
             <form id="login-form" onsubmit="return autenticarAdmin(event)">
                 <div class="form-group">
                     <label for="usuario">Usuario:</label>
-                    <input type="text" id="usuario" required>
+                    <input type="text" id="usuario" name="usuario" autocomplete="username" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Contraseña:</label>
-                    <input type="password" id="password" required>
+                    <input type="password" id="password" name="password" autocomplete="current-password" required>
                 </div>
-                <button type="submit" class="btn">LOGIN</button>
+                <button type="submit" class="btn">Ingresar</button>
             </form>
         </div>
     </div>
 
-    <div id="producto-modal" class="modal">
+    <div id="producto-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="producto-modal-title">
         <div class="modal-content">
-            <span class="close" onclick="cerrarFormularioProducto()">&times;</span>
-            <h2>Agregar Producto</h2>
+            <button class="close" onclick="cerrarFormularioProducto()" aria-label="Cerrar">&times;</button>
+            <h2 id="producto-modal-title">Agregar Producto</h2>
             <form id="producto-form" onsubmit="return agregarProducto(event)">
                 <div class="form-group">
                     <label for="producto-nombre">Nombre del Producto:</label>
@@ -251,73 +206,86 @@
         </div>
     </div>
 
-    <section id="productos">
+    <!-- ===== PRODUCTOS ===== -->
+    <section id="productos" aria-labelledby="productos-title">
         <div class="container">
-            <h2 class="section-title">Nuestros Productos</h2>
-            <div class="productos-grid" id="galeria-productos">
+            <h2 class="section-title reveal" id="productos-title">Nuestros Productos</h2>
+            <p class="section-subtitle reveal">Cada pieza es única, diseñada y fabricada con dedicación para superar tus expectativas.</p>
+            <div class="productos-grid" id="galeria-productos" aria-live="polite">
                 <p class="productos-vacio">Cargando productos...</p>
             </div>
-            <div class="text-center" style="margin-top:2rem;">
-                <button id="btn-agregar" onclick="mostrarFormularioProducto()" style="display:none;" class="btn">Agregar Producto</button>
+            <div style="margin-top:2rem; text-align:center;">
+                <button id="btn-agregar" onclick="mostrarFormularioProducto()" style="display:none;" class="btn">
+                    <i class="fas fa-plus" aria-hidden="true"></i>
+                    Agregar Producto
+                </button>
             </div>
         </div>
     </section>
 
-    <section id="testimonios">
+    <!-- ===== TESTIMONIOS ===== -->
+    <section id="testimonios" aria-labelledby="testimonios-title">
         <div class="container">
-            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+            <h2 class="section-title reveal" id="testimonios-title">Lo que dicen nuestros clientes</h2>
+            <p class="section-subtitle reveal">Más de 150 proyectos entregados con satisfacción total.</p>
             <div class="testimonios-grid">
 
-                <div class="testimonio-card">
-                    <div class="testimonio-stars">★★★★★</div>
+                <article class="testimonio-card reveal reveal-delay-1">
+                    <span class="quote-icon" aria-hidden="true">"</span>
+                    <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
                     <p class="testimonio-text">"Excelente calidad y atención. Mi prototipo quedó justo como lo imaginé. El tiempo de entrega fue rapidísimo y el nivel de detalle impresionante."</p>
                     <div class="testimonio-author-block">
-                        <div class="testimonio-avatar">LG</div>
+                        <div class="testimonio-avatar" aria-hidden="true">LG</div>
                         <div>
                             <div class="testimonio-author-name">Laura García</div>
                             <div class="testimonio-author-detail">Diseñadora industrial · Bogotá</div>
                         </div>
                     </div>
-                </div>
+                </article>
 
-                <div class="testimonio-card">
-                    <div class="testimonio-stars">★★★★★</div>
-                    <p class="testimonio-text">"Muy recomendados para piezas personalizadas y regalos innovadores. Pedí unos llaveros personalizados para un evento y quedaron perfectos."</p>
+                <article class="testimonio-card reveal reveal-delay-2">
+                    <span class="quote-icon" aria-hidden="true">"</span>
+                    <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
+                    <p class="testimonio-text">"Muy recomendados para piezas personalizadas y regalos innovadores. Pedí unos llaveros para un evento empresarial y quedaron perfectos."</p>
                     <div class="testimonio-author-block">
-                        <div class="testimonio-avatar">AP</div>
+                        <div class="testimonio-avatar" aria-hidden="true">AP</div>
                         <div>
                             <div class="testimonio-author-name">Andrés Pinto</div>
                             <div class="testimonio-author-detail">Emprendedor · Bogotá</div>
                         </div>
                     </div>
-                </div>
+                </article>
 
-                <div class="testimonio-card">
-                    <div class="testimonio-stars">★★★★★</div>
-                    <p class="testimonio-text">"El servicio fue rápido y el resultado superó mis expectativas. Me hicieron una pieza de repuesto que no conseguía en ningún lado. 100% recomendados."</p>
+                <article class="testimonio-card reveal reveal-delay-3">
+                    <span class="quote-icon" aria-hidden="true">"</span>
+                    <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
+                    <p class="testimonio-text">"El servicio fue rápido y el resultado superó mis expectativas. Me fabricaron una pieza de repuesto que no conseguía en ningún lado. 100% recomendados."</p>
                     <div class="testimonio-author-block">
-                        <div class="testimonio-avatar">CR</div>
+                        <div class="testimonio-avatar" aria-hidden="true">CR</div>
                         <div>
                             <div class="testimonio-author-name">Camila Ramírez</div>
                             <div class="testimonio-author-detail">Cliente particular · Bogotá</div>
                         </div>
                     </div>
-                </div>
+                </article>
 
             </div>
         </div>
     </section>
 
-    <section id="contacto">
+    <!-- ===== CONTACTO ===== -->
+    <section id="contacto" aria-labelledby="contacto-title">
         <div class="container">
-            <h2 class="section-title">Contacto</h2>
+            <h2 class="section-title reveal" id="contacto-title">Hablemos de tu proyecto</h2>
+            <p class="section-subtitle reveal">Respondemos en menos de 24 horas. Tu idea es el límite.</p>
             <div class="contacto-container">
-                <div class="contacto-info">
-                    <h3>¿Necesitas algo específico?</h3>
-                    <p>Contáctanos para discutir tu proyecto. Estamos aquí para ayudarte a materializar tus ideas. Respondemos en menos de 24 horas.</p>
+
+                <div class="contacto-info reveal from-left">
+                    <h3>¿Tienes algo en mente?</h3>
+                    <p style="margin-bottom:2rem;">Cuéntanos tu idea y te ayudamos a materializarla. Sin importar si es un prototipo, pieza funcional o regalo especial.</p>
 
                     <div class="info-item">
-                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="info-icon" aria-hidden="true"><i class="fas fa-map-marker-alt"></i></div>
                         <div>
                             <h4>Ubicación</h4>
                             <p>Bogotá, Colombia</p>
@@ -325,63 +293,75 @@
                     </div>
 
                     <div class="info-item">
-                        <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="info-icon" aria-hidden="true"><i class="fas fa-envelope"></i></div>
                         <div>
                             <h4>Email</h4>
-                            <p>juan.david.jds84@gmail.com</p>
+                            <p><a href="mailto:juan.david.jds84@gmail.com" style="color:var(--secondary);">juan.david.jds84@gmail.com</a></p>
                         </div>
                     </div>
 
                     <div class="info-item">
-                        <div class="info-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div class="info-icon" style="background:linear-gradient(135deg,#25d366,#1ebe5d);" aria-hidden="true"><i class="fab fa-whatsapp"></i></div>
                         <div>
                             <h4>WhatsApp</h4>
-                            <p><a href="https://wa.me/573026622715" target="_blank" style="color:var(--primary);">+57 302 662 2715</a></p>
+                            <p><a href="https://wa.me/573026622715" target="_blank" rel="noopener" style="color:var(--secondary);">+57 302 662 2715</a></p>
                         </div>
                     </div>
 
-                    <div class="social-links" style="justify-content:flex-start; margin-top:1.5rem;">
-                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://wa.me/573026622715" target="_blank" title="WhatsApp" style="background-color:#25d366;"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <div class="social-links" style="justify-content:flex-start; margin-top:2rem;" aria-label="Redes sociales">
+                        <a href="#" title="Instagram" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" title="Facebook" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="https://wa.me/573026622715" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp" style="background:linear-gradient(135deg,#25d366,#1ebe5d); color:white;"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+                        <a href="#" title="TikTok" aria-label="TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
-                <div class="contacto-form">
-                    <form id="contact-form">
+                <div class="contacto-form reveal from-right">
+                    <form id="contact-form" novalidate>
                         <div class="form-group">
                             <label for="nombre">Tu nombre</label>
-                            <input type="text" id="nombre" name="nombre" required>
+                            <input type="text" id="nombre" name="nombre" placeholder="Ej. Carlos Martínez" autocomplete="name" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Tu correo</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" autocomplete="email" required>
                         </div>
                         <div class="form-group">
                             <label for="mensaje">¿En qué podemos ayudarte?</label>
-                            <textarea id="mensaje" name="mensaje" required></textarea>
+                            <textarea id="mensaje" name="mensaje" placeholder="Describe tu idea o proyecto..." required></textarea>
                         </div>
-                        <button type="submit" class="btn">Enviar mensaje</button>
+                        <button type="submit" class="btn" style="width:100%; justify-content:center;">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                            Enviar mensaje
+                        </button>
                     </form>
-                    <div id="contact-success" style="display:none; color:var(--primary); margin-top:1rem; text-align:center; font-weight:600;">
-                        ¡Gracias por contactarnos! Te responderemos pronto.
+                    <div id="contact-success" style="display:none; color:var(--primary); margin-top:1.2rem; text-align:center; font-weight:600; padding:1rem; background:var(--surface); border-radius:var(--radius-sm);" role="alert">
+                        <i class="fas fa-check-circle" style="color:#22c55e; margin-right:6px;"></i>
+                        ¡Gracias! Te responderemos muy pronto.
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
+    <!-- ===== FOOTER ===== -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Impresionarte</h3>
-                    <p>Transformando ideas en realidad a través de la impresión 3D desde Bogotá, Colombia.</p>
+                    <p>Transformando ideas en realidad a través de la impresión 3D desde Bogotá, Colombia. Precisión, calidad y pasión en cada pieza.</p>
+                    <div class="social-links" style="justify-content:flex-start; margin-top:1.5rem;" aria-label="Redes sociales">
+                        <a href="#" title="Instagram" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" title="Facebook" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="https://wa.me/573026622715" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+                        <a href="#" title="TikTok" aria-label="TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
+                    </div>
                 </div>
                 <div class="footer-section">
-                    <h3>Enlaces rápidos</h3>
-                    <ul class="footer-links">
+                    <h3>Navegación</h3>
+                    <ul class="footer-links" role="list">
                         <li><a href="#home">Inicio</a></li>
                         <li><a href="#about">Acerca de</a></li>
                         <li><a href="#productos">Productos</a></li>
@@ -391,162 +371,249 @@
                 </div>
                 <div class="footer-section">
                     <h3>Contacto</h3>
-                    <p>juan.david.jds84@gmail.com</p>
-                    <p>+57 302 662 2715</p>
-                    <div class="social-links" style="justify-content:center; margin-top:1rem;">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://wa.me/573026622715" target="_blank" style="background-color:#25d366;"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                    </div>
+                    <p><a href="mailto:juan.david.jds84@gmail.com" style="color:rgba(255,255,255,0.62); transition:color 0.25s;">juan.david.jds84@gmail.com</a></p>
+                    <p style="margin-top:0.5rem;"><a href="https://wa.me/573026622715" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.62); transition:color 0.25s;">+57 302 662 2715</a></p>
+                    <p style="margin-top:0.5rem; color:rgba(255,255,255,0.42);">Bogotá, Colombia</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>© 2026 Impresionarte | Impresión 3D — Bogotá, Colombia</p>
+                <p>© 2026 Impresionarte · Impresión 3D — Bogotá, Colombia · Hecho con pasión</p>
             </div>
         </div>
     </footer>
 
     <script>
+    /* =============================================
+       SLIDER
+       ============================================= */
+    let slideActual = 0;
+    const totalSlides = 3;
 
+    function irSlide(n) {
+        slideActual = n;
+        document.getElementById('slider-track').style.transform = `translateX(-${n * 100}%)`;
+        document.querySelectorAll('.dot').forEach((d, i) => {
+            d.classList.toggle('active', i === n);
+            d.setAttribute('aria-selected', i === n ? 'true' : 'false');
+        });
+    }
 
-let slideActual = 0;
-const totalSlides = 3;
+    setInterval(() => irSlide((slideActual + 1) % totalSlides), 3500);
 
-function irSlide(n) {
-    slideActual = n;
-    document.querySelector('.slider-track').style.transform = `translateX(-${n * 100}%)`;
-    document.querySelectorAll('.dot').forEach((d, i) => {
-        d.classList.toggle('active', i === n);
+    /* =============================================
+       HEADER — shrink + active nav on scroll
+       ============================================= */
+    const header = document.getElementById('header');
+    const navLinks = document.querySelectorAll('nav a');
+    const sections = document.querySelectorAll('section[id]');
+
+    window.addEventListener('scroll', () => {
+        // Shrink header
+        header.classList.toggle('scrolled', window.scrollY > 60);
+
+        // Active nav link
+        let current = '';
+        sections.forEach(sec => {
+            if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+        });
+        navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+        });
+    }, { passive: true });
+
+    /* =============================================
+       MOBILE MENU
+       ============================================= */
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('menu');
+    const overlay = document.getElementById('menu-overlay');
+
+    function toggleMenu(open) {
+        const isOpen = open !== undefined ? open : !menu.classList.contains('show');
+        menu.classList.toggle('show', isOpen);
+        overlay.classList.toggle('show', isOpen);
+        mobileBtn.setAttribute('aria-expanded', isOpen);
+        mobileBtn.querySelector('i').className = isOpen ? 'fas fa-times' : 'fas fa-bars';
+    }
+
+    mobileBtn.addEventListener('click', () => toggleMenu());
+    overlay.addEventListener('click', () => toggleMenu(false));
+
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => toggleMenu(false));
     });
-}
 
-// Auto-avance cada 3 segundos
-setInterval(() => {
-    irSlide((slideActual + 1) % totalSlides);
-}, 3000);
-
-
-
-        async function cargarProductos() {
-            try {
-                const response = await fetch('productos.json');
-                if (!response.ok) throw new Error('No se pudo cargar');
-                const productos = await response.json();
-                mostrarProductos(productos);
-            } catch (error) {
-                document.getElementById('galeria-productos').innerHTML =
-                    '<p class="productos-vacio">Próximamente — escríbenos por WhatsApp para ver el catálogo completo.</p>';
+    /* =============================================
+       INTERSECTION OBSERVER — scroll animations
+       ============================================= */
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
             }
-        }
-
-        function mostrarProductos(productos) {
-            const galeria = document.getElementById('galeria-productos');
-            if (!productos || productos.length === 0) {
-                galeria.innerHTML = '<p class="productos-vacio">Próximamente — escríbenos por WhatsApp para ver el catálogo.</p>';
-                return;
-            }
-
-            // Agrupar productos por categoría
-            const productosPorCategoria = {};
-            productos.forEach(producto => {
-                const categoria = producto.categoria || 'otros';
-                if (!productosPorCategoria[categoria]) {
-                    productosPorCategoria[categoria] = [];
-                }
-                productosPorCategoria[categoria].push(producto);
-            });
-
-            galeria.innerHTML = '';
-
-            // Crear secciones por categoría
-            Object.keys(productosPorCategoria).forEach(categoria => {
-                const categoriaDiv = document.createElement('div');
-                categoriaDiv.classList.add('categoria-section');
-                categoriaDiv.id = `categoria-${categoria}`;
-
-                const tituloCategoria = document.createElement('h3');
-                tituloCategoria.classList.add('categoria-titulo');
-                tituloCategoria.textContent = categoria.charAt(0).toUpperCase() + categoria.slice(1);
-                categoriaDiv.appendChild(tituloCategoria);
-
-                const gridDiv = document.createElement('div');
-                gridDiv.classList.add('productos-grid');
-
-                productosPorCategoria[categoria].forEach(producto => {
-                    const imagen = producto.imagenes && producto.imagenes.length > 0
-                        ? producto.imagenes[0]
-                        : producto.imagen || 'img/placeholder-producto.jpg';
-
-                    const waMsg = encodeURIComponent(`Hola Impresionarte, me interesa "${producto.nombre}" 😊`);
-
-                    gridDiv.innerHTML += `
-                        <div class="producto-card">
-                            <div class="producto-img">
-                                <img src="${imagen}" alt="${producto.nombre}" loading="lazy">
-                            </div>
-                            <div class="producto-info">
-                                <h3>${producto.nombre}</h3>
-                                <p class="producto-precio">$${producto.precio.toLocaleString('es-CO')}</p>
-                                ${producto.descripcion ? `<p class="producto-desc">${producto.descripcion}</p>` : ''}
-                                <a href="https://wa.me/573026622715?text=${waMsg}" target="_blank" class="btn-producto">
-                                    <i class="fab fa-whatsapp" style="margin-right:5px;"></i>Solicitar
-                                </a>
-                            </div>
-                        </div>`;
-                });
-
-                categoriaDiv.appendChild(gridDiv);
-                galeria.appendChild(categoriaDiv);
-            });
-        }
-
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.getElementById('menu').classList.toggle('show');
         });
+    }, { threshold: 0.12 });
 
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', function() {
-                document.getElementById('menu').classList.remove('show');
-            });
-        });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-        document.getElementById('contact-form').onsubmit = function(e) {
-            e.preventDefault();
-            document.getElementById('contact-success').style.display = 'block';
-            this.reset();
-            setTimeout(() => {
-                document.getElementById('contact-success').style.display = 'none';
-            }, 5000);
+    /* =============================================
+       COUNTER ANIMATION
+       ============================================= */
+    function animateCounter(el, target, duration = 1500) {
+        const start = performance.now();
+        const update = (time) => {
+            const elapsed = time - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(eased * target);
+            if (progress < 1) requestAnimationFrame(update);
+            else el.textContent = target + '+';
         };
+        requestAnimationFrame(update);
+    }
 
-        function mostrarFormularioProducto() {
-            document.getElementById('producto-modal').style.display = 'flex';
-        }
-        function cerrarFormularioProducto() {
-            document.getElementById('producto-modal').style.display = 'none';
-        }
-        function agregarProducto(e) {
-            e.preventDefault();
-            alert('Producto agregado (demo)');
-            cerrarFormularioProducto();
-        }
-        function cerrarLogin() {
-            document.getElementById('login-modal').style.display = 'none';
-        }
-        function autenticarAdmin(e) {
-            e.preventDefault();
-            document.getElementById('btn-agregar').style.display = 'inline-block';
-            cerrarLogin();
-        }
-
-        window.addEventListener('click', function(e) {
-            if (e.target.classList.contains('modal')) {
-                e.target.style.display = 'none';
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const target = parseInt(el.dataset.count);
+                if (!isNaN(target)) animateCounter(el, target);
+                counterObserver.unobserve(el);
             }
         });
+    }, { threshold: 0.5 });
 
-        document.addEventListener('DOMContentLoaded', cargarProductos);
+    document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+    /* =============================================
+       PRODUCTOS — carga y renderizado
+       ============================================= */
+    async function cargarProductos() {
+        try {
+            const response = await fetch('productos.json');
+            if (!response.ok) throw new Error('No se pudo cargar');
+            const productos = await response.json();
+            mostrarProductos(productos);
+        } catch {
+            document.getElementById('galeria-productos').innerHTML =
+                '<p class="productos-vacio">Próximamente — escríbenos por WhatsApp para ver el catálogo completo.</p>';
+        }
+    }
+
+    function mostrarProductos(productos) {
+        const galeria = document.getElementById('galeria-productos');
+        if (!productos || productos.length === 0) {
+            galeria.innerHTML = '<p class="productos-vacio">Próximamente — escríbenos por WhatsApp para ver el catálogo.</p>';
+            return;
+        }
+
+        const porCategoria = {};
+        productos.forEach(p => {
+            const cat = p.categoria || 'otros';
+            if (!porCategoria[cat]) porCategoria[cat] = [];
+            porCategoria[cat].push(p);
+        });
+
+        galeria.innerHTML = '';
+
+        Object.keys(porCategoria).forEach(categoria => {
+            const catDiv = document.createElement('div');
+            catDiv.className = 'categoria-section';
+            catDiv.id = `categoria-${categoria}`;
+
+            const titulo = document.createElement('h3');
+            titulo.className = 'categoria-titulo reveal';
+            titulo.textContent = categoria.charAt(0).toUpperCase() + categoria.slice(1);
+            catDiv.appendChild(titulo);
+
+            const grid = document.createElement('div');
+            grid.className = 'productos-grid';
+
+            porCategoria[categoria].forEach((p, i) => {
+                const imagen = p.imagenes?.[0] ?? p.imagen ?? 'img/placeholder-producto.jpg';
+                const waMsg = encodeURIComponent(`Hola Impresionarte, me interesa "${p.nombre}"`);
+                const delay = i % 4;
+
+                const card = document.createElement('div');
+                card.className = `producto-card reveal reveal-delay-${delay}`;
+                card.innerHTML = `
+                    <div class="producto-img">
+                        <img src="${imagen}" alt="${p.nombre}" loading="lazy">
+                        <div class="producto-img-overlay">
+                            <span class="producto-overlay-text">
+                                <i class="fab fa-whatsapp"></i> Solicitar
+                            </span>
+                        </div>
+                    </div>
+                    <div class="producto-info">
+                        <h3>${p.nombre}</h3>
+                        <p class="producto-precio">$${p.precio.toLocaleString('es-CO')}</p>
+                        ${p.descripcion ? `<p class="producto-desc">${p.descripcion}</p>` : ''}
+                        <a href="https://wa.me/573026622715?text=${waMsg}" target="_blank" rel="noopener" class="btn-producto">
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i>Solicitar
+                        </a>
+                    </div>`;
+                grid.appendChild(card);
+            });
+
+            catDiv.appendChild(grid);
+            galeria.appendChild(catDiv);
+
+            // Activar observer en nuevas tarjetas
+            catDiv.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        });
+    }
+
+    /* =============================================
+       FORMULARIO DE CONTACTO
+       ============================================= */
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const success = document.getElementById('contact-success');
+        success.style.display = 'block';
+        this.reset();
+        setTimeout(() => success.style.display = 'none', 6000);
+    });
+
+    /* =============================================
+       ADMIN MODALES
+       ============================================= */
+    function mostrarFormularioProducto() {
+        document.getElementById('producto-modal').style.display = 'flex';
+    }
+    function cerrarFormularioProducto() {
+        document.getElementById('producto-modal').style.display = 'none';
+    }
+    function agregarProducto(e) {
+        e.preventDefault();
+        cerrarFormularioProducto();
+    }
+    function cerrarLogin() {
+        document.getElementById('login-modal').style.display = 'none';
+    }
+    function autenticarAdmin(e) {
+        e.preventDefault();
+        document.getElementById('btn-agregar').style.display = 'inline-flex';
+        cerrarLogin();
+    }
+
+    window.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal')) e.target.style.display = 'none';
+    });
+
+    // Cerrar modales con Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+            toggleMenu(false);
+        }
+    });
+
+    /* =============================================
+       INIT
+       ============================================= */
+    document.addEventListener('DOMContentLoaded', cargarProductos);
     </script>
 </body>
 </html>
