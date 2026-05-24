@@ -669,23 +669,71 @@
     });
 
     /* =============================================
-       PRODUCTOS — layout editorial / showcase
+       CARRUSEL — estado y timers
        ============================================= */
     let todosLosProductos = [];
+    const timers = new Map(); // uid → { iv, to }
 
+    function getCardAncho(track) {
+        const card = track.querySelector('.carrusel-card');
+        return card ? card.offsetWidth + 14 : 280;
+    }
+
+    function avanzar(track) {
+        const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 8;
+        if (atEnd) {
+            track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+            track.scrollBy({ left: getCardAncho(track), behavior: 'smooth' });
+        }
+    }
+
+    function iniciarAuto(uid) {
+        const t = timers.get(uid) || {};
+        clearInterval(t.iv);
+        clearTimeout(t.to);
+        const track = document.getElementById(uid);
+        if (!track) return;
+        const iv = setInterval(() => avanzar(track), 3200);
+        timers.set(uid, { iv, to: null });
+    }
+
+    function detenerAuto(uid) {
+        const t = timers.get(uid) || {};
+        clearInterval(t.iv);
+        clearTimeout(t.to);
+        timers.set(uid, { iv: null, to: null });
+    }
+
+    function reanudarTras(uid, ms = 5000) {
+        const t = timers.get(uid) || {};
+        clearInterval(t.iv);
+        clearTimeout(t.to);
+        const to = setTimeout(() => iniciarAuto(uid), ms);
+        timers.set(uid, { iv: null, to });
+    }
+
+    function sincronizarFlechas(track, prev, next) {
+        prev.disabled = track.scrollLeft <= 4;
+        next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+    }
+
+    /* =============================================
+       CARRUSEL — carga y render
+       ============================================= */
     async function cargarProductos() {
         try {
             const res = await fetch('productos.json');
             if (!res.ok) throw new Error();
             todosLosProductos = await res.json();
-            renderShowcase();
+            renderCarruseles();
         } catch {
             document.getElementById('galeria-productos').innerHTML =
                 '<p class="productos-vacio">Próximamente — escríbenos por WhatsApp para ver el catálogo completo.</p>';
         }
     }
 
-    function renderShowcase() {
+    function renderCarruseles() {
         const galeria = document.getElementById('galeria-productos');
 
         if (!todosLosProductos.length) {
@@ -709,79 +757,89 @@
 
         galeria.innerHTML = '';
 
-        orden.forEach((cat, ci) => {
+        orden.forEach(cat => {
+            const uid = `track-${cat}`;
             const productos = porCat[cat];
+
             const section = document.createElement('div');
-            section.className = `showcase-section reveal${ci > 0 ? ' reveal-delay-1' : ''}`;
+            section.className = 'carrusel-section reveal';
             section.id = `categoria-${cat}`;
 
             // Cabecera
-            const header = document.createElement('div');
-            header.className = 'showcase-header';
-            header.innerHTML = `
-                <h3 class="showcase-titulo">${cat.charAt(0).toUpperCase() + cat.slice(1)}</h3>
-                <span class="showcase-count">${productos.length} ${productos.length === 1 ? 'producto' : 'productos'}</span>`;
-            section.appendChild(header);
+            section.innerHTML = `
+                <div class="carrusel-header">
+                    <div class="carrusel-titulo-wrap">
+                        <h3 class="carrusel-titulo">${cat.charAt(0).toUpperCase() + cat.slice(1)}</h3>
+                        <span class="carrusel-count">${productos.length} ${productos.length === 1 ? 'producto' : 'productos'}</span>
+                    </div>
+                    <div class="carrusel-arrows">
+                        <button class="carrusel-arrow" id="prev-${uid}" aria-label="Anterior" disabled>
+                            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                        </button>
+                        <button class="carrusel-arrow" id="next-${uid}" aria-label="Siguiente">
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="carrusel-track" id="${uid}" role="list"></div>`;
 
-            // Layout: featured + secundarios
-            const layout = document.createElement('div');
-            layout.className = 'showcase-layout';
-
-            const [primero, ...resto] = productos;
-            layout.appendChild(crearCard(primero, true));
-
-            if (resto.length > 0) {
-                const secondary = document.createElement('div');
-                secondary.className = 'showcase-secondary';
-                resto.slice(0, 4).forEach(p => secondary.appendChild(crearCard(p, false)));
-                layout.appendChild(secondary);
-            }
-            section.appendChild(layout);
-
-            // Más productos (a partir del 6to)
-            if (resto.length > 4) {
-                const more = document.createElement('div');
-                more.className = 'showcase-more';
-                resto.slice(4).forEach(p => more.appendChild(crearCard(p, false)));
-                section.appendChild(more);
-            }
+            const track = section.querySelector(`#${uid}`);
+            productos.forEach(p => track.appendChild(crearCardCarrusel(p)));
 
             galeria.appendChild(section);
             revealObserver.observe(section);
+
+            // Flechas
+            const prevBtn = section.querySelector(`#prev-${uid}`);
+            const nextBtn = section.querySelector(`#next-${uid}`);
+
+            prevBtn.addEventListener('click', () => {
+                track.scrollBy({ left: -getCardAncho(track) * 2, behavior: 'smooth' });
+                reanudarTras(uid);
+            });
+            nextBtn.addEventListener('click', () => {
+                avanzar(track);
+                reanudarTras(uid);
+            });
+
+            // Sincronizar flechas con el scroll
+            track.addEventListener('scroll', () => sincronizarFlechas(track, prevBtn, nextBtn), { passive: true });
+
+            // Hover → pausa / reanuda
+            track.addEventListener('mouseenter', () => detenerAuto(uid));
+            track.addEventListener('mouseleave', () => iniciarAuto(uid));
+
+            // Touch → pausa, reanuda 5s después de soltar
+            track.addEventListener('touchstart', () => detenerAuto(uid), { passive: true });
+            track.addEventListener('touchend',   () => reanudarTras(uid, 5000), { passive: true });
+
+            // Arrancar auto-scroll
+            iniciarAuto(uid);
         });
     }
 
-    function crearCard(p, featured) {
+    function crearCardCarrusel(p) {
         const imagen = p.imagenes?.[0] ?? p.imagen ?? 'img/placeholder-producto.jpg';
         const waMsg  = encodeURIComponent(`Hola Impresionarte, me interesa "${p.nombre}"`);
-        const el     = document.createElement('div');
-        el.className = featured ? 'showcase-featured' : 'showcase-card';
-        el.setAttribute('role', 'article');
-        el.setAttribute('aria-label', p.nombre);
 
-        el.innerHTML = `
-            <img src="${imagen}" alt="${p.nombre}" loading="lazy">
-            <span class="price-badge">$${p.precio.toLocaleString('es-CO')}</span>
-            <div class="showcase-overlay">
-                <div class="showcase-overlay-inner">
-                    <h4>${p.nombre}</h4>
-                    ${p.descripcion ? `<p>${p.descripcion}</p>` : ''}
-                    <a href="https://wa.me/573026622715?text=${waMsg}"
-                       target="_blank" rel="noopener"
-                       class="btn-wa-overlay"
-                       aria-label="Solicitar ${p.nombre} por WhatsApp">
-                        <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar
-                    </a>
-                </div>
+        const card = document.createElement('div');
+        card.className = 'carrusel-card';
+        card.setAttribute('role', 'listitem');
+        card.innerHTML = `
+            <div class="carrusel-card-img" onclick="abrirLightbox(${p.globalIdx})" aria-label="Ver ${p.nombre} en grande" style="cursor:zoom-in;">
+                <img src="${imagen}" alt="${p.nombre}" loading="lazy">
+            </div>
+            <div class="carrusel-card-body">
+                <h3 title="${p.nombre}">${p.nombre}</h3>
+                <p class="carrusel-precio">$${p.precio.toLocaleString('es-CO')}</p>
+                ${p.descripcion ? `<p class="carrusel-desc">${p.descripcion}</p>` : ''}
+                <a href="https://wa.me/573026622715?text=${waMsg}"
+                   target="_blank" rel="noopener"
+                   class="btn-wa-card">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar
+                </a>
             </div>`;
-
-        // Click en la imagen abre lightbox; click en el botón va a WhatsApp
-        el.addEventListener('click', e => {
-            if (e.target.closest('.btn-wa-overlay')) return;
-            abrirLightbox(p.globalIdx);
-        });
-
-        return el;
+        return card;
     }
 
     /* =============================================
