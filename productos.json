@@ -23,7 +23,7 @@
     {
         "nombre": "El amor es paciente...",
         "categoria": "frases",
-        "precio": 50000,
+        "precio": 40000,
         "descripcion": "Frase bíblica completa en relieve 3D. Diseño detallado y elegante.",
         "imagenes": ["FOTOSIMPRESOS/El amor es.jpeg"]
     },
@@ -54,6 +54,41 @@
         "precio": 50000,
         "descripcion": "Cuadro familiar en relieve 3D con frase especial. Diseño premium.",
         "imagenes": ["FOTOSIMPRESOS/En esta casa.jpeg"]
+    },
+    {
+        "nombre": "Hoy es un día especial",
+        "categoria": "frases",
+        "precio": 60000,
+        "descripcion": "Cuadro impreso en 3D con frase celebratoria. Ideal como regalo para cumpleaños o fechas especiales.",
+        "imagenes": ["FOTOSIMPRESOS/hoyesundia.jpg"]
+    },
+    {
+        "nombre": "Dios Bendice",
+        "categoria": "frases",
+        "precio": 60000,
+        "descripcion": "Cuadro decorativo con mensaje de fe y bendición. Perfecto para regalar o decorar el hogar.",
+        "imagenes": ["FOTOSIMPRESOS/DiosBendice.jpg"]
+    },
+    {
+        "nombre": "Isaías 14",
+        "categoria": "frases",
+        "precio": 50000,
+        "descripcion": "Versículo bíblico en relieve 3D. Detalle fino y acabado premium, ideal para decoración espiritual.",
+        "imagenes": ["FOTOSIMPRESOS/isaias14.jpg"]
+    },
+    {
+        "nombre": "Sé la razón",
+        "categoria": "frases",
+        "precio": 40000,
+        "descripcion": "Frase motivacional impresa en 3D. Perfecta para oficina, estudio o regalo especial.",
+        "imagenes": ["FOTOSIMPRESOS/selarazon.jpg"]
+    },
+    {
+        "nombre": "Lucas 11",
+        "categoria": "frases",
+        "precio": 40000,
+        "descripcion": "Versículo bíblico en relieve 3D. Diseño elegante ideal para sala, habitación o como regalo.",
+        "imagenes": ["FOTOSIMPRESOS/lucas11.jpeg"]
     },
 
     {
