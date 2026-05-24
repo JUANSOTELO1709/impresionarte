@@ -1552,6 +1552,41 @@ footer .social-links a:hover {
     box-shadow: 0 4px 14px rgba(123, 47, 247, 0.35);
 }
 
+.tab-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 10px;
+    background: rgba(123, 47, 247, 0.12);
+    color: var(--secondary);
+    font-size: 0.72rem;
+    font-weight: 700;
+    margin-left: 5px;
+    line-height: 1;
+    transition: background var(--transition), color var(--transition);
+}
+
+.filtro-btn.active .tab-count {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+}
+
+/* Botón Ver más */
+#btn-ver-mas {
+    transition: all 0.25s ease;
+}
+
+#btn-ver-mas:hover {
+    background: var(--primary) !important;
+    color: white !important;
+    border-color: var(--primary) !important;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
 /* =============================================
    LIGHTBOX
    ============================================= */

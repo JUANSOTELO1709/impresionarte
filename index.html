@@ -323,24 +323,32 @@
             <h2 class="section-title reveal" id="productos-title">Nuestros Productos</h2>
             <p class="section-subtitle reveal">Cada pieza es única, diseñada y fabricada con dedicación para superar tus expectativas.</p>
 
-            <!-- Filtros -->
-            <div class="filtros-bar reveal" role="group" aria-label="Filtrar productos por categoría">
-                <button class="filtro-btn active" data-cat="todos" onclick="filtrarCategoria('todos', this)">
-                    Todos
+            <!-- Tabs de categoría -->
+            <div class="filtros-bar reveal" role="tablist" aria-label="Filtrar productos por categoría" id="filtros-bar">
+                <button class="filtro-btn active" role="tab" aria-selected="true" data-cat="todos">
+                    Todos <span class="tab-count" id="count-todos"></span>
                 </button>
-                <button class="filtro-btn" data-cat="frases" onclick="filtrarCategoria('frases', this)">
-                    <i class="fas fa-quote-right" aria-hidden="true" style="margin-right:6px;font-size:0.8rem;"></i>Frases
+                <button class="filtro-btn" role="tab" aria-selected="false" data-cat="frases">
+                    <i class="fas fa-quote-right" aria-hidden="true"></i> Frases <span class="tab-count" id="count-frases"></span>
                 </button>
-                <button class="filtro-btn" data-cat="llaveros" onclick="filtrarCategoria('llaveros', this)">
-                    <i class="fas fa-key" aria-hidden="true" style="margin-right:6px;font-size:0.8rem;"></i>Llaveros
+                <button class="filtro-btn" role="tab" aria-selected="false" data-cat="llaveros">
+                    <i class="fas fa-key" aria-hidden="true"></i> Llaveros <span class="tab-count" id="count-llaveros"></span>
                 </button>
-                <button class="filtro-btn" data-cat="decoracion" onclick="filtrarCategoria('decoracion', this)">
-                    <i class="fas fa-star" aria-hidden="true" style="margin-right:6px;font-size:0.8rem;"></i>Decoración
+                <button class="filtro-btn" role="tab" aria-selected="false" data-cat="decoracion">
+                    <i class="fas fa-star" aria-hidden="true"></i> Decoración <span class="tab-count" id="count-decoracion"></span>
                 </button>
             </div>
 
-            <div class="productos-grid" id="galeria-productos" aria-live="polite">
+            <div class="productos-grid" id="galeria-productos" aria-live="polite" role="region" aria-label="Lista de productos">
                 <p class="productos-vacio">Cargando productos...</p>
+            </div>
+
+            <!-- Ver más -->
+            <div id="ver-mas-container" style="display:none; margin-top:2.5rem; text-align:center;">
+                <button id="btn-ver-mas" class="btn" style="background:white; color:var(--primary); border:2px solid var(--primary); min-width:220px;">
+                    <i class="fas fa-plus" aria-hidden="true"></i>
+                    <span id="ver-mas-texto">Ver más productos</span>
+                </button>
             </div>
 
             <div style="margin-top:2rem;text-align:center;">
@@ -685,21 +693,12 @@
     });
 
     /* =============================================
-       FILTROS DE CATEGORÍA
+       PRODUCTOS — estado global
        ============================================= */
-    function filtrarCategoria(cat, btn) {
-        document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const categorias = document.querySelectorAll('.categoria-section');
-        categorias.forEach(sec => {
-            if (cat === 'todos' || sec.id === `categoria-${cat}`) {
-                sec.style.display = '';
-            } else {
-                sec.style.display = 'none';
-            }
-        });
-    }
+    let todosLosProductos = [];
+    const POR_PAGINA = 6;
+    let catActual = 'todos';
+    let visiblesActual = POR_PAGINA;
 
     /* =============================================
        PRODUCTOS — carga y renderizado
@@ -708,85 +707,124 @@
         try {
             const response = await fetch('productos.json');
             if (!response.ok) throw new Error('error');
-            const productos = await response.json();
-            mostrarProductos(productos);
+            todosLosProductos = await response.json();
+            inicializarProductos();
         } catch {
             document.getElementById('galeria-productos').innerHTML =
                 '<p class="productos-vacio">Próximamente — escríbenos por WhatsApp para ver el catálogo completo.</p>';
         }
     }
 
-    function mostrarProductos(productos) {
-        const galeria = document.getElementById('galeria-productos');
-        if (!productos || productos.length === 0) {
-            galeria.innerHTML = '<p class="productos-vacio">Próximamente — escríbenos por WhatsApp.</p>';
+    function inicializarProductos() {
+        if (!todosLosProductos.length) {
+            document.getElementById('galeria-productos').innerHTML =
+                '<p class="productos-vacio">Próximamente — escríbenos por WhatsApp.</p>';
             return;
         }
 
-        // Guardar todos los productos para lightbox
-        lbProductos = productos.map(p => ({
+        // Indexar para lightbox
+        lbProductos = todosLosProductos.map(p => ({
             nombre: p.nombre,
             precio: p.precio,
             img: p.imagenes?.[0] ?? p.imagen ?? 'img/placeholder-producto.jpg'
         }));
 
-        const porCategoria = {};
-        productos.forEach(p => {
-            const cat = p.categoria || 'otros';
-            if (!porCategoria[cat]) porCategoria[cat] = [];
-            porCategoria[cat].push(p);
+        // Contar por categoría y actualizar badges
+        const counts = { todos: todosLosProductos.length };
+        todosLosProductos.forEach(p => {
+            const cat = (p.categoria || 'otros').toLowerCase();
+            counts[cat] = (counts[cat] || 0) + 1;
         });
+        Object.keys(counts).forEach(cat => {
+            const el = document.getElementById(`count-${cat}`);
+            if (el) el.textContent = counts[cat];
+        });
+
+        // Conectar tabs
+        document.querySelectorAll('.filtro-btn[data-cat]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                catActual = btn.dataset.cat;
+                visiblesActual = POR_PAGINA;
+                document.querySelectorAll('.filtro-btn[data-cat]').forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-selected', 'false');
+                });
+                btn.classList.add('active');
+                btn.setAttribute('aria-selected', 'true');
+                renderizarProductos();
+            });
+        });
+
+        // Botón "Ver más"
+        document.getElementById('btn-ver-mas').addEventListener('click', () => {
+            visiblesActual += POR_PAGINA;
+            renderizarProductos(true);
+        });
+
+        renderizarProductos();
+    }
+
+    function productosFiltrados() {
+        if (catActual === 'todos') return todosLosProductos;
+        return todosLosProductos.filter(p =>
+            (p.categoria || 'otros').toLowerCase() === catActual
+        );
+    }
+
+    function renderizarProductos(append = false) {
+        const galeria = document.getElementById('galeria-productos');
+        const lista = productosFiltrados();
+        const slice = lista.slice(0, visiblesActual);
+        const hayMas = lista.length > visiblesActual;
+
+        if (lista.length === 0) {
+            galeria.innerHTML = '<p class="productos-vacio">No hay productos en esta categoría aún.</p>';
+            document.getElementById('ver-mas-container').style.display = 'none';
+            return;
+        }
 
         galeria.innerHTML = '';
-        let globalIndex = 0;
 
-        Object.keys(porCategoria).forEach(categoria => {
-            const catDiv = document.createElement('div');
-            catDiv.className = 'categoria-section';
-            catDiv.id = `categoria-${categoria}`;
+        slice.forEach((p, i) => {
+            const imagen = p.imagenes?.[0] ?? p.imagen ?? 'img/placeholder-producto.jpg';
+            const waMsg = encodeURIComponent(`Hola Impresionarte, me interesa "${p.nombre}"`);
+            const globalIdx = todosLosProductos.indexOf(p);
+            const delay = i % 4;
 
-            const titulo = document.createElement('h3');
-            titulo.className = 'categoria-titulo reveal';
-            titulo.textContent = categoria.charAt(0).toUpperCase() + categoria.slice(1);
-            catDiv.appendChild(titulo);
-
-            const grid = document.createElement('div');
-            grid.className = 'productos-grid';
-
-            porCategoria[categoria].forEach((p, i) => {
-                const imagen = p.imagenes?.[0] ?? p.imagen ?? 'img/placeholder-producto.jpg';
-                const waMsg = encodeURIComponent(`Hola Impresionarte, me interesa "${p.nombre}"`);
-                const delay = i % 4;
-                const idx = globalIndex;
-                globalIndex++;
-
-                const card = document.createElement('div');
-                card.className = `producto-card reveal reveal-delay-${delay}`;
-                card.setAttribute('role', 'article');
-                card.innerHTML = `
-                    <div class="producto-img" style="cursor:zoom-in;" onclick="abrirLightbox(${idx})" aria-label="Ver ${p.nombre} en grande">
-                        <img src="${imagen}" alt="${p.nombre}" loading="lazy">
-                        <div class="producto-img-overlay">
-                            <span class="producto-overlay-text">
-                                <i class="fas fa-search-plus"></i> Ver ampliado
-                            </span>
-                        </div>
+            const card = document.createElement('div');
+            card.className = 'producto-card reveal' + (i < 4 ? ` reveal-delay-${delay}` : '');
+            card.setAttribute('role', 'article');
+            card.innerHTML = `
+                <div class="producto-img" style="cursor:zoom-in;" onclick="abrirLightbox(${globalIdx})" aria-label="Ver ${p.nombre} en grande">
+                    <img src="${imagen}" alt="${p.nombre}" loading="lazy">
+                    <div class="producto-img-overlay">
+                        <span class="producto-overlay-text">
+                            <i class="fas fa-search-plus"></i> Ver ampliado
+                        </span>
                     </div>
-                    <div class="producto-info">
-                        <h3>${p.nombre}</h3>
-                        <p class="producto-precio">$${p.precio.toLocaleString('es-CO')}</p>
-                        ${p.descripcion ? `<p class="producto-desc">${p.descripcion}</p>` : ''}
-                        <a href="https://wa.me/573026622715?text=${waMsg}" target="_blank" rel="noopener" class="btn-producto">
-                            <i class="fab fa-whatsapp" aria-hidden="true"></i>Solicitar
-                        </a>
-                    </div>`;
-                grid.appendChild(card);
-            });
-
-            catDiv.appendChild(grid);
-            galeria.appendChild(catDiv);
-            catDiv.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+                </div>
+                <div class="producto-info">
+                    <h3>${p.nombre}</h3>
+                    <p class="producto-precio">$${p.precio.toLocaleString('es-CO')}</p>
+                    ${p.descripcion ? `<p class="producto-desc">${p.descripcion}</p>` : ''}
+                    <a href="https://wa.me/573026622715?text=${waMsg}" target="_blank" rel="noopener" class="btn-producto">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i>Solicitar
+                    </a>
+                </div>`;
+            galeria.appendChild(card);
+            revealObserver.observe(card);
         });
+
+        // Botón "Ver más"
+        const verMasContainer = document.getElementById('ver-mas-container');
+        const verMasTexto = document.getElementById('ver-mas-texto');
+        if (hayMas) {
+            const restantes = lista.length - visiblesActual;
+            verMasTexto.textContent = `Ver ${Math.min(restantes, POR_PAGINA)} productos más`;
+            verMasContainer.style.display = 'block';
+        } else {
+            verMasContainer.style.display = 'none';
+        }
     }
 
     /* =============================================
