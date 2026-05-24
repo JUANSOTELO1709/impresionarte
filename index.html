@@ -102,6 +102,20 @@
         </div>
     </div>
 
+    <!-- ===== BARRA INSTAGRAM ===== -->
+    <div class="ig-bar" id="ig-bar">
+        <a href="https://www.instagram.com/impresionatbgta" target="_blank" rel="noopener" class="ig-bar-link">
+            <svg class="ig-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/>
+                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+            </svg>
+            <span>Síguenos en Instagram <strong>@impresionatbgta</strong> y ve todos nuestros diseños</span>
+            <span class="ig-bar-cta">Seguir</span>
+        </a>
+        <button class="ig-bar-close" onclick="cerrarIgBar()" aria-label="Cerrar">&times;</button>
+    </div>
+
     <!-- ===== OVERLAY MENÚ MÓVIL ===== -->
     <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
 
@@ -188,6 +202,28 @@
                     <span class="stat-number">&lt;24h</span>
                     <span class="stat-label">Tiempo de respuesta</span>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NUEVOS PRODUCTOS ===== -->
+    <section id="nuevos" aria-labelledby="nuevos-title">
+        <div class="container">
+            <div class="nuevos-header reveal">
+                <div class="nuevos-titulo-wrap">
+                    <span class="nuevos-badge">
+                        <span class="nuevos-dot" aria-hidden="true"></span>
+                        Nuevos
+                    </span>
+                    <h2 id="nuevos-title">Lo último en Impresionarte</h2>
+                </div>
+                <a href="#productos" class="nuevos-ver-todos">
+                    Ver catálogo completo
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="nuevos-carrusel-wrap reveal">
+                <div class="nuevos-track" id="nuevos-grid" role="list"></div>
             </div>
         </div>
     </section>
@@ -437,7 +473,7 @@
                     </div>
 
                     <div class="social-links" style="justify-content:flex-start;margin-top:2rem;" aria-label="Redes sociales">
-                        <a href="#" title="Instagram" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/impresionatbgta" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                         <a href="#" title="Facebook" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
                         <a href="https://wa.me/573026622715" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp" style="background:linear-gradient(135deg,#25d366,#1ebe5d);color:white;"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
                         <a href="#" title="TikTok" aria-label="TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
@@ -481,7 +517,7 @@
                     <h3>Impresionarte</h3>
                     <p>Transformando ideas en realidad a través de la impresión 3D desde Bogotá, Colombia. Precisión, calidad y pasión en cada pieza.</p>
                     <div class="social-links" style="justify-content:flex-start;margin-top:1.5rem;" aria-label="Redes sociales">
-                        <a href="#" title="Instagram" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/impresionatbgta" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                         <a href="#" title="Facebook" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
                         <a href="https://wa.me/573026622715" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
                         <a href="#" title="TikTok" aria-label="TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
@@ -733,6 +769,51 @@
         }
     }
 
+    function renderNuevos() {
+        const grid = document.getElementById('nuevos-grid');
+        if (!grid) return;
+
+        const nuevos = [
+            { img: 'FOTOSIMPRESOS/hoyesundia.jpg',  nombre: 'Hoy es un día especial' },
+            { img: 'FOTOSIMPRESOS/DiosBendice.jpg', nombre: 'Dios Bendice' },
+            { img: 'FOTOSIMPRESOS/isaias14.jpg',    nombre: 'Isaías 14' },
+            { img: 'FOTOSIMPRESOS/selarazon.jpg',   nombre: 'Sé la razón' },
+            { img: 'FOTOSIMPRESOS/lucas11.jpeg',    nombre: 'Lucas 11' },
+        ];
+
+        const waBase = encodeURIComponent('Hola Impresionarte, me interesa un nuevo producto');
+
+        grid.innerHTML = '';
+        nuevos.forEach((item) => {
+            const card = document.createElement('div');
+            card.className = 'nuevo-card';
+            card.setAttribute('role', 'listitem');
+            card.innerHTML = `
+                <img src="${item.img}" alt="${item.nombre}" loading="lazy"
+                     onerror="this.src='img/IMPRESIONATE.png'; this.style.objectFit='contain'; this.style.padding='2rem';">
+                <span class="nuevo-tag">Nuevo</span>
+                <div class="nuevo-overlay">
+                    <h3>${item.nombre}</h3>
+                    <a href="https://wa.me/573026622715?text=${waBase}"
+                       target="_blank" rel="noopener"
+                       class="btn-wa-overlay"
+                       onclick="event.stopPropagation()">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar
+                    </a>
+                </div>`;
+            grid.appendChild(card);
+        });
+
+        // Auto-scroll carrusel nuevos
+        let nIdx = 0;
+        setInterval(() => {
+            const cards = grid.querySelectorAll('.nuevo-card');
+            if (!cards.length) return;
+            nIdx = (nIdx + 1) % cards.length;
+            cards[nIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+        }, 3000);
+    }
+
     function renderCarruseles() {
         const galeria = document.getElementById('galeria-productos');
 
@@ -746,6 +827,8 @@
             precio: p.precio,
             img: p.imagenes?.[0] ?? p.imagen ?? 'img/placeholder-producto.jpg'
         }));
+
+        renderNuevos();
 
         const orden = [];
         const porCat = {};
@@ -813,8 +896,8 @@
             track.addEventListener('touchstart', () => detenerAuto(uid), { passive: true });
             track.addEventListener('touchend',   () => reanudarTras(uid, 5000), { passive: true });
 
-            // Auto-scroll solo en desktop
-            if (window.innerWidth > 768) iniciarAuto(uid);
+            // Auto-scroll en todos los dispositivos
+            iniciarAuto(uid);
         });
     }
 
@@ -899,6 +982,20 @@
             if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % lbProductos.length; abrirLightbox(lbIndex); }
         }
     });
+
+    /* =============================================
+       BARRA INSTAGRAM
+       ============================================= */
+    function cerrarIgBar() {
+        document.getElementById('ig-bar').classList.add('oculta');
+        document.getElementById('header').classList.add('sin-ig-bar');
+        sessionStorage.setItem('ig-bar-cerrada', '1');
+    }
+
+    if (sessionStorage.getItem('ig-bar-cerrada')) {
+        document.getElementById('ig-bar').classList.add('oculta');
+        document.getElementById('header').classList.add('sin-ig-bar');
+    }
 
     /* =============================================
        INIT
