@@ -813,8 +813,8 @@
             track.addEventListener('touchstart', () => detenerAuto(uid), { passive: true });
             track.addEventListener('touchend',   () => reanudarTras(uid, 5000), { passive: true });
 
-            // Arrancar auto-scroll
-            iniciarAuto(uid);
+            // Auto-scroll solo en desktop
+            if (window.innerWidth > 768) iniciarAuto(uid);
         });
     }
 

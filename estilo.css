@@ -1947,8 +1947,58 @@ footer .social-links a:hover {
         margin-inline: auto;
     }
 
-    /* Carrusel en móvil — card casi full-width con peek del siguiente */
+    /* ── MÓVIL: grid 2 columnas, sin scroll horizontal ── */
+
+    .carrusel-arrows {
+        display: none;          /* flechas innecesarias en táctil */
+    }
+
+    .carrusel-track {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        overflow-x: visible;
+        overflow-y: visible;
+        scroll-snap-type: none;
+        -webkit-overflow-scrolling: unset;
+        padding: 0;
+        width: 100%;
+        flex-wrap: unset;
+    }
+
     .carrusel-card {
-        flex: 0 0 min(260px, 78vw);
+        flex: none;
+        width: 100%;
+        scroll-snap-align: none;
+        scroll-snap-stop: unset;
+    }
+
+    .carrusel-card-img {
+        height: 140px;
+    }
+
+    .carrusel-card-body {
+        padding: 0.65rem 0.75rem 0.85rem;
+    }
+
+    .carrusel-card-body h3 {
+        font-size: 0.8rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .carrusel-precio {
+        font-size: 0.97rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .carrusel-desc {
+        display: none;          /* sin descripción — más compacto */
+    }
+
+    .btn-wa-card {
+        font-size: 0.78rem;
+        padding: 8px 10px;
+        min-height: 40px;
+        gap: 5px;
     }
 }
