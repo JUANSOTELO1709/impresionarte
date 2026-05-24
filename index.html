@@ -804,14 +804,41 @@
             grid.appendChild(card);
         });
 
-        // Auto-scroll carrusel nuevos
+        // Tarjeta CTA al final del carrusel
+        const ctaCard = document.createElement('a');
+        ctaCard.className = 'nuevo-card nuevo-cta-card';
+        ctaCard.href = '#productos';
+        ctaCard.setAttribute('role', 'listitem');
+        ctaCard.innerHTML = `
+            <i class="fas fa-th-large nuevo-cta-icon" aria-hidden="true"></i>
+            <span class="nuevo-cta-label">Ver catálogo completo</span>
+            <span class="nuevo-cta-sub">Todos nuestros diseños</span>
+            <span class="nuevo-cta-arrow"><i class="fas fa-arrow-right" aria-hidden="true"></i></span>`;
+        grid.appendChild(ctaCard);
+
+        // Auto-scroll — usa scrollTo en el track para NO secuestrar el scroll de página
+        const nAllCards = Array.from(grid.querySelectorAll('.nuevo-card'));
         let nIdx = 0;
-        setInterval(() => {
-            const cards = grid.querySelectorAll('.nuevo-card');
-            if (!cards.length) return;
-            nIdx = (nIdx + 1) % cards.length;
-            cards[nIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-        }, 3000);
+        let nTimer = null;
+
+        function nAvanzar() {
+            nIdx = (nIdx + 1) % nAllCards.length;
+            const card = nAllCards[nIdx];
+            grid.scrollTo({ left: card.offsetLeft - grid.offsetLeft, behavior: 'smooth' });
+        }
+
+        function nIniciar() {
+            if (nTimer) clearInterval(nTimer);
+            nTimer = setInterval(nAvanzar, 3200);
+        }
+
+        function nDetener() { clearInterval(nTimer); nTimer = null; }
+
+        nIniciar();
+        grid.addEventListener('touchstart', nDetener, { passive: true });
+        grid.addEventListener('touchend',   () => setTimeout(nIniciar, 5000), { passive: true });
+        grid.addEventListener('mouseenter', nDetener);
+        grid.addEventListener('mouseleave', nIniciar);
     }
 
     function renderCarruseles() {
@@ -1000,7 +1027,10 @@
     /* =============================================
        INIT
        ============================================= */
-    document.addEventListener('DOMContentLoaded', cargarProductos);
+    document.addEventListener('DOMContentLoaded', () => {
+        window.scrollTo(0, 0);
+        cargarProductos();
+    });
     </script>
 </body>
 </html>

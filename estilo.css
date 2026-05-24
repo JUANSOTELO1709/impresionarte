@@ -2297,3 +2297,70 @@ footer .social-links a:hover {
         min-height: 42px;
     }
 }
+
+/* =============================================
+   NUEVO — CTA CARD (Ver catálogo completo)
+   ============================================= */
+
+.nuevo-cta-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.2s ease;
+}
+
+.nuevo-cta-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: var(--shadow-xl);
+    filter: brightness(1.1);
+    border-color: transparent;
+}
+
+.nuevo-cta-icon {
+    font-size: 2.4rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.25rem;
+}
+
+.nuevo-cta-label {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+}
+
+.nuevo-cta-sub {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.72);
+    font-weight: 400;
+}
+
+.nuevo-cta-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    font-size: 1rem;
+    margin-top: 0.25rem;
+    transition: background 0.25s, transform 0.25s;
+}
+
+.nuevo-cta-card:hover .nuevo-cta-arrow {
+    background: rgba(255, 255, 255, 0.32);
+    transform: translateX(4px);
+}
