@@ -2272,7 +2272,8 @@ footer .social-links a:hover {
     }
 
     .carrusel-card-img {
-        height: 220px;
+        height: auto;
+        aspect-ratio: 3 / 4;
     }
 
     .carrusel-card-body {
