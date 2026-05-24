@@ -45,7 +45,6 @@ body {
     background-color: var(--white);
     line-height: 1.65;
     font-size: 16px;
-    overflow-x: hidden;
 }
 
 p {
@@ -1590,18 +1589,17 @@ footer .social-links a:hover {
 /* Track: scroll nativo + snap */
 .carrusel-track {
     display: flex;
+    flex-wrap: nowrap;          /* nunca apilar verticalmente */
+    width: 100%;
     gap: 14px;
-    overflow-x: scroll;
+    overflow-x: auto;           /* auto funciona mejor que scroll en Android */
+    overflow-y: visible;
     scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 10px;
-    /* Ocultar scrollbar */
+    -webkit-overflow-scrolling: touch;  /* momentum en iOS */
     scrollbar-width: none;
     -ms-overflow-style: none;
-    /* Deja que las sombras de las cards se vean */
-    padding-top: 4px;
-    padding-left: 2px;
-    padding-right: 2px;
+    padding: 4px 2px 14px;
+    box-sizing: border-box;
 }
 
 .carrusel-track::-webkit-scrollbar {
