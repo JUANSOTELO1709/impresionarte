@@ -1514,7 +1514,114 @@ footer .social-links a:hover {
 }
 
 /* =============================================
-   FILTROS DE CATEGORÍA
+   CARRUSEL DE PRODUCTOS
+   ============================================= */
+
+.carrusel-section {
+    margin-bottom: 3rem;
+}
+
+.carrusel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    gap: 1rem;
+}
+
+.carrusel-titulo-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.carrusel-titulo {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin: 0;
+    text-transform: capitalize;
+}
+
+.carrusel-count {
+    font-size: 0.8rem;
+    color: var(--gray);
+    font-weight: 500;
+    background: var(--surface-2);
+    padding: 3px 10px;
+    border-radius: 50px;
+}
+
+.carrusel-controles {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.carrusel-arrow {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--gray-light);
+    background: white;
+    color: var(--primary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.carrusel-arrow:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.carrusel-arrow.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.carrusel-track {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 12px;
+    /* Ocultar scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.carrusel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.carrusel-card {
+    flex: 0 0 260px;
+    scroll-snap-align: start;
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.carrusel-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: transparent;
+}
+
+/* =============================================
+   FILTROS DE CATEGORÍA (legacy, se puede quitar)
    ============================================= */
 
 .filtros-bar {
@@ -1822,5 +1929,14 @@ footer .social-links a:hover {
         display: block;
         width: fit-content;
         margin-inline: auto;
+    }
+    /* Carrusel en móvil: cards más angostas con peek del siguiente */
+    .carrusel-card {
+        flex: 0 0 78vw;
+    }
+    .carrusel-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 0.8rem;
     }
 }
