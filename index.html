@@ -1,1036 +1,380 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impresionarte — Impresión 3D a tu Medida en Bogotá</title>
-    <meta name="description" content="Impresionarte: impresión 3D personalizada en Bogotá. Prototipos, piezas funcionales, llaveros, decoración y regalos únicos. Cuéntanos tu idea y la hacemos realidad.">
-    <meta name="keywords" content="impresión 3D Bogotá, impresión 3D Colombia, prototipos 3D, llaveros personalizados, decoración 3D, regalos personalizados">
-    <meta name="author" content="Impresionarte">
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://impresionarte.co/">
-    <meta property="og:title" content="Impresionarte — Impresión 3D a tu Medida en Bogotá">
-    <meta property="og:description" content="Prototipos, piezas funcionales, llaveros y regalos únicos hechos con impresión 3D en Bogotá. Cuéntanos tu idea y la hacemos realidad.">
-    <meta property="og:image" content="https://impresionarte.co/img/IMPRESIONATE.png">
-    <meta property="og:locale" content="es_CO">
-    <meta property="og:site_name" content="Impresionarte">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Impresionarte — Impresión 3D en Bogotá">
-    <meta name="twitter:description" content="Prototipos, piezas funcionales, llaveros y regalos únicos en 3D. Bogotá, Colombia.">
-    <meta name="twitter:image" content="https://impresionarte.co/img/IMPRESIONATE.png">
-
-    <!-- JSON-LD LocalBusiness -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Impresionarte",
-      "description": "Servicio de impresión 3D personalizada en Bogotá: prototipos, piezas funcionales, llaveros, decoración y regalos únicos.",
-      "url": "https://impresionarte.co",
-      "telephone": "+573026622715",
-      "email": "juan.david.jds84@gmail.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Bogotá",
-        "addressCountry": "CO"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 4.7110,
-        "longitude": -74.0721
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-        "opens": "08:00",
-        "closes": "20:00"
-      },
-      "priceRange": "$$",
-      "image": "https://impresionarte.co/img/IMPRESIONATE.png",
-      "sameAs": [
-        "https://wa.me/573026622715"
-      ]
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impresionarte · Impresión 3D en Bogotá</title>
+  <meta name="description" content="Impresión 3D personalizada en Bogotá. Letras decorativas, figuras, prototipos y más. Pide por WhatsApp o en línea.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50:'#f5f3ff', 100:'#ede9fe', 200:'#ddd6fe', 400:'#a78bfa', 500:'#8b5cf6', 600:'#7c3aed', 700:'#6d28d9', 800:'#5b21b6' }
+          },
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+        }
+      }
     }
-    </script>
-
-    <link rel="stylesheet" href="estilo.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="img/IMPRESIONATE.png" type="image/png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="./app.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+  <style>
+    [x-cloak] { display: none !important; }
+    .product-card { transition: transform .2s, box-shadow .2s; }
+    .product-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -12px rgba(0,0,0,.15); }
+    .color-dot { width:28px; height:28px; border-radius:50%; border:2px solid transparent; cursor:pointer; transition: border-color .15s, transform .15s; }
+    .color-dot.active, .color-dot:hover { border-color: #7c3aed; transform: scale(1.2); }
+    .size-btn { padding: 6px 14px; border-radius: 8px; border: 1.5px solid #e5e7eb; font-size:.875rem; font-weight:500; cursor:pointer; transition:all .15s; }
+    .size-btn.active { border-color:#7c3aed; background:#ede9fe; color:#6d28d9; }
+    .size-btn:hover:not(.active) { border-color:#a78bfa; }
+    .gallery-thumb { width:60px; height:60px; object-fit:cover; border-radius:8px; border:2px solid transparent; cursor:pointer; transition:border-color .15s; }
+    .gallery-thumb.active { border-color:#7c3aed; }
+    ::-webkit-scrollbar { width:6px; } ::-webkit-scrollbar-track { background:#f1f1f1; } ::-webkit-scrollbar-thumb { background:#c4b5fd; border-radius:3px; }
+  </style>
 </head>
-<body>
+<body class="bg-gray-50 font-sans" x-data="catalogApp()" x-init="init()" x-cloak>
 
-    <!-- ===== WHATSAPP FLOTANTE ===== -->
-    <a href="https://wa.me/573026622715?text=Hola%20Impresionarte%2C%20me%20interesa%20un%20producto"
-       target="_blank" rel="noopener"
-       class="whatsapp-float"
-       aria-label="Contactar por WhatsApp">
-        <i class="fab fa-whatsapp" aria-hidden="true"></i>
-        <span>Pedir cotización</span>
-    </a>
-
-    <!-- ===== BACK TO TOP ===== -->
-    <button id="back-top" aria-label="Volver al inicio" title="Volver al inicio">
-        <i class="fas fa-chevron-up" aria-hidden="true"></i>
-    </button>
-
-    <!-- ===== LIGHTBOX ===== -->
-    <div id="lightbox" role="dialog" aria-modal="true" aria-label="Vista de producto">
-        <div class="lightbox-inner">
-            <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar">&times;</button>
-            <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Anterior">
-                <i class="fas fa-chevron-left" aria-hidden="true"></i>
-            </button>
-            <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Siguiente">
-                <i class="fas fa-chevron-right" aria-hidden="true"></i>
-            </button>
-            <img id="lightbox-img" src="" alt="">
-            <div style="text-align:center;">
-                <p class="lightbox-caption" id="lightbox-caption"></p>
-                <p class="lightbox-precio" id="lightbox-precio"></p>
-                <a href="#" id="lightbox-wa" class="lightbox-wa" target="_blank" rel="noopener">
-                    <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar por WhatsApp
-                </a>
-            </div>
+  <!-- ═══ NAVBAR ═══════════════════════════════════════════════ -->
+  <nav class="bg-white border-b border-gray-100 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="text-2xl">🖨️</span>
+        <div>
+          <span class="font-bold text-gray-900 text-lg leading-none">Impresionarte</span>
+          <p class="text-xs text-gray-400 leading-none">Impresión 3D · Bogotá</p>
         </div>
+      </div>
+
+      <!-- Buscador -->
+      <div class="relative flex-1 max-w-sm hidden sm:block">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/></svg>
+        <input type="search" placeholder="Buscar productos…" x-model="searchQuery"
+               class="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-transparent bg-gray-50">
+      </div>
+
+      <a href="https://wa.me/573026622715" target="_blank"
+         class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors whitespace-nowrap">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        WhatsApp
+      </a>
     </div>
 
-    <!-- ===== BARRA INSTAGRAM ===== -->
-    <div class="ig-bar" id="ig-bar">
-        <a href="https://www.instagram.com/impresionatbgta" target="_blank" rel="noopener" class="ig-bar-link">
-            <svg class="ig-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/>
-                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
-                <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
-            </svg>
-            <span>Síguenos en Instagram <strong>@impresionatbgta</strong> y ve todos nuestros diseños</span>
-            <span class="ig-bar-cta">Seguir</span>
+    <!-- Buscador mobile -->
+    <div class="sm:hidden px-4 pb-3">
+      <div class="relative">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/></svg>
+        <input type="search" placeholder="Buscar…" x-model="searchQuery"
+               class="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 bg-gray-50">
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO ══════════════════════════════════════════════════ -->
+  <section x-show="!searchQuery && !selectedCategory" class="bg-gradient-to-br from-brand-700 via-brand-600 to-violet-800 text-white">
+    <div class="max-w-6xl mx-auto px-4 py-16 md:py-24 text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
+        Tu idea en 3D,<br>lista para estrenar
+      </h1>
+      <p class="text-brand-200 text-lg md:text-xl mb-8 max-w-xl mx-auto">
+        Letras decorativas, figuras, prototipos y más. Fabricados en Bogotá con entrega a domicilio.
+      </p>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <button @click="$el.closest('section').scrollIntoView({behavior:'smooth'}); document.getElementById('productos').scrollIntoView({behavior:'smooth'})"
+                class="bg-white text-brand-700 font-bold px-6 py-3 rounded-full hover:bg-brand-50 transition">
+          Ver catálogo
+        </button>
+        <a href="https://wa.me/573026622715?text=Hola, quiero hacer un pedido personalizado" target="_blank"
+           class="bg-green-500 hover:bg-green-400 text-white font-bold px-6 py-3 rounded-full transition flex items-center gap-2">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Pedir personalizado
         </a>
-        <button class="ig-bar-close" onclick="cerrarIgBar()" aria-label="Cerrar">&times;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CATALOGO ══════════════════════════════════════════════ -->
+  <section id="productos" class="max-w-6xl mx-auto px-4 py-8">
+
+    <!-- Filtros de categoría -->
+    <div class="flex gap-2 overflow-x-auto pb-2 mb-6 scrollbar-hide">
+      <button @click="selectedCategory = null"
+              class="flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all"
+              :class="!selectedCategory ? 'bg-brand-600 text-white border-brand-600' : 'border-gray-200 text-gray-600 hover:border-brand-400'">
+        Todos
+      </button>
+      <template x-for="c in categories" :key="c.id">
+        <button @click="selectedCategory = c.id"
+                class="flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all"
+                :class="selectedCategory === c.id ? 'bg-brand-600 text-white border-brand-600' : 'border-gray-200 text-gray-600 hover:border-brand-400'"
+                x-text="c.name">
+        </button>
+      </template>
     </div>
 
-    <!-- ===== OVERLAY MENÚ MÓVIL ===== -->
-    <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
-
-    <!-- ===== HEADER ===== -->
-    <header id="header">
-        <div class="container header-container">
-            <a href="#home" class="logo" aria-label="Impresionarte - Inicio">
-                <img src="img/IMPRESIONATE.png" alt="Logo Impresionarte">
-                Impresionarte
-            </a>
-            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
-                <i class="fas fa-bars" aria-hidden="true"></i>
-            </button>
-            <nav aria-label="Navegación principal">
-                <ul id="menu" role="list">
-                    <li><a href="#home">Inicio</a></li>
-                    <li><a href="#about">Acerca de</a></li>
-                    <li><a href="#como-funciona">Cómo funciona</a></li>
-                    <li class="dropdown">
-                        <a href="#productos" aria-haspopup="true">Productos</a>
-                        <ul class="submenu" role="list">
-                            <li><a href="#categoria-frases">Frases</a></li>
-                            <li><a href="#categoria-llaveros">Llaveros</a></li>
-                            <li><a href="#categoria-decoracion">Decoración</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#testimonios">Testimonios</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                </ul>
-            </nav>
+    <!-- Estado cargando -->
+    <div x-show="loading" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      <template x-for="i in 8" :key="i">
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm animate-pulse">
+          <div class="bg-gray-200 aspect-square"></div>
+          <div class="p-3 space-y-2">
+            <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+            <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+          </div>
         </div>
-    </header>
+      </template>
+    </div>
 
-    <!-- ===== HERO ===== -->
-    <section class="main-banner" id="home" aria-label="Sección principal">
-        <video autoplay muted loop playsinline
-            style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.5;"
-            aria-hidden="true">
-            <source src="img/Vid1.mp4" type="video/mp4">
-        </video>
-
-        <div class="container" style="position:relative;z-index:2;text-align:center;">
-            <div class="hero-badge">
-                <span aria-hidden="true"></span>
-                Disponible en Bogotá
+    <!-- Grid de productos -->
+    <div x-show="!loading" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      <template x-for="p in filteredProducts" :key="p.id">
+        <div class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 cursor-pointer"
+             @click="openProduct(p)">
+          <!-- Foto -->
+          <div class="aspect-square bg-gray-50 relative overflow-hidden">
+            <img x-show="p.primary_photo_url" :src="p.primary_photo_url" :alt="p.name"
+                 class="w-full h-full object-cover" loading="lazy">
+            <div x-show="!p.primary_photo_url" class="w-full h-full flex items-center justify-center text-5xl">🖨️</div>
+            <div x-show="p.is_featured" class="absolute top-2 left-2 bg-amber-400 text-amber-900 text-xs font-bold px-2 py-0.5 rounded-full">⭐ Destacado</div>
+          </div>
+          <!-- Info -->
+          <div class="p-3">
+            <p class="font-semibold text-gray-800 text-sm leading-tight mb-1 line-clamp-2" x-text="p.name"></p>
+            <p class="text-xs text-gray-400 mb-2" x-text="categoryName(p.category_id)"></p>
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-brand-700 text-sm" x-text="formatPrice(p.base_price)"></span>
+              <div class="flex gap-1">
+                <template x-for="c in (p.colors || []).slice(0,4)" :key="c.id">
+                  <div class="w-4 h-4 rounded-full border border-white shadow-sm" :style="`background:${c.hex_code}`" :title="c.name"></div>
+                </template>
+                <span x-show="(p.colors||[]).length > 4" class="text-xs text-gray-400">+<span x-text="p.colors.length - 4"></span></span>
+              </div>
             </div>
-            <h1>Impresión 3D<br>a tu medida</h1>
-            <p>Prototipos, piezas funcionales, decoración y regalos únicos hechos con precisión. Cuéntanos tu idea y la hacemos realidad.</p>
-            <div class="hero-ctas">
-                <a href="#productos" class="btn">
-                    <i class="fas fa-cube" aria-hidden="true"></i>
-                    Ver productos
-                </a>
-                <a href="https://wa.me/573026622715?text=Hola%2C%20quiero%20cotizar%20una%20pieza" target="_blank" rel="noopener" class="btn btn-outline">
-                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                    Cotizar ahora
-                </a>
-            </div>
+            <p class="text-xs text-gray-400 mt-1">⏱ <span x-text="p.fabrication_days"></span> días</p>
+          </div>
         </div>
+      </template>
 
-        <a href="#stats" class="scroll-indicator" aria-label="Desplazarse hacia abajo">
-            <div class="scroll-line" aria-hidden="true"></div>
-            <span>Scroll</span>
+      <!-- Sin resultados -->
+      <div x-show="filteredProducts.length === 0 && !loading" class="col-span-full text-center py-20 text-gray-400">
+        <div class="text-5xl mb-4">🔍</div>
+        <p class="text-lg font-medium">Sin resultados</p>
+        <p class="text-sm mt-1">Intenta con otra categoría o escríbenos por WhatsApp</p>
+        <a href="https://wa.me/573026622715" target="_blank" class="mt-4 inline-flex items-center gap-2 bg-green-500 text-white px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-green-600 transition">
+          Pedir personalizado
         </a>
-    </section>
-
-    <!-- ===== STATS BAR ===== -->
-    <section class="stats-bar" id="stats" aria-label="Estadísticas">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item reveal">
-                    <span class="stat-number" data-count="150">0</span>
-                    <span class="stat-label">Proyectos entregados</span>
-                </div>
-                <div class="stat-item reveal reveal-delay-1">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">Satisfacción garantizada</span>
-                </div>
-                <div class="stat-item reveal reveal-delay-2">
-                    <span class="stat-number">3</span>
-                    <span class="stat-label">Materiales premium</span>
-                </div>
-                <div class="stat-item reveal reveal-delay-3">
-                    <span class="stat-number">&lt;24h</span>
-                    <span class="stat-label">Tiempo de respuesta</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== NUEVOS PRODUCTOS ===== -->
-    <section id="nuevos" aria-labelledby="nuevos-title">
-        <div class="container">
-            <div class="nuevos-header reveal">
-                <div class="nuevos-titulo-wrap">
-                    <span class="nuevos-badge">
-                        <span class="nuevos-dot" aria-hidden="true"></span>
-                        Nuevos
-                    </span>
-                    <h2 id="nuevos-title">Lo último en Impresionarte</h2>
-                </div>
-                <a href="#productos" class="nuevos-ver-todos">
-                    Ver catálogo completo
-                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                </a>
-            </div>
-            <div class="nuevos-carrusel-wrap reveal">
-                <div class="nuevos-track" id="nuevos-grid" role="list"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== ACERCA DE ===== -->
-    <section id="about" aria-labelledby="about-title">
-        <div class="container">
-            <div class="about-content">
-
-                <div class="about-text reveal from-left">
-                    <h2 id="about-title">¿Quiénes somos?</h2>
-                    <p>En <strong>Impresionarte</strong> combinamos creatividad, tecnología y pasión para ofrecerte productos de impresión 3D hechos a medida. Nuestro objetivo es ayudarte a materializar tus ideas, desde prototipos hasta piezas funcionales y decorativas.</p>
-                    <p>Trabajamos con materiales de alta calidad y tiempos de entrega rápidos. Apoyamos el emprendimiento local y la innovación desde Bogotá.</p>
-
-                    <div class="materials-tags" aria-label="Materiales disponibles">
-                        <span class="material-tag">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                            PLA
-                        </span>
-                        <span class="material-tag">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                            PETG
-                        </span>
-                        <span class="material-tag">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                            TPU Flexible
-                        </span>
-                    </div>
-
-                    <a href="#contacto" class="btn">Contáctanos</a>
-                </div>
-
-                <div class="about-slider reveal from-right" aria-label="Galería de trabajos">
-                    <div class="slider-track" id="slider-track">
-                        <div class="slider-slide">
-                            <img src="FOTOSIMPRESOS/llavero negocio.jpeg" alt="Llavero personalizado para negocio impreso en 3D">
-                        </div>
-                        <div class="slider-slide">
-                            <img src="FOTOSIMPRESOS/real2.jpeg" alt="Pieza impresa en 3D por Impresionarte">
-                        </div>
-                        <div class="slider-slide">
-                            <img src="FOTOSIMPRESOS/real1.jpeg" alt="Producto de impresión 3D terminado">
-                        </div>
-                    </div>
-                    <div class="slider-dots" role="tablist" aria-label="Navegar galería">
-                        <button class="dot active" onclick="irSlide(0)" role="tab" aria-label="Imagen 1" aria-selected="true"></button>
-                        <button class="dot" onclick="irSlide(1)" role="tab" aria-label="Imagen 2" aria-selected="false"></button>
-                        <button class="dot" onclick="irSlide(2)" role="tab" aria-label="Imagen 3" aria-selected="false"></button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== CÓMO FUNCIONA ===== -->
-    <section id="como-funciona" aria-labelledby="como-title">
-        <div class="container">
-            <h2 class="section-title reveal" id="como-title">¿Cómo funciona?</h2>
-            <p class="section-subtitle reveal">Hacer realidad tu idea es más fácil de lo que crees. Solo tres pasos.</p>
-
-            <div class="pasos-grid">
-
-                <div class="paso-card reveal reveal-delay-1">
-                    <div class="paso-numero">1</div>
-                    <i class="fas fa-lightbulb paso-icon" aria-hidden="true"></i>
-                    <h3>Cuéntanos tu idea</h3>
-                    <p>Escríbenos por WhatsApp o el formulario de contacto con tu idea, referencia o archivo. Sin compromisos.</p>
-                </div>
-
-                <div class="paso-card reveal reveal-delay-2">
-                    <div class="paso-numero">2</div>
-                    <i class="fas fa-cogs paso-icon" aria-hidden="true"></i>
-                    <h3>Fabricamos tu pieza</h3>
-                    <p>Diseñamos e imprimimos con el material ideal para tu proyecto. Te enviamos fotos del avance.</p>
-                </div>
-
-                <div class="paso-card reveal reveal-delay-3">
-                    <div class="paso-numero">3</div>
-                    <i class="fas fa-box-open paso-icon" aria-hidden="true"></i>
-                    <h3>Recibe tu pedido</h3>
-                    <p>Entrega rápida en Bogotá o envío a todo Colombia. Tu pieza lista, empacada y perfecta.</p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== MODALES ADMIN ===== -->
-    <div id="login-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
-        <div class="modal-content">
-            <button class="close" onclick="cerrarLogin()" aria-label="Cerrar">&times;</button>
-            <h2 id="login-title">Iniciar Sesión</h2>
-            <form id="login-form" onsubmit="return autenticarAdmin(event)">
-                <div class="form-group">
-                    <label for="usuario">Usuario:</label>
-                    <input type="text" id="usuario" name="usuario" autocomplete="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Contraseña:</label>
-                    <input type="password" id="password" name="password" autocomplete="current-password" required>
-                </div>
-                <button type="submit" class="btn">Ingresar</button>
-            </form>
-        </div>
+      </div>
     </div>
+  </section>
 
-    <div id="producto-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="prod-modal-title">
-        <div class="modal-content">
-            <button class="close" onclick="cerrarFormularioProducto()" aria-label="Cerrar">&times;</button>
-            <h2 id="prod-modal-title">Agregar Producto</h2>
-            <form id="producto-form" onsubmit="return agregarProducto(event)">
-                <div class="form-group">
-                    <label for="producto-nombre">Nombre del Producto:</label>
-                    <input type="text" id="producto-nombre" required>
-                </div>
-                <div class="form-group">
-                    <label for="producto-precio">Precio:</label>
-                    <input type="number" id="producto-precio" required>
-                </div>
-                <div class="form-group">
-                    <label for="producto-imagen">Imagen:</label>
-                    <input type="file" id="producto-imagen" accept="image/*" required>
-                </div>
-                <button type="submit" class="btn">Agregar Producto</button>
-            </form>
+  <!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+  <footer class="bg-slate-900 text-slate-400 mt-16">
+    <div class="max-w-6xl mx-auto px-4 py-12 flex flex-col md:flex-row gap-8 justify-between">
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <span class="text-2xl">🖨️</span>
+          <span class="text-white font-bold text-lg">Impresionarte</span>
         </div>
+        <p class="text-sm">Impresión 3D personalizada en Bogotá.</p>
+        <p class="text-sm">Envíos a toda Colombia.</p>
+      </div>
+      <div>
+        <p class="text-white font-semibold mb-3">Contáctanos</p>
+        <a href="https://wa.me/573026622715" target="_blank" class="flex items-center gap-2 text-green-400 hover:text-green-300 text-sm mb-2">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp
+        </a>
+      </div>
     </div>
+    <div class="border-t border-slate-800 text-center py-4 text-xs text-slate-600">
+      © 2026 Impresionarte · Hecho con ❤️ en Bogotá
+    </div>
+  </footer>
 
-    <!-- ===== PRODUCTOS ===== -->
-    <section id="productos" aria-labelledby="productos-title">
-        <div class="container">
-            <h2 class="section-title reveal" id="productos-title">Nuestros Productos</h2>
-            <p class="section-subtitle reveal">Cada pieza es única, diseñada y fabricada con dedicación para superar tus expectativas.</p>
+  <!-- ═══ MODAL PRODUCTO ════════════════════════════════════════ -->
+  <div x-show="productModal" class="fixed inset-0 bg-black/60 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
+       @click.self="closeProduct()" x-cloak>
+    <div class="bg-white w-full sm:max-w-3xl sm:rounded-2xl rounded-t-3xl shadow-2xl max-h-[95vh] overflow-y-auto"
+         x-show="product">
 
-            <div id="galeria-productos" aria-live="polite">
-                <p class="productos-vacio">Cargando productos...</p>
-            </div>
+      <!-- Header -->
+      <div class="sticky top-0 bg-white px-4 sm:px-6 pt-4 pb-3 border-b flex items-center justify-between z-10">
+        <div class="w-10 h-1 bg-gray-300 rounded-full mx-auto sm:hidden absolute left-1/2 -translate-x-1/2 top-2"></div>
+        <h3 class="font-bold text-gray-900 text-lg pr-8" x-text="product?.name"></h3>
+        <button @click="closeProduct()" class="text-gray-400 hover:text-gray-600 text-2xl leading-none">✕</button>
+      </div>
 
-            <div style="margin-top:2rem;text-align:center;">
-                <button id="btn-agregar" onclick="mostrarFormularioProducto()" style="display:none;" class="btn">
-                    <i class="fas fa-plus" aria-hidden="true"></i> Agregar Producto
+      <div class="p-4 sm:p-6 grid sm:grid-cols-2 gap-6">
+
+        <!-- Galería fotos -->
+        <div>
+          <div class="aspect-square bg-gray-50 rounded-2xl overflow-hidden mb-3">
+            <img x-show="product?.photos?.length > 0" :src="product?.photos?.[currentPhoto]?.url" :alt="product?.name"
+                 class="w-full h-full object-cover">
+            <div x-show="!product?.photos?.length" class="w-full h-full flex items-center justify-center text-8xl">🖨️</div>
+          </div>
+          <div class="flex gap-2 overflow-x-auto" x-show="product?.photos?.length > 1">
+            <template x-for="(ph, i) in product?.photos" :key="ph.id">
+              <img :src="ph.url" @click="currentPhoto = i"
+                   class="gallery-thumb flex-shrink-0" :class="currentPhoto === i && 'active'">
+            </template>
+          </div>
+        </div>
+
+        <!-- Info y selector -->
+        <div class="flex flex-col gap-4">
+          <div>
+            <p class="text-3xl font-extrabold text-brand-700" x-text="formatPrice(displayPrice)"></p>
+            <p class="text-sm text-gray-400 mt-1" x-show="selectedSize?.price_modifier > 0">
+              Precio base <span x-text="formatPrice(product?.base_price)"></span> + talla
+            </p>
+            <p class="text-sm text-gray-500 mt-2" x-text="product?.description"></p>
+          </div>
+
+          <!-- Colores -->
+          <div x-show="product?.colors?.length > 0">
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
+              Color: <span class="text-brand-700 font-bold" x-text="selectedColor?.name"></span>
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <template x-for="c in product?.colors" :key="c.id">
+                <button @click="selectColor(c)" :title="c.name"
+                        class="color-dot" :class="selectedColor?.id === c.id && 'active'"
+                        :style="`background:${c.hex_code}; box-shadow: inset 0 0 0 1px rgba(0,0,0,.1)`">
                 </button>
+              </template>
             </div>
+          </div>
+
+          <!-- Tallas -->
+          <div x-show="product?.sizes?.length > 0">
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Talla / Medida</p>
+            <div class="flex flex-wrap gap-2">
+              <template x-for="s in product?.sizes" :key="s.id">
+                <button @click="selectSize(s)" class="size-btn" :class="selectedSize?.id === s.id && 'active'">
+                  <span x-text="s.label"></span>
+                  <span x-show="s.price_modifier > 0" class="text-brand-600 ml-1" x-text="`+${formatPrice(s.price_modifier)}`"></span>
+                </button>
+              </template>
+            </div>
+          </div>
+
+          <!-- Cantidad -->
+          <div>
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Cantidad</p>
+            <div class="flex items-center gap-3">
+              <button @click="changeQty(-1)" class="w-9 h-9 rounded-full border-2 border-gray-200 font-bold text-gray-600 hover:border-brand-400 transition text-xl leading-none">−</button>
+              <span class="text-lg font-bold w-8 text-center" x-text="quantity"></span>
+              <button @click="changeQty(1)" class="w-9 h-9 rounded-full border-2 border-gray-200 font-bold text-gray-600 hover:border-brand-400 transition text-xl leading-none">+</button>
+            </div>
+          </div>
+
+          <p class="text-xs text-gray-400">⏱ Tiempo de fabricación: <span class="font-semibold text-gray-600" x-text="`${product?.fabrication_days} días hábiles`"></span></p>
+
+          <!-- Botones CTA -->
+          <div class="flex flex-col gap-3 mt-auto pt-2">
+            <button @click="openWhatsApp()"
+                    class="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-xl transition-colors">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Pedir por WhatsApp
+            </button>
+            <button @click="openOrder()"
+                    class="flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-xl transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 7H4l1-7z"/></svg>
+              Hacer pedido en línea
+            </button>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
 
-    <!-- ===== TESTIMONIOS ===== -->
-    <section id="testimonios" aria-labelledby="testimonios-title">
-        <div class="container">
-            <h2 class="section-title reveal" id="testimonios-title">Lo que dicen nuestros clientes</h2>
-            <p class="section-subtitle reveal">Más de 150 proyectos entregados con satisfacción total.</p>
-            <div class="testimonios-grid">
-
-                <article class="testimonio-card reveal reveal-delay-1">
-                    <span class="quote-icon" aria-hidden="true">"</span>
-                    <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
-                    <p class="testimonio-text">"Excelente calidad y atención. Mi prototipo quedó justo como lo imaginé. El tiempo de entrega fue rapidísimo y el nivel de detalle impresionante."</p>
-                    <div class="testimonio-author-block">
-                        <div class="testimonio-avatar" aria-hidden="true">LG</div>
-                        <div>
-                            <div class="testimonio-author-name">Laura García</div>
-                            <div class="testimonio-author-detail">Diseñadora industrial · Bogotá</div>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="testimonio-card reveal reveal-delay-2">
-                    <span class="quote-icon" aria-hidden="true">"</span>
-                    <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
-                    <p class="testimonio-text">"Muy recomendados para piezas personalizadas y regalos innovadores. Pedí unos llaveros para un evento empresarial y quedaron perfectos."</p>
-                    <div class="testimonio-author-block">
-                        <div class="testimonio-avatar" aria-hidden="true">AP</div>
-                        <div>
-                            <div class="testimonio-author-name">Andrés Pinto</div>
-                            <div class="testimonio-author-detail">Emprendedor · Bogotá</div>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="testimonio-card reveal reveal-delay-3">
-                    <span class="quote-icon" aria-hidden="true">"</span>
-                    <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
-                    <p class="testimonio-text">"El servicio fue rápido y el resultado superó mis expectativas. Me fabricaron una pieza de repuesto que no conseguía en ningún lado. 100% recomendados."</p>
-                    <div class="testimonio-author-block">
-                        <div class="testimonio-avatar" aria-hidden="true">CR</div>
-                        <div>
-                            <div class="testimonio-author-name">Camila Ramírez</div>
-                            <div class="testimonio-author-detail">Cliente particular · Bogotá</div>
-                        </div>
-                    </div>
-                </article>
-
-            </div>
+  <!-- ═══ MODAL PEDIDO ══════════════════════════════════════════ -->
+  <div x-show="orderModal" class="fixed inset-0 bg-black/60 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
+       @click.self="orderModal=false" x-cloak>
+    <div class="bg-white w-full sm:max-w-md sm:rounded-2xl rounded-t-3xl shadow-2xl">
+      <div class="px-6 pt-6 pb-4 border-b">
+        <div class="w-10 h-1 bg-gray-300 rounded-full mx-auto mb-4 sm:hidden"></div>
+        <h3 class="font-bold text-gray-900 text-lg">Datos del pedido</h3>
+        <p class="text-sm text-gray-500" x-text="product?.name"></p>
+      </div>
+      <div class="p-6 space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Nombre completo *</label>
+          <input class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400"
+                 type="text" x-model="orderForm.name" placeholder="Tu nombre">
         </div>
-    </section>
-
-    <!-- ===== CTA BAND ===== -->
-    <section class="cta-band" aria-label="Llamada a la acción">
-        <div class="container">
-            <h2 class="reveal">¿Tienes una idea en mente?</h2>
-            <p class="reveal">No importa si es un prototipo, una pieza de repuesto o un regalo especial. En Impresionarte lo hacemos realidad con la máxima calidad.</p>
-            <div class="reveal">
-                <a href="https://wa.me/573026622715?text=Hola%2C%20quiero%20cotizar%20una%20pieza" target="_blank" rel="noopener" class="btn">
-                    <i class="fab fa-whatsapp" aria-hidden="true"></i> Cotizar por WhatsApp
-                </a>
-                <a href="#contacto" class="btn btn-outline">
-                    <i class="fas fa-envelope" aria-hidden="true"></i> Enviar mensaje
-                </a>
-            </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Teléfono / WhatsApp *</label>
+          <input class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400"
+                 type="tel" x-model="orderForm.phone" placeholder="+57 300 000 0000">
         </div>
-    </section>
-
-    <!-- ===== CONTACTO ===== -->
-    <section id="contacto" aria-labelledby="contacto-title">
-        <div class="container">
-            <h2 class="section-title reveal" id="contacto-title">Hablemos de tu proyecto</h2>
-            <p class="section-subtitle reveal">Respondemos en menos de 24 horas. Tu idea es el límite.</p>
-            <div class="contacto-container">
-
-                <div class="contacto-info reveal from-left">
-                    <h3>¿Tienes algo en mente?</h3>
-                    <p style="margin-bottom:2rem;">Cuéntanos tu idea y te ayudamos a materializarla. Sin importar si es un prototipo, pieza funcional o regalo especial.</p>
-
-                    <div class="info-item">
-                        <div class="info-icon" aria-hidden="true"><i class="fas fa-map-marker-alt"></i></div>
-                        <div>
-                            <h4>Ubicación</h4>
-                            <p>Bogotá, Colombia</p>
-                        </div>
-                    </div>
-
-                    <div class="info-item">
-                        <div class="info-icon" aria-hidden="true"><i class="fas fa-envelope"></i></div>
-                        <div>
-                            <h4>Email</h4>
-                            <p><a href="mailto:juan.david.jds84@gmail.com" style="color:var(--secondary);">juan.david.jds84@gmail.com</a></p>
-                        </div>
-                    </div>
-
-                    <div class="info-item">
-                        <div class="info-icon" style="background:linear-gradient(135deg,#25d366,#1ebe5d);" aria-hidden="true"><i class="fab fa-whatsapp"></i></div>
-                        <div>
-                            <h4>WhatsApp</h4>
-                            <p><a href="https://wa.me/573026622715" target="_blank" rel="noopener" style="color:var(--secondary);">+57 302 662 2715</a></p>
-                        </div>
-                    </div>
-
-                    <div class="social-links" style="justify-content:flex-start;margin-top:2rem;" aria-label="Redes sociales">
-                        <a href="https://www.instagram.com/impresionatbgta" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                        <a href="#" title="Facebook" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="https://wa.me/573026622715" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp" style="background:linear-gradient(135deg,#25d366,#1ebe5d);color:white;"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
-                        <a href="#" title="TikTok" aria-label="TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-
-                <div class="contacto-form reveal from-right">
-                    <form id="contact-form" novalidate>
-                        <div class="form-group">
-                            <label for="nombre">Tu nombre</label>
-                            <input type="text" id="nombre" name="nombre" placeholder="Ej. Carlos Martínez" autocomplete="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Tu correo</label>
-                            <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" autocomplete="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="mensaje">¿En qué podemos ayudarte?</label>
-                            <textarea id="mensaje" name="mensaje" placeholder="Describe tu idea o proyecto..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn" style="width:100%;justify-content:center;">
-                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
-                            Enviar mensaje
-                        </button>
-                    </form>
-                    <div id="contact-success" style="display:none;color:var(--primary);margin-top:1.2rem;text-align:center;font-weight:600;padding:1rem;background:var(--surface);border-radius:var(--radius-sm);" role="alert">
-                        <i class="fas fa-check-circle" style="color:#22c55e;margin-right:6px;"></i>
-                        ¡Gracias! Te responderemos muy pronto.
-                    </div>
-                </div>
-
-            </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Email (opcional)</label>
+          <input class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400"
+                 type="email" x-model="orderForm.email" placeholder="correo@ejemplo.com">
         </div>
-    </section>
-
-    <!-- ===== FOOTER ===== -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Impresionarte</h3>
-                    <p>Transformando ideas en realidad a través de la impresión 3D desde Bogotá, Colombia. Precisión, calidad y pasión en cada pieza.</p>
-                    <div class="social-links" style="justify-content:flex-start;margin-top:1.5rem;" aria-label="Redes sociales">
-                        <a href="https://www.instagram.com/impresionatbgta" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                        <a href="#" title="Facebook" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="https://wa.me/573026622715" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
-                        <a href="#" title="TikTok" aria-label="TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Navegación</h3>
-                    <ul class="footer-links" role="list">
-                        <li><a href="#home">Inicio</a></li>
-                        <li><a href="#about">Acerca de</a></li>
-                        <li><a href="#como-funciona">Cómo funciona</a></li>
-                        <li><a href="#productos">Productos</a></li>
-                        <li><a href="#testimonios">Testimonios</a></li>
-                        <li><a href="#contacto">Contacto</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Contacto</h3>
-                    <p><a href="mailto:juan.david.jds84@gmail.com" style="color:rgba(255,255,255,0.62);transition:color 0.25s;">juan.david.jds84@gmail.com</a></p>
-                    <p style="margin-top:0.5rem;"><a href="https://wa.me/573026622715" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.62);transition:color 0.25s;">+57 302 662 2715</a></p>
-                    <p style="margin-top:0.5rem;color:rgba(255,255,255,0.42);">Bogotá, Colombia</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>© 2026 Impresionarte · Impresión 3D — Bogotá, Colombia</p>
-            </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Notas adicionales</label>
+          <textarea class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 h-20 resize-none"
+                    x-model="orderForm.notes" placeholder="Detalles especiales, dirección, etc."></textarea>
         </div>
-    </footer>
 
-    <script>
-    /* =============================================
-       SLIDER
-       ============================================= */
-    let slideActual = 0;
-    const totalSlides = 3;
+        <!-- Resumen -->
+        <div class="bg-brand-50 rounded-xl p-4 text-sm">
+          <div class="flex justify-between mb-1">
+            <span class="text-gray-600">Producto</span>
+            <span class="font-medium text-gray-800" x-text="product?.name"></span>
+          </div>
+          <div class="flex justify-between mb-1" x-show="selectedColor">
+            <span class="text-gray-600">Color</span>
+            <span class="font-medium text-gray-800" x-text="selectedColor?.name"></span>
+          </div>
+          <div class="flex justify-between mb-1" x-show="selectedSize">
+            <span class="text-gray-600">Talla</span>
+            <span class="font-medium text-gray-800" x-text="selectedSize?.label"></span>
+          </div>
+          <div class="flex justify-between mb-1">
+            <span class="text-gray-600">Cantidad</span>
+            <span class="font-medium text-gray-800" x-text="quantity"></span>
+          </div>
+          <div class="flex justify-between pt-2 border-t border-brand-200 mt-2">
+            <span class="font-bold text-gray-800">Total estimado</span>
+            <span class="font-extrabold text-brand-700" x-text="formatPrice(displayPrice)"></span>
+          </div>
+        </div>
+
+        <p x-show="orderError" class="text-red-500 text-sm text-center" x-text="orderError"></p>
+      </div>
+      <div class="flex gap-3 px-6 pb-6">
+        <button @click="orderModal=false" class="flex-1 py-3 rounded-xl border-2 border-gray-200 text-gray-600 font-semibold hover:bg-gray-50 transition">
+          Cancelar
+        </button>
+        <button @click="submitOrder()" :disabled="orderLoading"
+                class="flex-1 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold transition disabled:opacity-60">
+          <span x-show="orderLoading">Enviando…</span>
+          <span x-show="!orderLoading">Confirmar pedido</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MODAL ÉXITO ═══════════════════════════════════════════ -->
+  <div x-show="successModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" x-cloak>
+    <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center">
+      <div class="text-6xl mb-4">🎉</div>
+      <h3 class="text-2xl font-extrabold text-gray-900 mb-2">¡Pedido enviado!</h3>
+      <p class="text-gray-500 mb-2">Tu pedido <span class="font-bold text-brand-700" x-text="`#${orderId}`"></span> fue recibido.</p>
+      <p class="text-gray-500 text-sm mb-6">Nos contactaremos contigo pronto para confirmar los detalles.</p>
+      <button @click="successModal=false"
+              class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-xl transition">
+        Seguir explorando
+      </button>
+    </div>
+  </div>
 
-    function irSlide(n) {
-        slideActual = n;
-        document.getElementById('slider-track').style.transform = `translateX(-${n * 100}%)`;
-        document.querySelectorAll('.dot').forEach((d, i) => {
-            d.classList.toggle('active', i === n);
-            d.setAttribute('aria-selected', i === n ? 'true' : 'false');
-        });
-    }
-
-    setInterval(() => irSlide((slideActual + 1) % totalSlides), 3500);
-
-    /* =============================================
-       HEADER — shrink + active nav
-       ============================================= */
-    const header = document.getElementById('header');
-    const sections = document.querySelectorAll('section[id]');
-
-    window.addEventListener('scroll', () => {
-        header.classList.toggle('scrolled', window.scrollY > 60);
-
-        let current = '';
-        sections.forEach(sec => {
-            if (window.scrollY >= sec.offsetTop - 130) current = sec.id;
-        });
-        document.querySelectorAll('nav a').forEach(link => {
-            link.classList.toggle('active', link.getAttribute('href') === '#' + current);
-        });
-
-        // Back to top
-        document.getElementById('back-top').classList.toggle('visible', window.scrollY > 400);
-    }, { passive: true });
-
-    /* =============================================
-       MOBILE MENU
-       ============================================= */
-    const mobileBtn = document.getElementById('mobile-menu-btn');
-    const menu = document.getElementById('menu');
-    const overlay = document.getElementById('menu-overlay');
-
-    function toggleMenu(open) {
-        const isOpen = open !== undefined ? open : !menu.classList.contains('show');
-        menu.classList.toggle('show', isOpen);
-        overlay.classList.toggle('show', isOpen);
-        mobileBtn.setAttribute('aria-expanded', isOpen);
-        mobileBtn.querySelector('i').className = isOpen ? 'fas fa-times' : 'fas fa-bars';
-    }
-
-    mobileBtn.addEventListener('click', () => toggleMenu());
-    overlay.addEventListener('click', () => toggleMenu(false));
-    document.querySelectorAll('nav a').forEach(link => link.addEventListener('click', () => toggleMenu(false)));
-
-    /* =============================================
-       BACK TO TOP
-       ============================================= */
-    document.getElementById('back-top').addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    /* =============================================
-       INTERSECTION OBSERVER — scroll animations
-       ============================================= */
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                revealObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-    /* =============================================
-       COUNTER ANIMATION
-       ============================================= */
-    function animateCounter(el, target, duration = 1500) {
-        const start = performance.now();
-        const update = (time) => {
-            const elapsed = time - start;
-            const progress = Math.min(elapsed / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = Math.round(eased * target);
-            if (progress < 1) requestAnimationFrame(update);
-            else el.textContent = target + '+';
-        };
-        requestAnimationFrame(update);
-    }
-
-    const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const el = entry.target;
-                const target = parseInt(el.dataset.count);
-                if (!isNaN(target)) animateCounter(el, target);
-                counterObserver.unobserve(el);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
-
-    /* =============================================
-       LIGHTBOX
-       ============================================= */
-    let lbProductos = [];
-    let lbIndex = 0;
-
-    function abrirLightbox(index) {
-        lbIndex = index;
-        const p = lbProductos[index];
-        if (!p) return;
-
-        const img = document.getElementById('lightbox-img');
-        const caption = document.getElementById('lightbox-caption');
-        const precio = document.getElementById('lightbox-precio');
-        const wa = document.getElementById('lightbox-wa');
-
-        img.src = p.img;
-        img.alt = p.nombre;
-        caption.textContent = p.nombre;
-        precio.textContent = '$' + p.precio.toLocaleString('es-CO');
-        wa.href = `https://wa.me/573026622715?text=${encodeURIComponent('Hola Impresionarte, me interesa "' + p.nombre + '"')}`;
-
-        const lb = document.getElementById('lightbox');
-        lb.classList.add('open');
-        document.body.style.overflow = 'hidden';
-
-        // Mostrar/ocultar navegación
-        document.getElementById('lightbox-prev').style.display = lbProductos.length > 1 ? 'flex' : 'none';
-        document.getElementById('lightbox-next').style.display = lbProductos.length > 1 ? 'flex' : 'none';
-    }
-
-    function cerrarLightbox() {
-        document.getElementById('lightbox').classList.remove('open');
-        document.body.style.overflow = '';
-    }
-
-    document.getElementById('lightbox-close').addEventListener('click', cerrarLightbox);
-    document.getElementById('lightbox').addEventListener('click', e => {
-        if (e.target === document.getElementById('lightbox')) cerrarLightbox();
-    });
-    document.getElementById('lightbox-prev').addEventListener('click', () => {
-        lbIndex = (lbIndex - 1 + lbProductos.length) % lbProductos.length;
-        abrirLightbox(lbIndex);
-    });
-    document.getElementById('lightbox-next').addEventListener('click', () => {
-        lbIndex = (lbIndex + 1) % lbProductos.length;
-        abrirLightbox(lbIndex);
-    });
-
-    /* =============================================
-       CARRUSEL — estado y timers
-       ============================================= */
-    let todosLosProductos = [];
-    const timers = new Map(); // uid → { iv, to }
-
-    function getCardAncho(track) {
-        const card = track.querySelector('.carrusel-card');
-        return card ? card.offsetWidth + 14 : 280;
-    }
-
-    function avanzar(track) {
-        const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 8;
-        if (atEnd) {
-            track.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-            track.scrollBy({ left: getCardAncho(track), behavior: 'smooth' });
-        }
-    }
-
-    function iniciarAuto(uid) {
-        const t = timers.get(uid) || {};
-        clearInterval(t.iv);
-        clearTimeout(t.to);
-        const track = document.getElementById(uid);
-        if (!track) return;
-        const iv = setInterval(() => avanzar(track), 3200);
-        timers.set(uid, { iv, to: null });
-    }
-
-    function detenerAuto(uid) {
-        const t = timers.get(uid) || {};
-        clearInterval(t.iv);
-        clearTimeout(t.to);
-        timers.set(uid, { iv: null, to: null });
-    }
-
-    function reanudarTras(uid, ms = 5000) {
-        const t = timers.get(uid) || {};
-        clearInterval(t.iv);
-        clearTimeout(t.to);
-        const to = setTimeout(() => iniciarAuto(uid), ms);
-        timers.set(uid, { iv: null, to });
-    }
-
-    function sincronizarFlechas(track, prev, next) {
-        prev.disabled = track.scrollLeft <= 4;
-        next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
-    }
-
-    /* =============================================
-       CARRUSEL — carga y render
-       ============================================= */
-    async function cargarProductos() {
-        try {
-            const res = await fetch('productos.json');
-            if (!res.ok) throw new Error();
-            todosLosProductos = await res.json();
-            renderCarruseles();
-        } catch {
-            document.getElementById('galeria-productos').innerHTML =
-                '<p class="productos-vacio">Próximamente — escríbenos por WhatsApp para ver el catálogo completo.</p>';
-        }
-    }
-
-    function renderNuevos() {
-        const grid = document.getElementById('nuevos-grid');
-        if (!grid) return;
-
-        const nuevos = [
-            { img: 'FOTOSIMPRESOS/hoyesundia.jpg',  nombre: 'Hoy es un día especial' },
-            { img: 'FOTOSIMPRESOS/DiosBendice.jpg', nombre: 'Dios Bendice' },
-            { img: 'FOTOSIMPRESOS/isaias14.jpg',    nombre: 'Isaías 14' },
-            { img: 'FOTOSIMPRESOS/selarazon.jpg',   nombre: 'Sé la razón' },
-            { img: 'FOTOSIMPRESOS/lucas11.jpeg',    nombre: 'Lucas 11' },
-        ];
-
-        const waBase = encodeURIComponent('Hola Impresionarte, me interesa un nuevo producto');
-
-        grid.innerHTML = '';
-        nuevos.forEach((item) => {
-            const card = document.createElement('div');
-            card.className = 'nuevo-card';
-            card.setAttribute('role', 'listitem');
-            card.innerHTML = `
-                <img src="${item.img}" alt="${item.nombre}" loading="lazy"
-                     onerror="this.src='img/IMPRESIONATE.png'; this.style.objectFit='contain'; this.style.padding='2rem';">
-                <span class="nuevo-tag">Nuevo</span>
-                <div class="nuevo-overlay">
-                    <h3>${item.nombre}</h3>
-                    <a href="https://wa.me/573026622715?text=${waBase}"
-                       target="_blank" rel="noopener"
-                       class="btn-wa-overlay"
-                       onclick="event.stopPropagation()">
-                        <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar
-                    </a>
-                </div>`;
-            grid.appendChild(card);
-        });
-
-        // Tarjeta CTA al final del carrusel
-        const ctaCard = document.createElement('a');
-        ctaCard.className = 'nuevo-card nuevo-cta-card';
-        ctaCard.href = '#productos';
-        ctaCard.setAttribute('role', 'listitem');
-        ctaCard.innerHTML = `
-            <i class="fas fa-th-large nuevo-cta-icon" aria-hidden="true"></i>
-            <span class="nuevo-cta-label">Ver catálogo completo</span>
-            <span class="nuevo-cta-sub">Todos nuestros diseños</span>
-            <span class="nuevo-cta-arrow"><i class="fas fa-arrow-right" aria-hidden="true"></i></span>`;
-        grid.appendChild(ctaCard);
-
-        // Auto-scroll — usa scrollTo en el track para NO secuestrar el scroll de página
-        const nAllCards = Array.from(grid.querySelectorAll('.nuevo-card'));
-        let nIdx = 0;
-        let nTimer = null;
-
-        function nAvanzar() {
-            nIdx = (nIdx + 1) % nAllCards.length;
-            const card = nAllCards[nIdx];
-            grid.scrollTo({ left: card.offsetLeft - grid.offsetLeft, behavior: 'smooth' });
-        }
-
-        function nIniciar() {
-            if (nTimer) clearInterval(nTimer);
-            nTimer = setInterval(nAvanzar, 3200);
-        }
-
-        function nDetener() { clearInterval(nTimer); nTimer = null; }
-
-        nIniciar();
-        grid.addEventListener('touchstart', nDetener, { passive: true });
-        grid.addEventListener('touchend',   () => setTimeout(nIniciar, 5000), { passive: true });
-        grid.addEventListener('mouseenter', nDetener);
-        grid.addEventListener('mouseleave', nIniciar);
-    }
-
-    function renderCarruseles() {
-        const galeria = document.getElementById('galeria-productos');
-
-        if (!todosLosProductos.length) {
-            galeria.innerHTML = '<p class="productos-vacio">Próximamente — escríbenos por WhatsApp.</p>';
-            return;
-        }
-
-        lbProductos = todosLosProductos.map(p => ({
-            nombre: p.nombre,
-            precio: p.precio,
-            img: p.imagenes?.[0] ?? p.imagen ?? 'img/placeholder-producto.jpg'
-        }));
-
-        renderNuevos();
-
-        const orden = [];
-        const porCat = {};
-        todosLosProductos.forEach((p, globalIdx) => {
-            const cat = (p.categoria || 'otros').toLowerCase();
-            if (!porCat[cat]) { porCat[cat] = []; orden.push(cat); }
-            porCat[cat].push({ ...p, globalIdx });
-        });
-
-        galeria.innerHTML = '';
-
-        orden.forEach(cat => {
-            const uid = `track-${cat}`;
-            const productos = porCat[cat];
-
-            const section = document.createElement('div');
-            section.className = 'carrusel-section reveal';
-            section.id = `categoria-${cat}`;
-
-            // Cabecera
-            section.innerHTML = `
-                <div class="carrusel-header">
-                    <div class="carrusel-titulo-wrap">
-                        <h3 class="carrusel-titulo">${cat.charAt(0).toUpperCase() + cat.slice(1)}</h3>
-                        <span class="carrusel-count">${productos.length} ${productos.length === 1 ? 'producto' : 'productos'}</span>
-                    </div>
-                    <div class="carrusel-arrows">
-                        <button class="carrusel-arrow" id="prev-${uid}" aria-label="Anterior" disabled>
-                            <i class="fas fa-chevron-left" aria-hidden="true"></i>
-                        </button>
-                        <button class="carrusel-arrow" id="next-${uid}" aria-label="Siguiente">
-                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="carrusel-track" id="${uid}" role="list"></div>`;
-
-            const track = section.querySelector(`#${uid}`);
-            productos.forEach(p => track.appendChild(crearCardCarrusel(p)));
-
-            galeria.appendChild(section);
-            revealObserver.observe(section);
-
-            // Flechas
-            const prevBtn = section.querySelector(`#prev-${uid}`);
-            const nextBtn = section.querySelector(`#next-${uid}`);
-
-            prevBtn.addEventListener('click', () => {
-                track.scrollBy({ left: -getCardAncho(track) * 2, behavior: 'smooth' });
-                reanudarTras(uid);
-            });
-            nextBtn.addEventListener('click', () => {
-                avanzar(track);
-                reanudarTras(uid);
-            });
-
-            // Sincronizar flechas con el scroll
-            track.addEventListener('scroll', () => sincronizarFlechas(track, prevBtn, nextBtn), { passive: true });
-
-            // Hover → pausa / reanuda
-            track.addEventListener('mouseenter', () => detenerAuto(uid));
-            track.addEventListener('mouseleave', () => iniciarAuto(uid));
-
-            // Touch → pausa, reanuda 5s después de soltar
-            track.addEventListener('touchstart', () => detenerAuto(uid), { passive: true });
-            track.addEventListener('touchend',   () => reanudarTras(uid, 5000), { passive: true });
-
-            // Auto-scroll en todos los dispositivos
-            iniciarAuto(uid);
-        });
-    }
-
-    function crearCardCarrusel(p) {
-        const imagen = p.imagenes?.[0] ?? p.imagen ?? 'img/placeholder-producto.jpg';
-        const waMsg  = encodeURIComponent(`Hola Impresionarte, me interesa "${p.nombre}"`);
-
-        const card = document.createElement('div');
-        card.className = 'carrusel-card';
-        card.setAttribute('role', 'listitem');
-        card.innerHTML = `
-            <div class="carrusel-card-img" onclick="abrirLightbox(${p.globalIdx})" aria-label="Ver ${p.nombre} en grande" style="cursor:zoom-in;">
-                <img src="${imagen}" alt="${p.nombre}" loading="lazy">
-            </div>
-            <div class="carrusel-card-body">
-                <h3 title="${p.nombre}">${p.nombre}</h3>
-                <p class="carrusel-precio">$${p.precio.toLocaleString('es-CO')}</p>
-                ${p.descripcion ? `<p class="carrusel-desc">${p.descripcion}</p>` : ''}
-                <a href="https://wa.me/573026622715?text=${waMsg}"
-                   target="_blank" rel="noopener"
-                   class="btn-wa-card">
-                    <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar
-                </a>
-            </div>`;
-        return card;
-    }
-
-    /* =============================================
-       FORMULARIO
-       ============================================= */
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        // Validación visual
-        let valid = true;
-        this.querySelectorAll('[required]').forEach(field => {
-            if (!field.value.trim()) {
-                field.style.borderColor = '#ef4444';
-                valid = false;
-            } else {
-                field.style.borderColor = '';
-            }
-        });
-
-        if (!valid) return;
-
-        const success = document.getElementById('contact-success');
-        success.style.display = 'block';
-        this.reset();
-        setTimeout(() => success.style.display = 'none', 6000);
-    });
-
-    /* =============================================
-       ADMIN
-       ============================================= */
-    function mostrarFormularioProducto() {
-        document.getElementById('producto-modal').style.display = 'flex';
-    }
-    function cerrarFormularioProducto() {
-        document.getElementById('producto-modal').style.display = 'none';
-    }
-    function agregarProducto(e) { e.preventDefault(); cerrarFormularioProducto(); }
-    function cerrarLogin() { document.getElementById('login-modal').style.display = 'none'; }
-    function autenticarAdmin(e) {
-        e.preventDefault();
-        document.getElementById('btn-agregar').style.display = 'inline-flex';
-        cerrarLogin();
-    }
-
-    window.addEventListener('click', e => {
-        if (e.target.classList.contains('modal')) e.target.style.display = 'none';
-    });
-
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') {
-            cerrarLightbox();
-            document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
-            toggleMenu(false);
-        }
-        if (document.getElementById('lightbox').classList.contains('open')) {
-            if (e.key === 'ArrowLeft') { lbIndex = (lbIndex - 1 + lbProductos.length) % lbProductos.length; abrirLightbox(lbIndex); }
-            if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % lbProductos.length; abrirLightbox(lbIndex); }
-        }
-    });
-
-    /* =============================================
-       BARRA INSTAGRAM
-       ============================================= */
-    function cerrarIgBar() {
-        document.getElementById('ig-bar').classList.add('oculta');
-        document.getElementById('header').classList.add('sin-ig-bar');
-        sessionStorage.setItem('ig-bar-cerrada', '1');
-    }
-
-    if (sessionStorage.getItem('ig-bar-cerrada')) {
-        document.getElementById('ig-bar').classList.add('oculta');
-        document.getElementById('header').classList.add('sin-ig-bar');
-    }
-
-    /* =============================================
-       INIT
-       ============================================= */
-    document.addEventListener('DOMContentLoaded', () => {
-        window.scrollTo(0, 0);
-        cargarProductos();
-    });
-    </script>
 </body>
 </html>
