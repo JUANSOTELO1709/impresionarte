@@ -4,259 +4,416 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Impresionarte · Impresión 3D en Bogotá</title>
-  <meta name="description" content="Impresión 3D personalizada en Bogotá. Letras decorativas, figuras, prototipos y más. Pide por WhatsApp o en línea.">
+  <meta name="description" content="Impresión 3D personalizada en Bogotá. Letras decorativas, materas, llaveros, artículos de boda y más. Pide por WhatsApp o en línea.">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            brand: { 50:'#f5f3ff', 100:'#ede9fe', 200:'#ddd6fe', 400:'#a78bfa', 500:'#8b5cf6', 600:'#7c3aed', 700:'#6d28d9', 800:'#5b21b6' }
+            brand: { 50:'#f5f3ff', 100:'#ede9fe', 200:'#ddd6fe', 400:'#a78bfa', 500:'#8b5cf6', 600:'#7c3aed', 700:'#6d28d9', 800:'#5b21b6', 900:'#1e0a3c' }
           },
-          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+          fontFamily: { sans: ['Inter','system-ui','sans-serif'] },
+          animation: {
+            'fade-up': 'fadeUp .5s ease both',
+            'fade-in': 'fadeIn .4s ease both',
+            'pulse-slow': 'pulse 3s ease-in-out infinite',
+          },
+          keyframes: {
+            fadeUp: { '0%':{ opacity:'0', transform:'translateY(20px)' }, '100%':{ opacity:'1', transform:'translateY(0)' } },
+            fadeIn: { '0%':{ opacity:'0' }, '100%':{ opacity:'1' } },
+          }
         }
       }
     }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="./app.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
   <style>
-    [x-cloak] { display: none !important; }
-    .product-card { transition: transform .2s, box-shadow .2s; }
-    .product-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -12px rgba(0,0,0,.15); }
-    .color-dot { width:28px; height:28px; border-radius:50%; border:2px solid transparent; cursor:pointer; transition: border-color .15s, transform .15s; }
-    .color-dot.active, .color-dot:hover { border-color: #7c3aed; transform: scale(1.2); }
-    .size-btn { padding: 6px 14px; border-radius: 8px; border: 1.5px solid #e5e7eb; font-size:.875rem; font-weight:500; cursor:pointer; transition:all .15s; }
-    .size-btn.active { border-color:#7c3aed; background:#ede9fe; color:#6d28d9; }
-    .size-btn:hover:not(.active) { border-color:#a78bfa; }
-    .gallery-thumb { width:60px; height:60px; object-fit:cover; border-radius:8px; border:2px solid transparent; cursor:pointer; transition:border-color .15s; }
-    .gallery-thumb.active { border-color:#7c3aed; }
-    ::-webkit-scrollbar { width:6px; } ::-webkit-scrollbar-track { background:#f1f1f1; } ::-webkit-scrollbar-thumb { background:#c4b5fd; border-radius:3px; }
+    [x-cloak]{display:none!important}
+    *{scroll-behavior:smooth}
+
+    /* Glassmorphism navbar */
+    .glass-nav { background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(124,58,237,0.08); }
+
+    /* Hero orbs */
+    .orb { position:absolute; border-radius:50%; filter:blur(80px); opacity:.35; animation: pulse 6s ease-in-out infinite alternate; }
+
+    /* Cards */
+    .product-card { transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease; }
+    .product-card:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 24px 50px -12px rgba(109,40,217,.25); }
+    .product-card .card-overlay { opacity:0; transition:opacity .2s ease; }
+    .product-card:hover .card-overlay { opacity:1; }
+
+    /* Category card */
+    .cat-card { transition: all .2s cubic-bezier(.34,1.56,.64,1); }
+    .cat-card:hover, .cat-card.active { transform: translateY(-4px) scale(1.04); }
+
+    /* Color dot */
+    .cdot { width:22px;height:22px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:all .15s; box-shadow:inset 0 0 0 1px rgba(0,0,0,.12); }
+    .cdot.active,.cdot:hover { border-color:#7c3aed;transform:scale(1.25); }
+
+    /* Size btn */
+    .sbtn { padding:6px 14px;border-radius:10px;border:2px solid #e5e7eb;font-size:.875rem;font-weight:600;cursor:pointer;transition:all .15s; }
+    .sbtn.active { border-color:#7c3aed;background:#ede9fe;color:#6d28d9; }
+    .sbtn:hover:not(.active) { border-color:#a78bfa; }
+
+    /* Thumb */
+    .gthumb { width:56px;height:56px;object-fit:cover;border-radius:10px;border:2.5px solid transparent;cursor:pointer;transition:border-color .15s; }
+    .gthumb.active { border-color:#7c3aed; }
+
+    /* Float WA */
+    .wa-float { position:fixed;bottom:24px;right:24px;z-index:99;animation:fadeIn .6s ease 1s both; }
+    .wa-float a { display:flex;align-items:center;gap:10px;background:#25d366;color:#fff;font-weight:700;padding:14px 20px;border-radius:50px;box-shadow:0 8px 30px rgba(37,211,102,.4);transition:all .2s; text-decoration:none; }
+    .wa-float a:hover { transform:translateY(-3px);box-shadow:0 14px 40px rgba(37,211,102,.5); }
+
+    /* Skeleton */
+    @keyframes shimmer { 0%{background-position:-400px 0} 100%{background-position:400px 0} }
+    .skeleton { background:linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%);background-size:800px 100%;animation:shimmer 1.6s infinite; }
+
+    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:#f1f1f1}::-webkit-scrollbar-thumb{background:#c4b5fd;border-radius:3px}
   </style>
 </head>
-<body class="bg-gray-50 font-sans" x-data="catalogApp()" x-init="init()" x-cloak>
+<body class="bg-gray-50 font-sans antialiased" x-data="catalogApp()" x-init="init()" x-cloak>
 
-  <!-- ═══ NAVBAR ═══════════════════════════════════════════════ -->
-  <nav class="bg-white border-b border-gray-100 sticky top-0 z-30 shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <span class="text-2xl">🖨️</span>
-        <div>
-          <span class="font-bold text-gray-900 text-lg leading-none">Impresionarte</span>
-          <p class="text-xs text-gray-400 leading-none">Impresión 3D · Bogotá</p>
+  <!-- ══ NAVBAR ══════════════════════════════════════════════ -->
+  <nav class="glass-nav sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center gap-4">
+      <a href="/" class="flex items-center gap-2.5 flex-shrink-0">
+        <div class="w-9 h-9 bg-gradient-to-br from-brand-600 to-brand-800 rounded-xl flex items-center justify-center shadow-md">
+          <span class="text-lg">🖨️</span>
         </div>
-      </div>
+        <div class="leading-none">
+          <p class="font-black text-gray-900 text-base tracking-tight">Impresionarte</p>
+          <p class="text-[10px] text-brand-600 font-semibold uppercase tracking-widest">Impresión 3D · Bogotá</p>
+        </div>
+      </a>
 
-      <!-- Buscador -->
-      <div class="relative flex-1 max-w-sm hidden sm:block">
-        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/></svg>
+      <div class="relative flex-1 max-w-md mx-auto hidden sm:block">
+        <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/></svg>
         <input type="search" placeholder="Buscar productos…" x-model="searchQuery"
-               class="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-transparent bg-gray-50">
+               class="w-full pl-10 pr-4 py-2 bg-gray-100 border border-transparent rounded-full text-sm focus:outline-none focus:bg-white focus:border-brand-300 focus:ring-2 focus:ring-brand-100 transition-all">
       </div>
 
       <a href="https://wa.me/573026622715" target="_blank"
-         class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors whitespace-nowrap">
+         class="flex-shrink-0 flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-bold transition-all shadow-sm hover:shadow-md">
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
         WhatsApp
       </a>
     </div>
-
-    <!-- Buscador mobile -->
+    <!-- Mobile search -->
     <div class="sm:hidden px-4 pb-3">
       <div class="relative">
-        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/></svg>
+        <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/></svg>
         <input type="search" placeholder="Buscar…" x-model="searchQuery"
-               class="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 bg-gray-50">
+               class="w-full pl-10 pr-4 py-2 bg-gray-100 border border-transparent rounded-full text-sm focus:outline-none focus:bg-white focus:border-brand-300 transition-all">
       </div>
     </div>
   </nav>
 
-  <!-- ═══ HERO ══════════════════════════════════════════════════ -->
-  <section x-show="!searchQuery && !selectedCategory" class="bg-gradient-to-br from-brand-700 via-brand-600 to-violet-800 text-white">
-    <div class="max-w-6xl mx-auto px-4 py-16 md:py-24 text-center">
-      <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
-        Tu idea en 3D,<br>lista para estrenar
+  <!-- ══ HERO ═════════════════════════════════════════════════ -->
+  <section x-show="!searchQuery && !selectedCategory" class="relative overflow-hidden bg-brand-900 text-white">
+    <!-- Orbs decorativos -->
+    <div class="orb w-96 h-96 bg-brand-500 -top-20 -left-20"></div>
+    <div class="orb w-80 h-80 bg-violet-400 top-10 right-0" style="animation-delay:.8s"></div>
+    <div class="orb w-64 h-64 bg-purple-600 bottom-0 left-1/3" style="animation-delay:1.5s"></div>
+
+    <div class="relative max-w-6xl mx-auto px-4 py-20 md:py-28 text-center">
+      <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 text-sm font-medium text-brand-200 mb-6">
+        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+        Fabricamos en Bogotá · Envíos a toda Colombia
+      </div>
+      <h1 class="text-5xl md:text-6xl lg:text-7xl font-black leading-none mb-5 tracking-tight">
+        Tu idea<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 to-pink-300">en 3D</span>
       </h1>
-      <p class="text-brand-200 text-lg md:text-xl mb-8 max-w-xl mx-auto">
-        Letras decorativas, figuras, prototipos y más. Fabricados en Bogotá con entrega a domicilio.
+      <p class="text-brand-200 text-lg md:text-xl mb-10 max-w-lg mx-auto leading-relaxed">
+        Letras decorativas, materas, llaveros, artículos de boda y más. Diseños únicos impresos con calidad.
       </p>
+
+      <!-- Stats -->
+      <div class="flex flex-wrap justify-center gap-6 mb-10">
+        <div class="text-center">
+          <p class="text-3xl font-black text-white" x-text="products.length || '+'"></p>
+          <p class="text-brand-300 text-xs font-medium uppercase tracking-wide">Productos</p>
+        </div>
+        <div class="w-px bg-white/20 self-stretch"></div>
+        <div class="text-center">
+          <p class="text-3xl font-black text-white" x-text="categories.length || '6'"></p>
+          <p class="text-brand-300 text-xs font-medium uppercase tracking-wide">Categorías</p>
+        </div>
+        <div class="w-px bg-white/20 self-stretch"></div>
+        <div class="text-center">
+          <p class="text-3xl font-black text-white">3–7</p>
+          <p class="text-brand-300 text-xs font-medium uppercase tracking-wide">Días hábiles</p>
+        </div>
+      </div>
+
       <div class="flex flex-wrap gap-3 justify-center">
-        <button @click="$el.closest('section').scrollIntoView({behavior:'smooth'}); document.getElementById('productos').scrollIntoView({behavior:'smooth'})"
-                class="bg-white text-brand-700 font-bold px-6 py-3 rounded-full hover:bg-brand-50 transition">
-          Ver catálogo
+        <button onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})"
+                class="bg-white text-brand-800 font-bold px-7 py-3.5 rounded-full hover:bg-brand-50 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 text-sm">
+          Ver catálogo completo
         </button>
-        <a href="https://wa.me/573026622715?text=Hola, quiero hacer un pedido personalizado" target="_blank"
-           class="bg-green-500 hover:bg-green-400 text-white font-bold px-6 py-3 rounded-full transition flex items-center gap-2">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          Pedir personalizado
+        <a href="https://wa.me/573026622715?text=Hola, quiero hacer un pedido personalizado de impresión 3D" target="_blank"
+           class="flex items-center gap-2 bg-green-500 hover:bg-green-400 text-white font-bold px-7 py-3.5 rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 text-sm">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Pedido personalizado
         </a>
       </div>
     </div>
+
+    <!-- Wave -->
+    <div class="absolute bottom-0 left-0 right-0">
+      <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0 60L60 50C120 40 240 20 360 15C480 10 600 20 720 28C840 36 960 42 1080 40C1200 38 1320 28 1380 23L1440 18V60H0Z" fill="#f9fafb"/>
+      </svg>
+    </div>
   </section>
 
-  <!-- ═══ CATALOGO ══════════════════════════════════════════════ -->
-  <section id="productos" class="max-w-6xl mx-auto px-4 py-8">
+  <!-- ══ CATÁLOGO ══════════════════════════════════════════════ -->
+  <section id="catalogo" class="max-w-6xl mx-auto px-4 py-10">
 
-    <!-- Filtros de categoría -->
-    <div class="flex gap-2 overflow-x-auto pb-2 mb-6 scrollbar-hide">
-      <button @click="selectedCategory = null"
-              class="flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all"
-              :class="!selectedCategory ? 'bg-brand-600 text-white border-brand-600' : 'border-gray-200 text-gray-600 hover:border-brand-400'">
-        Todos
-      </button>
-      <template x-for="c in categories" :key="c.id">
-        <button @click="selectedCategory = c.id"
-                class="flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all"
-                :class="selectedCategory === c.id ? 'bg-brand-600 text-white border-brand-600' : 'border-gray-200 text-gray-600 hover:border-brand-400'"
-                x-text="c.name">
+    <!-- Categorías -->
+    <div x-show="categories.length > 0" class="mb-8">
+      <h2 x-show="!searchQuery && !selectedCategory" class="text-2xl font-black text-gray-900 mb-5">Explorar por categoría</h2>
+      <div class="flex gap-3 overflow-x-auto pb-2">
+        <button @click="selectedCategory = null"
+                class="cat-card flex-shrink-0 flex flex-col items-center gap-1.5 bg-white border-2 rounded-2xl px-5 py-3.5 cursor-pointer shadow-sm transition-all"
+                :class="!selectedCategory ? 'border-brand-500 bg-brand-50 shadow-brand-100' : 'border-gray-100 hover:border-brand-200'">
+          <span class="text-2xl">✨</span>
+          <span class="text-xs font-bold text-gray-700 whitespace-nowrap">Todos</span>
         </button>
-      </template>
+        <template x-for="c in categories" :key="c.id">
+          <button @click="selectedCategory = c.id"
+                  class="cat-card flex-shrink-0 flex flex-col items-center gap-1.5 bg-white border-2 rounded-2xl px-5 py-3.5 cursor-pointer shadow-sm transition-all"
+                  :class="selectedCategory === c.id ? 'border-brand-500 bg-brand-50 shadow-brand-100' : 'border-gray-100 hover:border-brand-200'">
+            <span class="text-2xl" x-text="catIcon(c.name)"></span>
+            <span class="text-xs font-bold text-gray-700 whitespace-nowrap" x-text="c.name"></span>
+          </button>
+        </template>
+      </div>
     </div>
 
-    <!-- Estado cargando -->
+    <!-- Título sección -->
+    <div class="flex items-center justify-between mb-5">
+      <div>
+        <h2 class="text-2xl font-black text-gray-900" x-show="!selectedCategory && !searchQuery">Todos los productos</h2>
+        <h2 class="text-2xl font-black text-gray-900" x-show="selectedCategory" x-text="categories.find(c=>c.id===selectedCategory)?.name"></h2>
+        <h2 class="text-2xl font-black text-gray-900" x-show="searchQuery">Resultados para "<span x-text="searchQuery"></span>"</h2>
+        <p class="text-sm text-gray-400 mt-0.5" x-text="`${filteredProducts.length} producto${filteredProducts.length!==1?'s':''}`"></p>
+      </div>
+    </div>
+
+    <!-- Skeletons -->
     <div x-show="loading" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
       <template x-for="i in 8" :key="i">
-        <div class="bg-white rounded-2xl overflow-hidden shadow-sm animate-pulse">
-          <div class="bg-gray-200 aspect-square"></div>
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm">
+          <div class="skeleton aspect-square"></div>
           <div class="p-3 space-y-2">
-            <div class="h-4 bg-gray-200 rounded w-3/4"></div>
-            <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+            <div class="skeleton h-4 rounded-lg w-3/4"></div>
+            <div class="skeleton h-4 rounded-lg w-1/2"></div>
+            <div class="skeleton h-3 rounded-lg w-1/3"></div>
           </div>
         </div>
       </template>
     </div>
 
-    <!-- Grid de productos -->
-    <div x-show="!loading" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-      <template x-for="p in filteredProducts" :key="p.id">
-        <div class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 cursor-pointer"
-             @click="openProduct(p)">
-          <!-- Foto -->
-          <div class="aspect-square bg-gray-50 relative overflow-hidden">
-            <img x-show="p.primary_photo_url" :src="p.primary_photo_url" :alt="p.name"
-                 class="w-full h-full object-cover" loading="lazy">
-            <div x-show="!p.primary_photo_url" class="w-full h-full flex items-center justify-center text-5xl">🖨️</div>
-            <div x-show="p.is_featured" class="absolute top-2 left-2 bg-amber-400 text-amber-900 text-xs font-bold px-2 py-0.5 rounded-full">⭐ Destacado</div>
+    <!-- Productos destacados -->
+    <div x-show="!loading && !selectedCategory && !searchQuery && featuredProducts.length > 0" class="mb-8">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="text-xl">⭐</span>
+        <h3 class="font-black text-gray-800 text-lg">Destacados</h3>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <template x-for="p in featuredProducts.slice(0,3)" :key="`f-${p.id}`">
+          <div class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 cursor-pointer relative"
+               @click="openProduct(p)">
+            <div class="aspect-[4/3] bg-gradient-to-br from-brand-50 to-purple-50 relative overflow-hidden">
+              <img x-show="p.primary_photo_url" :src="p.primary_photo_url" :alt="p.name" class="w-full h-full object-cover" loading="lazy">
+              <div x-show="!p.primary_photo_url" class="w-full h-full flex items-center justify-center text-6xl">🖨️</div>
+              <div class="card-overlay absolute inset-0 bg-brand-900/40 flex items-center justify-center">
+                <span class="bg-white text-brand-700 font-bold text-sm px-5 py-2.5 rounded-full shadow-lg">Ver producto</span>
+              </div>
+              <div class="absolute top-3 left-3 bg-amber-400 text-amber-900 text-xs font-black px-2.5 py-1 rounded-full">⭐ Destacado</div>
+            </div>
+            <div class="p-4">
+              <p class="font-bold text-gray-900 leading-tight mb-1" x-text="p.name"></p>
+              <div class="flex items-center justify-between mt-2">
+                <span class="font-black text-brand-700 text-lg" x-text="`Desde ${formatPrice(p.base_price)}`"></span>
+                <div class="flex gap-1">
+                  <template x-for="c in (p.colors||[]).slice(0,5)" :key="c.id">
+                    <div class="w-4 h-4 rounded-full border border-white shadow-sm" :style="`background:${c.hex_code}`" :title="c.name"></div>
+                  </template>
+                </div>
+              </div>
+              <p class="text-xs text-gray-400 mt-1.5 flex items-center gap-1">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span x-text="`${p.fabrication_days} días hábiles`"></span>
+              </p>
+            </div>
           </div>
-          <!-- Info -->
+        </template>
+      </div>
+    </div>
+
+    <!-- Separador -->
+    <div x-show="!loading && !selectedCategory && !searchQuery && featuredProducts.length > 0 && filteredProducts.length > featuredProducts.length" class="flex items-center gap-3 mb-6">
+      <div class="flex-1 h-px bg-gray-100"></div>
+      <span class="text-xs text-gray-400 font-semibold uppercase tracking-widest">Todos los productos</span>
+      <div class="flex-1 h-px bg-gray-100"></div>
+    </div>
+
+    <!-- Grid productos -->
+    <div x-show="!loading" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      <template x-for="p in (selectedCategory || searchQuery ? filteredProducts : filteredProducts.filter(p=>!p.is_featured || featuredProducts.length===0))" :key="p.id">
+        <div class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 cursor-pointer" @click="openProduct(p)">
+          <div class="aspect-square bg-gradient-to-br from-gray-50 to-brand-50 relative overflow-hidden">
+            <img x-show="p.primary_photo_url" :src="p.primary_photo_url" :alt="p.name" class="w-full h-full object-cover" loading="lazy">
+            <div x-show="!p.primary_photo_url" class="w-full h-full flex items-center justify-center" :style="`font-size:3.5rem`" x-text="catIcon(categoryName(p.category_id))"></div>
+            <div class="card-overlay absolute inset-0 bg-brand-900/40 flex items-center justify-center">
+              <span class="bg-white text-brand-700 font-bold text-xs px-4 py-2 rounded-full shadow-md">Ver producto</span>
+            </div>
+            <div x-show="p.is_featured" class="absolute top-2 right-2 bg-amber-400 text-amber-900 text-[10px] font-black px-2 py-0.5 rounded-full">⭐</div>
+          </div>
           <div class="p-3">
-            <p class="font-semibold text-gray-800 text-sm leading-tight mb-1 line-clamp-2" x-text="p.name"></p>
-            <p class="text-xs text-gray-400 mb-2" x-text="categoryName(p.category_id)"></p>
+            <p class="font-semibold text-gray-900 text-sm leading-tight mb-0.5 line-clamp-2" x-text="p.name"></p>
+            <p class="text-[11px] text-brand-600 font-semibold mb-1.5" x-text="categoryName(p.category_id)"></p>
             <div class="flex items-center justify-between">
-              <span class="font-bold text-brand-700 text-sm" x-text="formatPrice(p.base_price)"></span>
+              <span class="font-black text-gray-900 text-sm" x-text="`Desde ${formatPrice(p.base_price)}`"></span>
               <div class="flex gap-1">
-                <template x-for="c in (p.colors || []).slice(0,4)" :key="c.id">
-                  <div class="w-4 h-4 rounded-full border border-white shadow-sm" :style="`background:${c.hex_code}`" :title="c.name"></div>
+                <template x-for="c in (p.colors||[]).slice(0,4)" :key="c.id">
+                  <div class="w-3.5 h-3.5 rounded-full border border-white shadow-sm" :style="`background:${c.hex_code}`"></div>
                 </template>
-                <span x-show="(p.colors||[]).length > 4" class="text-xs text-gray-400">+<span x-text="p.colors.length - 4"></span></span>
+                <span x-show="(p.colors||[]).length>4" class="text-[10px] text-gray-400 font-semibold">+<span x-text="p.colors.length-4"></span></span>
               </div>
             </div>
-            <p class="text-xs text-gray-400 mt-1">⏱ <span x-text="p.fabrication_days"></span> días</p>
+            <p class="text-[11px] text-gray-400 mt-1 flex items-center gap-1">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span x-text="`${p.fabrication_days} días`"></span>
+            </p>
           </div>
         </div>
       </template>
 
-      <!-- Sin resultados -->
-      <div x-show="filteredProducts.length === 0 && !loading" class="col-span-full text-center py-20 text-gray-400">
-        <div class="text-5xl mb-4">🔍</div>
-        <p class="text-lg font-medium">Sin resultados</p>
-        <p class="text-sm mt-1">Intenta con otra categoría o escríbenos por WhatsApp</p>
-        <a href="https://wa.me/573026622715" target="_blank" class="mt-4 inline-flex items-center gap-2 bg-green-500 text-white px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-green-600 transition">
+      <!-- Empty -->
+      <div x-show="filteredProducts.length===0 && !loading" class="col-span-full py-20 text-center">
+        <div class="text-6xl mb-4">🔍</div>
+        <p class="text-xl font-bold text-gray-700 mb-2">Sin resultados</p>
+        <p class="text-gray-400 text-sm mb-6">Intenta con otra búsqueda o pídenos algo personalizado</p>
+        <a href="https://wa.me/573026622715" target="_blank"
+           class="inline-flex items-center gap-2 bg-green-500 text-white px-6 py-3 rounded-full font-bold text-sm hover:bg-green-600 transition-all shadow-md">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
           Pedir personalizado
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ═══ FOOTER ════════════════════════════════════════════════ -->
-  <footer class="bg-slate-900 text-slate-400 mt-16">
-    <div class="max-w-6xl mx-auto px-4 py-12 flex flex-col md:flex-row gap-8 justify-between">
+  <!-- ══ FOOTER ════════════════════════════════════════════════ -->
+  <footer class="bg-brand-900 text-white mt-20">
+    <div class="max-w-6xl mx-auto px-4 py-14 grid grid-cols-1 md:grid-cols-3 gap-10">
       <div>
-        <div class="flex items-center gap-3 mb-3">
-          <span class="text-2xl">🖨️</span>
-          <span class="text-white font-bold text-lg">Impresionarte</span>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-xl">🖨️</div>
+          <span class="font-black text-xl">Impresionarte</span>
         </div>
-        <p class="text-sm">Impresión 3D personalizada en Bogotá.</p>
-        <p class="text-sm">Envíos a toda Colombia.</p>
+        <p class="text-brand-300 text-sm leading-relaxed">Fabricamos tus ideas en 3D con materiales de calidad. Bogotá, Colombia.</p>
       </div>
       <div>
-        <p class="text-white font-semibold mb-3">Contáctanos</p>
-        <a href="https://wa.me/573026622715" target="_blank" class="flex items-center gap-2 text-green-400 hover:text-green-300 text-sm mb-2">
+        <p class="font-bold mb-4 text-brand-200 uppercase text-xs tracking-widest">Categorías</p>
+        <div class="grid grid-cols-2 gap-1.5">
+          <template x-for="c in categories" :key="c.id">
+            <button @click="selectedCategory=c.id; document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})"
+                    class="text-left text-brand-300 hover:text-white text-sm transition-colors" x-text="c.name"></button>
+          </template>
+        </div>
+      </div>
+      <div>
+        <p class="font-bold mb-4 text-brand-200 uppercase text-xs tracking-widest">Contacto</p>
+        <a href="https://wa.me/573026622715" target="_blank" class="flex items-center gap-2 text-green-400 hover:text-green-300 text-sm mb-3 transition-colors font-semibold">
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          WhatsApp
+          +57 302 662 2715
         </a>
+        <p class="text-brand-400 text-xs">Respuesta en menos de 2 horas</p>
       </div>
     </div>
-    <div class="border-t border-slate-800 text-center py-4 text-xs text-slate-600">
+    <div class="border-t border-white/10 text-center py-5 text-brand-500 text-xs">
       © 2026 Impresionarte · Hecho con ❤️ en Bogotá
     </div>
   </footer>
 
-  <!-- ═══ MODAL PRODUCTO ════════════════════════════════════════ -->
-  <div x-show="productModal" class="fixed inset-0 bg-black/60 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
-       @click.self="closeProduct()" x-cloak>
-    <div class="bg-white w-full sm:max-w-3xl sm:rounded-2xl rounded-t-3xl shadow-2xl max-h-[95vh] overflow-y-auto"
-         x-show="product">
+  <!-- ══ FLOAT WhatsApp ════════════════════════════════════════ -->
+  <div class="wa-float" x-show="!productModal && !orderModal">
+    <a href="https://wa.me/573026622715?text=Hola, vi el catálogo en impresionartes.com y quiero más información" target="_blank">
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Escríbenos
+    </a>
+  </div>
 
-      <!-- Header -->
-      <div class="sticky top-0 bg-white px-4 sm:px-6 pt-4 pb-3 border-b flex items-center justify-between z-10">
-        <div class="w-10 h-1 bg-gray-300 rounded-full mx-auto sm:hidden absolute left-1/2 -translate-x-1/2 top-2"></div>
-        <h3 class="font-bold text-gray-900 text-lg pr-8" x-text="product?.name"></h3>
-        <button @click="closeProduct()" class="text-gray-400 hover:text-gray-600 text-2xl leading-none">✕</button>
+  <!-- ══ MODAL PRODUCTO ════════════════════════════════════════ -->
+  <div x-show="productModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4" @click.self="closeProduct()" x-cloak>
+    <div class="bg-white w-full sm:max-w-3xl sm:rounded-3xl rounded-t-3xl shadow-2xl max-h-[96vh] overflow-y-auto" x-show="product">
+      <!-- Drag handle mobile -->
+      <div class="sm:hidden flex justify-center pt-3 pb-1">
+        <div class="w-10 h-1 bg-gray-200 rounded-full"></div>
+      </div>
+      <div class="sticky top-0 bg-white/95 backdrop-blur-sm px-5 sm:px-6 py-3.5 border-b border-gray-100 flex items-center justify-between z-10 sm:rounded-t-3xl">
+        <h3 class="font-black text-gray-900 text-lg pr-8 leading-tight" x-text="product?.name"></h3>
+        <button @click="closeProduct()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 transition-colors text-sm font-bold">✕</button>
       </div>
 
-      <div class="p-4 sm:p-6 grid sm:grid-cols-2 gap-6">
-
-        <!-- Galería fotos -->
+      <div class="p-5 sm:p-6 grid sm:grid-cols-2 gap-6">
+        <!-- Galería -->
         <div>
-          <div class="aspect-square bg-gray-50 rounded-2xl overflow-hidden mb-3">
-            <img x-show="product?.photos?.length > 0" :src="product?.photos?.[currentPhoto]?.url" :alt="product?.name"
-                 class="w-full h-full object-cover">
-            <div x-show="!product?.photos?.length" class="w-full h-full flex items-center justify-center text-8xl">🖨️</div>
+          <div class="aspect-square bg-gradient-to-br from-brand-50 to-purple-50 rounded-2xl overflow-hidden mb-3 relative">
+            <img x-show="product?.photos?.length > 0" :src="product?.photos?.[currentPhoto]?.url" :alt="product?.name" class="w-full h-full object-cover">
+            <div x-show="!product?.photos?.length" class="w-full h-full flex items-center justify-center text-8xl" x-text="catIcon(categoryName(product?.category_id))"></div>
+            <!-- Prev/next -->
+            <button x-show="product?.photos?.length > 1" @click="currentPhoto = (currentPhoto - 1 + product.photos.length) % product.photos.length"
+                    class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center shadow-md text-gray-700 hover:bg-white transition-all">‹</button>
+            <button x-show="product?.photos?.length > 1" @click="currentPhoto = (currentPhoto + 1) % product.photos.length"
+                    class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center shadow-md text-gray-700 hover:bg-white transition-all">›</button>
           </div>
           <div class="flex gap-2 overflow-x-auto" x-show="product?.photos?.length > 1">
             <template x-for="(ph, i) in product?.photos" :key="ph.id">
-              <img :src="ph.url" @click="currentPhoto = i"
-                   class="gallery-thumb flex-shrink-0" :class="currentPhoto === i && 'active'">
+              <img :src="ph.url" @click="currentPhoto = i" class="gthumb flex-shrink-0" :class="currentPhoto===i && 'active'">
             </template>
           </div>
         </div>
 
-        <!-- Info y selector -->
+        <!-- Info -->
         <div class="flex flex-col gap-4">
           <div>
-            <p class="text-3xl font-extrabold text-brand-700" x-text="formatPrice(displayPrice)"></p>
-            <p class="text-sm text-gray-400 mt-1" x-show="selectedSize?.price_modifier > 0">
-              Precio base <span x-text="formatPrice(product?.base_price)"></span> + talla
+            <p class="text-[11px] text-brand-600 font-bold uppercase tracking-widest mb-1" x-text="categoryName(product?.category_id)"></p>
+            <p class="text-3xl font-black text-gray-900" x-text="formatPrice(displayPrice)"></p>
+            <p class="text-sm text-gray-400 mt-0.5" x-show="selectedSize?.price_modifier > 0">
+              Base <span x-text="formatPrice(product?.base_price)"></span> + talla seleccionada
             </p>
-            <p class="text-sm text-gray-500 mt-2" x-text="product?.description"></p>
+            <p class="text-sm text-gray-600 mt-3 leading-relaxed" x-text="product?.description"></p>
           </div>
 
-          <!-- Colores -->
+          <!-- Color -->
           <div x-show="product?.colors?.length > 0">
-            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
-              Color: <span class="text-brand-700 font-bold" x-text="selectedColor?.name"></span>
+            <p class="text-xs font-black text-gray-500 uppercase tracking-widest mb-2">
+              Color — <span class="text-brand-700" x-text="selectedColor?.name"></span>
             </p>
             <div class="flex flex-wrap gap-2">
               <template x-for="c in product?.colors" :key="c.id">
-                <button @click="selectColor(c)" :title="c.name"
-                        class="color-dot" :class="selectedColor?.id === c.id && 'active'"
-                        :style="`background:${c.hex_code}; box-shadow: inset 0 0 0 1px rgba(0,0,0,.1)`">
-                </button>
+                <button @click="selectColor(c)" :title="c.name" class="cdot" :class="selectedColor?.id===c.id && 'active'"
+                        :style="`background:${c.hex_code}`"></button>
               </template>
             </div>
           </div>
 
-          <!-- Tallas -->
+          <!-- Talla -->
           <div x-show="product?.sizes?.length > 0">
-            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Talla / Medida</p>
+            <p class="text-xs font-black text-gray-500 uppercase tracking-widest mb-2">Talla / Medida</p>
             <div class="flex flex-wrap gap-2">
               <template x-for="s in product?.sizes" :key="s.id">
-                <button @click="selectSize(s)" class="size-btn" :class="selectedSize?.id === s.id && 'active'">
+                <button @click="selectSize(s)" class="sbtn" :class="selectedSize?.id===s.id && 'active'">
                   <span x-text="s.label"></span>
-                  <span x-show="s.price_modifier > 0" class="text-brand-600 ml-1" x-text="`+${formatPrice(s.price_modifier)}`"></span>
+                  <span x-show="s.price_modifier>0" class="text-brand-600 ml-1 text-xs" x-text="`+${formatPrice(s.price_modifier)}`"></span>
                 </button>
               </template>
             </div>
@@ -264,25 +421,28 @@
 
           <!-- Cantidad -->
           <div>
-            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Cantidad</p>
-            <div class="flex items-center gap-3">
-              <button @click="changeQty(-1)" class="w-9 h-9 rounded-full border-2 border-gray-200 font-bold text-gray-600 hover:border-brand-400 transition text-xl leading-none">−</button>
-              <span class="text-lg font-bold w-8 text-center" x-text="quantity"></span>
-              <button @click="changeQty(1)" class="w-9 h-9 rounded-full border-2 border-gray-200 font-bold text-gray-600 hover:border-brand-400 transition text-xl leading-none">+</button>
+            <p class="text-xs font-black text-gray-500 uppercase tracking-widest mb-2">Cantidad</p>
+            <div class="inline-flex items-center border-2 border-gray-100 rounded-xl overflow-hidden">
+              <button @click="changeQty(-1)" class="w-10 h-10 flex items-center justify-center text-gray-500 hover:bg-gray-50 font-bold text-xl transition-colors">−</button>
+              <span class="w-10 text-center font-black text-gray-900" x-text="quantity"></span>
+              <button @click="changeQty(1)" class="w-10 h-10 flex items-center justify-center text-gray-500 hover:bg-gray-50 font-bold text-xl transition-colors">+</button>
             </div>
           </div>
 
-          <p class="text-xs text-gray-400">⏱ Tiempo de fabricación: <span class="font-semibold text-gray-600" x-text="`${product?.fabrication_days} días hábiles`"></span></p>
+          <p class="text-xs text-gray-400 flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Tiempo de fabricación: <strong class="text-gray-600" x-text="`${product?.fabrication_days} días hábiles`"></strong>
+          </p>
 
-          <!-- Botones CTA -->
-          <div class="flex flex-col gap-3 mt-auto pt-2">
+          <!-- CTAs -->
+          <div class="flex flex-col gap-2.5 mt-auto pt-1">
             <button @click="openWhatsApp()"
-                    class="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-xl transition-colors">
+                    class="flex items-center justify-center gap-2.5 bg-green-500 hover:bg-green-600 text-white font-black py-3.5 rounded-2xl transition-all shadow-md hover:shadow-lg active:scale-95">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
               Pedir por WhatsApp
             </button>
             <button @click="openOrder()"
-                    class="flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-xl transition-colors">
+                    class="flex items-center justify-center gap-2.5 bg-brand-600 hover:bg-brand-700 text-white font-black py-3.5 rounded-2xl transition-all shadow-md hover:shadow-lg active:scale-95">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 7H4l1-7z"/></svg>
               Hacer pedido en línea
             </button>
@@ -292,69 +452,54 @@
     </div>
   </div>
 
-  <!-- ═══ MODAL PEDIDO ══════════════════════════════════════════ -->
-  <div x-show="orderModal" class="fixed inset-0 bg-black/60 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
-       @click.self="orderModal=false" x-cloak>
-    <div class="bg-white w-full sm:max-w-md sm:rounded-2xl rounded-t-3xl shadow-2xl">
-      <div class="px-6 pt-6 pb-4 border-b">
-        <div class="w-10 h-1 bg-gray-300 rounded-full mx-auto mb-4 sm:hidden"></div>
-        <h3 class="font-bold text-gray-900 text-lg">Datos del pedido</h3>
-        <p class="text-sm text-gray-500" x-text="product?.name"></p>
+  <!-- ══ MODAL PEDIDO ══════════════════════════════════════════ -->
+  <div x-show="orderModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4" @click.self="orderModal=false" x-cloak>
+    <div class="bg-white w-full sm:max-w-md sm:rounded-3xl rounded-t-3xl shadow-2xl">
+      <div class="sm:hidden flex justify-center pt-3 pb-1"><div class="w-10 h-1 bg-gray-200 rounded-full"></div></div>
+      <div class="px-6 pt-5 pb-4 border-b border-gray-100">
+        <h3 class="font-black text-gray-900 text-lg">Datos del pedido</h3>
+        <p class="text-sm text-brand-600 font-semibold" x-text="product?.name"></p>
       </div>
       <div class="p-6 space-y-4">
         <div>
-          <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Nombre completo *</label>
-          <input class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400"
-                 type="text" x-model="orderForm.name" placeholder="Tu nombre">
+          <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-1.5">Nombre completo *</label>
+          <input class="w-full border-2 border-gray-100 focus:border-brand-400 rounded-xl px-4 py-2.5 text-sm outline-none transition-colors" type="text" x-model="orderForm.name" placeholder="Tu nombre">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Teléfono / WhatsApp *</label>
-          <input class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400"
-                 type="tel" x-model="orderForm.phone" placeholder="+57 300 000 0000">
+          <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-1.5">Teléfono / WhatsApp *</label>
+          <input class="w-full border-2 border-gray-100 focus:border-brand-400 rounded-xl px-4 py-2.5 text-sm outline-none transition-colors" type="tel" x-model="orderForm.phone" placeholder="+57 300 000 0000">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Email (opcional)</label>
-          <input class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400"
-                 type="email" x-model="orderForm.email" placeholder="correo@ejemplo.com">
+          <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-1.5">Email (opcional)</label>
+          <input class="w-full border-2 border-gray-100 focus:border-brand-400 rounded-xl px-4 py-2.5 text-sm outline-none transition-colors" type="email" x-model="orderForm.email" placeholder="correo@ejemplo.com">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Notas adicionales</label>
-          <textarea class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 h-20 resize-none"
-                    x-model="orderForm.notes" placeholder="Detalles especiales, dirección, etc."></textarea>
+          <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-1.5">Notas adicionales</label>
+          <textarea class="w-full border-2 border-gray-100 focus:border-brand-400 rounded-xl px-4 py-2.5 text-sm outline-none transition-colors h-20 resize-none" x-model="orderForm.notes" placeholder="Detalles, dirección de entrega, etc."></textarea>
         </div>
 
         <!-- Resumen -->
-        <div class="bg-brand-50 rounded-xl p-4 text-sm">
-          <div class="flex justify-between mb-1">
-            <span class="text-gray-600">Producto</span>
-            <span class="font-medium text-gray-800" x-text="product?.name"></span>
+        <div class="bg-gradient-to-br from-brand-50 to-purple-50 rounded-2xl p-4 text-sm border border-brand-100">
+          <div class="flex justify-between mb-1.5" x-show="selectedColor">
+            <span class="text-gray-500">Color</span><span class="font-bold text-gray-800" x-text="selectedColor?.name"></span>
           </div>
-          <div class="flex justify-between mb-1" x-show="selectedColor">
-            <span class="text-gray-600">Color</span>
-            <span class="font-medium text-gray-800" x-text="selectedColor?.name"></span>
+          <div class="flex justify-between mb-1.5" x-show="selectedSize">
+            <span class="text-gray-500">Talla</span><span class="font-bold text-gray-800" x-text="selectedSize?.label"></span>
           </div>
-          <div class="flex justify-between mb-1" x-show="selectedSize">
-            <span class="text-gray-600">Talla</span>
-            <span class="font-medium text-gray-800" x-text="selectedSize?.label"></span>
+          <div class="flex justify-between mb-1.5">
+            <span class="text-gray-500">Cantidad</span><span class="font-bold text-gray-800" x-text="quantity"></span>
           </div>
-          <div class="flex justify-between mb-1">
-            <span class="text-gray-600">Cantidad</span>
-            <span class="font-medium text-gray-800" x-text="quantity"></span>
-          </div>
-          <div class="flex justify-between pt-2 border-t border-brand-200 mt-2">
-            <span class="font-bold text-gray-800">Total estimado</span>
-            <span class="font-extrabold text-brand-700" x-text="formatPrice(displayPrice)"></span>
+          <div class="flex justify-between pt-3 border-t border-brand-100 mt-2">
+            <span class="font-black text-gray-900">Total estimado</span>
+            <span class="font-black text-brand-700 text-lg" x-text="formatPrice(displayPrice)"></span>
           </div>
         </div>
-
-        <p x-show="orderError" class="text-red-500 text-sm text-center" x-text="orderError"></p>
+        <p x-show="orderError" class="text-red-500 text-sm text-center font-semibold" x-text="orderError"></p>
       </div>
       <div class="flex gap-3 px-6 pb-6">
-        <button @click="orderModal=false" class="flex-1 py-3 rounded-xl border-2 border-gray-200 text-gray-600 font-semibold hover:bg-gray-50 transition">
-          Cancelar
-        </button>
+        <button @click="orderModal=false" class="flex-1 py-3 rounded-2xl border-2 border-gray-100 text-gray-600 font-bold hover:bg-gray-50 transition-colors">Cancelar</button>
         <button @click="submitOrder()" :disabled="orderLoading"
-                class="flex-1 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold transition disabled:opacity-60">
+                class="flex-1 py-3 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-black transition-all shadow-md disabled:opacity-60 active:scale-95">
           <span x-show="orderLoading">Enviando…</span>
           <span x-show="!orderLoading">Confirmar pedido</span>
         </button>
@@ -362,15 +507,14 @@
     </div>
   </div>
 
-  <!-- ═══ MODAL ÉXITO ═══════════════════════════════════════════ -->
-  <div x-show="successModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" x-cloak>
-    <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center">
-      <div class="text-6xl mb-4">🎉</div>
-      <h3 class="text-2xl font-extrabold text-gray-900 mb-2">¡Pedido enviado!</h3>
-      <p class="text-gray-500 mb-2">Tu pedido <span class="font-bold text-brand-700" x-text="`#${orderId}`"></span> fue recibido.</p>
-      <p class="text-gray-500 text-sm mb-6">Nos contactaremos contigo pronto para confirmar los detalles.</p>
-      <button @click="successModal=false"
-              class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-xl transition">
+  <!-- ══ MODAL ÉXITO ═══════════════════════════════════════════ -->
+  <div x-show="successModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" x-cloak>
+    <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-8 text-center">
+      <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5 text-4xl">🎉</div>
+      <h3 class="text-2xl font-black text-gray-900 mb-2">¡Pedido enviado!</h3>
+      <p class="text-gray-500 mb-1">Pedido <span class="font-black text-brand-700" x-text="`#${orderId}`"></span> recibido.</p>
+      <p class="text-gray-400 text-sm mb-6">Te contactamos pronto para confirmar los detalles y coordinar el pago.</p>
+      <button @click="successModal=false" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-black py-3.5 rounded-2xl transition-all shadow-md active:scale-95">
         Seguir explorando
       </button>
     </div>

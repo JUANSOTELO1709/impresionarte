@@ -165,6 +165,20 @@ document.addEventListener('alpine:init', () => {
         },
 
         // ── Helpers ───────────────────────────────────────────────
+        catIcon(name) {
+            if (!name) return '🖨️';
+            const n = name.toLowerCase();
+            if (n.includes('letra')) return '🔤';
+            if (n.includes('matera') || n.includes('plant')) return '🌱';
+            if (n.includes('llavero')) return '🗝️';
+            if (n.includes('tarjeta') || n.includes('empresa')) return '💼';
+            if (n.includes('prototipo') || n.includes('técnico')) return '⚙️';
+            if (n.includes('boda') || n.includes('matrimonio')) return '💍';
+            if (n.includes('figura') || n.includes('juguete')) return '🎮';
+            if (n.includes('navidad') || n.includes('natal')) return '🎄';
+            return '🖨️';
+        },
+
         formatPrice(p) {
             return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(p || 0);
         },
