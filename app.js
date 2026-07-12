@@ -77,6 +77,8 @@ document.addEventListener('alpine:init', () => {
                 ]);
                 this.categories = cats;
                 this.products = prods;
+                const sinFoto = prods.filter(p => !p.photos?.length && !p.primary_photo_url);
+                if (sinFoto.length) console.warn('[Impresionarte] Productos sin foto:', sinFoto.map(p => `#${p.id} ${p.name}`));
             } finally {
                 this.loading = false;
             }

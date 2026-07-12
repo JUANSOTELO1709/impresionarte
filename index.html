@@ -86,9 +86,22 @@
     .skeleton { background:linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%);background-size:800px 100%;animation:shimmer 1.6s infinite; }
 
     ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:#f1f1f1}::-webkit-scrollbar-thumb{background:#c4b5fd;border-radius:3px}
+
+    /* Patrón FDM sutil — capas de impresión como fondo de página */
+    body {
+      background-color: #f9fafb;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 7px,
+          rgba(124,58,237,0.028) 7px,
+          rgba(124,58,237,0.028) 8px
+        );
+    }
   </style>
 </head>
-<body class="bg-gray-50 font-sans antialiased" x-data="catalogApp()" x-init="init()" x-cloak>
+<body class="font-sans antialiased" x-data="catalogApp()" x-init="init()" x-cloak>
 
   <!-- ══ NAVBAR ══════════════════════════════════════════════ -->
   <nav class="glass-nav sticky top-0 z-40">
@@ -127,11 +140,39 @@
 
   <!-- ══ HERO ═════════════════════════════════════════════════ -->
   <section x-show="!searchQuery && !selectedCategory" class="relative overflow-hidden bg-brand-900 text-white">
-    <!-- Orbs decorativos (reemplaza video para carga instantánea) -->
+    <!-- Orbs de luz -->
     <div class="orb w-96 h-96 bg-brand-500 -top-20 -left-20"></div>
     <div class="orb w-80 h-80 bg-violet-400 top-10 right-0" style="animation-delay:.8s"></div>
     <div class="orb w-64 h-64 bg-purple-600 bottom-0 left-1/3" style="animation-delay:1.5s"></div>
-    <div class="orb w-48 h-48 bg-pink-500 bottom-10 right-1/4" style="animation-delay:2.2s;opacity:.2"></div>
+
+    <!-- Wireframe 3D — esquina superior derecha (cubo isométrico) -->
+    <svg class="absolute top-0 right-0 w-72 h-72 pointer-events-none select-none" viewBox="0 0 240 240" fill="none" aria-hidden="true" style="opacity:.13">
+      <!-- Cara frontal -->
+      <rect x="70" y="80" width="90" height="90" stroke="white" stroke-width="0.8"/>
+      <!-- Cara superior -->
+      <path d="M70 80 L105 45 L195 45 L160 80Z" stroke="white" stroke-width="0.8"/>
+      <!-- Cara derecha -->
+      <path d="M160 80 L195 45 L195 135 L160 170Z" stroke="white" stroke-width="0.8"/>
+      <!-- Líneas de profundidad ocultas (guiones) -->
+      <line x1="70" y1="170" x2="105" y2="135" stroke="white" stroke-width="0.5" stroke-dasharray="3 4"/>
+      <line x1="105" y1="45" x2="105" y2="135" stroke="white" stroke-width="0.5" stroke-dasharray="3 4"/>
+      <!-- Triángulos internos de malla -->
+      <line x1="70" y1="80" x2="160" y2="170" stroke="white" stroke-width="0.4" stroke-dasharray="2 6"/>
+      <line x1="160" y1="80" x2="70" y2="170" stroke="white" stroke-width="0.4" stroke-dasharray="2 6"/>
+    </svg>
+
+    <!-- Wireframe 3D — esquina inferior izquierda (malla triangulada) -->
+    <svg class="absolute bottom-0 left-0 w-80 h-52 pointer-events-none select-none" viewBox="0 0 320 210" fill="none" aria-hidden="true" style="opacity:.11">
+      <polygon points="0,210 70,130 150,185 230,90 320,145 320,210" fill="white" fill-opacity="0.04" stroke="white" stroke-width="0.7"/>
+      <line x1="0"   y1="210" x2="70"  y2="130" stroke="white" stroke-width="0.6"/>
+      <line x1="70"  y1="130" x2="150" y2="185" stroke="white" stroke-width="0.6"/>
+      <line x1="150" y1="185" x2="230" y2="90"  stroke="white" stroke-width="0.6"/>
+      <line x1="230" y1="90"  x2="320" y2="145" stroke="white" stroke-width="0.6"/>
+      <!-- Triángulos internos -->
+      <line x1="70"  y1="130" x2="230" y2="145" stroke="white" stroke-width="0.4" stroke-dasharray="3 5"/>
+      <line x1="150" y1="185" x2="70"  y2="60"  stroke="white" stroke-width="0.4" stroke-dasharray="3 5"/>
+      <line x1="0"   y1="100" x2="230" y2="90"  stroke="white" stroke-width="0.4" stroke-dasharray="3 5"/>
+    </svg>
 
     <div class="relative max-w-6xl mx-auto px-4 py-20 md:py-28 text-center">
       <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 text-sm font-medium text-brand-200 mb-6">
