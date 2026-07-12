@@ -43,7 +43,24 @@ document.addEventListener('alpine:init', () => {
             });
         },
         get featuredProducts() {
-            return this.products.filter(p => p.is_featured);
+            const all = this.products.filter(p => p.is_featured).sort((a, b) => a.id - b.id);
+            const i = all.findIndex(p => p.category_id === 7);
+            if (i > 1) { const [x] = all.splice(i, 1); all.splice(1, 0, x); }
+            return all;
+        },
+        get bannerSlides() {
+            const featured = this.products.filter(p => p.is_featured);
+            const catOrder = this.categories.map(c => c.id);
+            const seen = new Set();
+            const slides = [];
+            for (const catId of catOrder) {
+                const p = featured.find(p => p.category_id === catId);
+                if (p) { seen.add(p.id); slides.push(p); }
+            }
+            for (const p of featured) {
+                if (!seen.has(p.id)) slides.push(p);
+            }
+            return slides.slice(0, 6);
         },
 
         // ── Init ─────────────────────────────────────────────────
