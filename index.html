@@ -193,12 +193,12 @@
       <!-- Stats -->
       <div class="flex flex-wrap justify-center gap-6 mb-10">
         <div class="text-center">
-          <p class="text-3xl font-black text-white" x-text="products.length || '+'"></p>
+          <p class="text-3xl font-black text-white" x-text="loading ? '—' : products.length"></p>
           <p class="text-brand-300 text-xs font-medium uppercase tracking-wide">Productos</p>
         </div>
         <div class="w-px bg-white/20 self-stretch"></div>
         <div class="text-center">
-          <p class="text-3xl font-black text-white" x-text="categories.length || '6'"></p>
+          <p class="text-3xl font-black text-white" x-text="loading ? '—' : categories.length"></p>
           <p class="text-brand-300 text-xs font-medium uppercase tracking-wide">Categorías</p>
         </div>
         <div class="w-px bg-white/20 self-stretch"></div>
@@ -297,20 +297,12 @@
       <div class="grid md:grid-cols-2 gap-10 items-center">
 
         <!-- Video -->
-        <div class="relative group rounded-2xl overflow-hidden shadow-xl bg-brand-900">
+        <div class="rounded-2xl overflow-hidden shadow-xl bg-brand-900">
           <video class="w-full block"
-                 autoplay muted loop playsinline
-                 preload="metadata"
-                 poster="./img/og-preview.jpg"
-                 id="tallerVideo">
+                 controls muted playsinline
+                 preload="metadata">
             <source src="./img/Vid1.mp4" type="video/mp4">
           </video>
-          <!-- Control mute/unmute visible al hover -->
-          <button onclick="(function(v){v.muted=!v.muted;document.getElementById('muteIcon').textContent=v.muted?'🔇':'🔊'})(document.getElementById('tallerVideo'))"
-                  class="absolute bottom-3 right-3 bg-black/50 hover:bg-black/70 text-white w-9 h-9 rounded-full flex items-center justify-center text-base transition-all opacity-0 group-hover:opacity-100 focus:opacity-100"
-                  aria-label="Silenciar/activar sonido">
-            <span id="muteIcon">🔇</span>
-          </button>
         </div>
 
         <!-- Texto -->
