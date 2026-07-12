@@ -77,7 +77,8 @@ document.addEventListener('alpine:init', () => {
                 ]);
                 this.categories = cats;
                 this.products = prods;
-                const sinFoto = prods.filter(p => !p.photos?.length && !p.primary_photo_url);
+                // Excluye productos de cotización (precio 0 = sin diseño fijo) — su imagen es un placeholder intencional
+                const sinFoto = prods.filter(p => p.base_price > 0 && !p.photos?.length && !p.primary_photo_url);
                 if (sinFoto.length) console.warn('[Impresionarte] Productos sin foto:', sinFoto.map(p => `#${p.id} ${p.name}`));
             } finally {
                 this.loading = false;
